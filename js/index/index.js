@@ -1,8 +1,7 @@
-function init() {
-    // Index page has no particular components to note
-    const components = null;
+import { IndexViewLayout } from './view-layouts/indexViewLayout.js';
 
-    const layout = new IndexViewLayout(components);
+function init() {
+    const layout = new IndexViewLayout();
     layout.render(document.querySelector("main"));
 }
 

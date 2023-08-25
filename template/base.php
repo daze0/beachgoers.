@@ -17,5 +17,8 @@
         <?php foreach($webpage->getJs() as $jsScript): ?>
             <script src="<?php echo $jsScript; ?>"></script>
         <?php endforeach; ?>
+        <?php foreach($webpage->getJsm() as $jsModule): ?>
+            <script type="module" src="<?php echo $jsModule; ?>"></script>
+        <?php endforeach; ?>
     </body>
 </html>

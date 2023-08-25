@@ -1,8 +1,7 @@
-function init() {
-    // Index page has no particular components to note
-    const components = null;
+import { FooterViewLayout } from './view-layouts/footerViewLayout.js';
 
-    const layout = new FooterViewLayout(components);
+function init() {
+    const layout = new FooterViewLayout();
     layout.render(document.querySelector("footer"));
 }
 

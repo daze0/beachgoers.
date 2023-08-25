@@ -1,13 +1,9 @@
 class IndexViewLayout {
-    constructor(components) {
-        this._components = components;
-    }
-
     render(rootElement) {
-        rootElement.innerHTML = this._generate();
+        rootElement.innerHTML = this.#generate();
     }
 
-    _generate() {
+    #generate() {
         return `
         <div class="col-3"></div>
         <div class="container col-6 py-4">
@@ -47,3 +43,5 @@ class IndexViewLayout {
         <div class="col-3"></div>`;
     }
 }
+
+export { IndexViewLayout };

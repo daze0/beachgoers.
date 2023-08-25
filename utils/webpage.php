@@ -11,10 +11,11 @@ class WebPage {
      * css   -> css files to include in the web page
      * js    -> js files to include in the web page
      */ 
-    public function __construct($title, $css, $js) {
+    public function __construct($title, $css, $js, $jsm) {
         $this->templateParams["title"] = $title;
         $this->templateParams["css"] = $css;
         $this->templateParams["js"] = $js;
+        $this->templateParams["jsm"] = $jsm;
     }
 
     /**
@@ -45,6 +46,10 @@ class WebPage {
         $this->templateParams["js"] = $js;
     }
 
+    public function setJsm($jsm) {
+        $this->templateParams["jsm"] = $jsm;
+    }
+
     public function getTitle() {
         return $this->templateParams["title"];
     }
@@ -55,6 +60,10 @@ class WebPage {
 
     public function getJs() {
         return $this->templateParams["js"];
+    }
+
+    public function getJsm() {
+        return $this->templateParams["jsm"];
     }
 }
 
