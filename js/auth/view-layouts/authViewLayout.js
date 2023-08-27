@@ -4,15 +4,9 @@ class AuthViewLayout {
 
     constructor(components) {
         this.#components = components;
-        this.#firstRender = true;
     }
 
     render(rootElement) {
-        if (this.#firstRender) {
-            this.#firstRender = false;
-        } else {
-            this.#components["authForm"].getListener().attachListener()
-        }
         rootElement.innerHTML = this.#generate();
         this.#components["authForm"].getListener().attachListener();
     }
