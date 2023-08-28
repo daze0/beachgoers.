@@ -5,7 +5,15 @@ function init() {
     const components = {"authForm": new LoginAuthForm()};
 
     const layout = new AuthViewLayout(components);
-    layout.render(document.querySelector("main"));
+
+    axios.get("api/api-login.php").then(response => {
+        if (!response.data["login_success"]) {
+            layout.render(document.querySelector("main"));
+        } else {
+            document.querySelector("main").innerHTML = components["authForm"].generateLoginSuccessLayout(response.data["username"]);
+        }
+    });
+    
 }
 
 init();

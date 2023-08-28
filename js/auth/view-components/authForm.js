@@ -108,14 +108,14 @@ class LoginAuthForm extends AuthForm {
         console.log(data);
         axios.post("api/api-login.php", data).then(response => {
             if (response.data["login_success"]) {
-                document.querySelector("main").innerHTML = this.#generateLoginSuccessLayout(response.data["username"]);
+                document.querySelector("main").innerHTML = this.generateLoginSuccessLayout(response.data["username"]);
             } else {
                 document.querySelector("div.row.p-2 > form > p").innerHTML = response.data["login_error"];
             }
         });
     }
 
-    #generateLoginSuccessLayout(username) {
+    generateLoginSuccessLayout(username) {
         return `
         <div class="col-2"></div>
         <div class="container col-8 py-4">
@@ -202,14 +202,14 @@ class SignupAuthForm extends AuthForm {
         console.log(data);
         axios.post("api/api-signup.php", data).then(response => {
             if (response.data["signup_success"]) {
-                document.querySelector("main").innerHTML = this.#generateSignupSuccessLayout(response.data["username"]);
+                document.querySelector("main").innerHTML = this.generateSignupSuccessLayout(response.data["username"]);
             } else {
                 document.querySelector("div.row.p-2 > form > p").innerHTML = response.data["signup_error"];
             }
         });
     }
 
-    #generateSignupSuccessLayout(username) {
+    generateSignupSuccessLayout(username) {
         return `
         <div class="col-2"></div>
         <div class="container col-8 py-4">
