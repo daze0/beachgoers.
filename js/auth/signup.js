@@ -10,7 +10,7 @@ function init() {
         if (!response.data["signup_success"]) {
             layout.render(document.querySelector("main"));
         } else {
-            document.querySelector("main").innerHTML = components["authForm"].generateLoginSuccessLayout(response.data["username"]);
+            document.querySelector("main").innerHTML = components["authForm"].generateSignupSuccessLayout(response.data["username"]);
         }
     });
 }

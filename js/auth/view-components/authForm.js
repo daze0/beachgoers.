@@ -4,9 +4,12 @@ class AuthForm {
     constructor(title, formLabels) {
         this._title = title;
         this._form = document.createElement('form');
-        this._formLabels = formLabels;
         this.formSubmitCallback = this.formSubmitCallback.bind(this);
-        this._listener = new AuthFormListener("submit", this.formSubmitCallback);
+        this._formLabels = formLabels;
+        this._listeners = {
+            "showHide": new AuthFormListener("#toggle", "click", this.#showHideCallback),
+            "formSubmit": new AuthFormListener("form", "submit", this.formSubmitCallback)
+        };
     }
 
     generateComponent(data=null) {
@@ -35,8 +38,18 @@ class AuthForm {
         return formContainer;
     }
 
-    getListener() {
-        return this._listener;
+    getListener(label) {
+        return this._listeners[label];
+    }
+
+    attachListeners() {
+        const listeners = Object.values(this._listeners);
+        listeners.forEach(listener => listener.attachListener());
+    }
+
+    detachListeners() {
+        const listeners = Object.values(this._listeners);
+        listeners.forEach(listener => listener.detachListener());
     }
 
     #generateAuthForm() {
@@ -63,8 +76,19 @@ class AuthForm {
     }
 
     formSubmitCallback() {
-        console.log("formSubmit");
         this._authenticate();
+    }
+
+    #showHideCallback() {
+        const passwordInput = document.getElementById('inputPassword');
+        const toggle = document.getElementById('toggle');
+        if (passwordInput.type === 'password') {
+            passwordInput.setAttribute('type', 'text');
+            toggle.innerHTML = '&#128064;';
+        } else {
+            passwordInput.setAttribute('type', 'password');
+            toggle.innerHTML = '&#128065;';
+        }
     }
 }
 
@@ -90,12 +114,17 @@ class LoginAuthForm extends AuthForm {
         <div class="input-group mt-2 mb-2 flex-nowrap">
             <label for="input${label}Login" class="form-label visually-hidden">${label}</label>
             <span class="input-group-text"><img src="${textIconUrl}" alt="${label.toLowerCase()} icon" /></span>
-            <input type="${label.toLowerCase()}" id="input${label}Login" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
             `
         if (label === "Password") {
-            res+= `<button class="btn btn-outline-secondary" type="button" id="toggle" onclick="showHide();">
+            res += `
+            <input type="${label.toLowerCase()}" id="input${label}" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
+            <button class="btn btn-outline-secondary" type="button" id="toggle">
                 &#128065;
             </button>`;
+        } else {
+            res += `
+            <input type="${label.toLowerCase()}" id="input${label}Login" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
+            `;
         }
         res += `</div>`;
 
@@ -167,13 +196,18 @@ class SignupAuthForm extends AuthForm {
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
                 <span class="input-group-text"><img src="${textIconUrl}" alt="${label.toLowerCase()} icon" /></span>
-                <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                 `;
             
             if (label === formKeys[2]) {
-                res += `<button class="btn btn-outline-secondary" type="button" id="toggle" onclick="showHide();">
+                res += `
+                <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                    <button class="btn btn-outline-secondary" type="button" id="toggle">
                         &#128065;
                     </button>`;
+            } else {
+                res += `
+                <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                `;
             }
         } else {
             res = `

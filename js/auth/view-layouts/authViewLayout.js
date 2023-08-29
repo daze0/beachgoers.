@@ -1,6 +1,5 @@
 class AuthViewLayout {
     #components;
-    #firstRender;
 
     constructor(components) {
         this.#components = components;
@@ -8,7 +7,7 @@ class AuthViewLayout {
 
     render(rootElement) {
         rootElement.innerHTML = this.#generate();
-        this.#components["authForm"].getListener().attachListener();
+        this.#components["authForm"].attachListeners();
     }
 
     #generate() {
