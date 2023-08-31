@@ -5,7 +5,8 @@ require_once("utils/webpage.php");
 $webpage = new WebPage(
     "ConnectU - Feed", 
     array("global-style.css"), 
-    array("https://unpkg.com/axios/dist/axios.min.js", "js/utils/functions.js", "js/feed.js", "js/search-popup.js", "js/navbar.js", "js/footer.js")
+    array("https://unpkg.com/axios/dist/axios.min.js"),
+    array("js/feed/feed.js", "js/navbar/navbar.js", "js/footer/footer.js")
 );
 
 if (isset($_SESSION["profile"])) {
