@@ -34,7 +34,7 @@ class NavbarViewLayout {
                 </div>
             </form>
             <a href="#" class="navbar-brand ms-2 mb-0 h1">
-                <img id="logoutImage" class="d-inline-block align-top" src="upload/logout.png" width="30" height="30" onclick="logout()" />
+                ${this.#components["logoutIcon"].generateComponent().outerHTML}
             </a>
         </div>
         `;

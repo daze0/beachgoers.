@@ -1,4 +1,4 @@
-class AuthFormListener {
+class LogoutIconListener {
     #selector;
     #event;
     #listener;
@@ -26,4 +26,4 @@ class AuthFormListener {
     }
 }
 
-export { AuthFormListener };
+export { LogoutIconListener };
