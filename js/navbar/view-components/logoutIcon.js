@@ -3,14 +3,14 @@ import { LogoutIconListener } from "./listeners/logoutIconListener.js";
 class LogoutIcon {
     constructor() {
         this._img = document.createElement('img');
-        this.formSubmitCallback = this.formSubmitCallback.bind(this);
-        this._formLabels = formLabels;
+        this.logoutCallback = this.logoutCallback.bind(this);
         this._listeners = {
-            "logoutIcon": new LogoutIconListener("#logoutIcon", "click", this.#logoutCallback),
+            "logoutIconClick": new LogoutIconListener("#logoutIcon", "click", this.logoutCallback),
         };
     }
 
     generateComponent(data=null) {
+        this._img.id = "logoutIcon";
         this._img.classList.add("d-inline-block", "align-top");
         this._img.src = "upload/logout.png";
         this._img.width = 30;
@@ -33,8 +33,11 @@ class LogoutIcon {
         listeners.forEach(listener => listener.detachListener());
     }
 
-    #logoutCallback() {
-        axios.get("api/api-login.php?logout=true").catch(error => {
+    logoutCallback() {
+        console.log("logout");
+        axios.get("api/api-login.php?logout=true").then(response => {
+            window.location.href = 'index.php';
+        }).catch(error => {
             console.log("Error detected while logging out: " + error);
         });
     }

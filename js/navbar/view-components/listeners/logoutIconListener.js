@@ -14,11 +14,14 @@ class LogoutIconListener {
     attachListener() {
         this.#listener = e => {
             e.preventDefault();
+            console.log(e.target);
             if (e.target.matches(this.#selector)) {
+                console.log("matched");
                 this.#callback();
             }
         }
         document.querySelector(this.#selector).addEventListener(this.#event, this.#listener);
+        console.log("logout action attached");
     }
 
     detachListener() {

@@ -6,7 +6,18 @@ class NavbarViewLayout {
     }
 
     render(rootElement) {
+        /*
+            Detach only if already attached.
+            TODO: define it's useful or not to check the above condition
+
+            Object.entries(this.#components).forEach(([label, component]) => {
+                component.detachListeners();
+            });
+        */
         rootElement.innerHTML = this.#generate();
+        Object.entries(this.#components).forEach(([label, component]) => {
+            component.attachListeners();
+        });
     }
 
     #generate() {
