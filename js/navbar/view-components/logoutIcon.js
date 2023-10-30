@@ -1,11 +1,11 @@
-import { LogoutIconListener } from "./listeners/logoutIconListener.js";
+import { Listener } from "../../utils/listener.js";
 
 class LogoutIcon {
     constructor() {
         this._img = document.createElement('img');
         this.logoutCallback = this.logoutCallback.bind(this);
         this._listeners = {
-            "logoutIconClick": new LogoutIconListener("#logoutIcon", "click", this.logoutCallback),
+            "logoutIconClick": new Listener("#logoutIcon", "click", this.logoutCallback),
         };
     }
 

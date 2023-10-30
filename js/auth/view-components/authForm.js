@@ -1,4 +1,4 @@
-import { AuthFormListener } from "./listeners/authFormListener.js";
+import { Listener } from "../../utils/listener.js";
 
 class AuthForm {
     constructor(title, formLabels) {
@@ -7,8 +7,8 @@ class AuthForm {
         this.formSubmitCallback = this.formSubmitCallback.bind(this);
         this._formLabels = formLabels;
         this._listeners = {
-            "showHide": new AuthFormListener("#toggle", "click", this.#showHideCallback),
-            "formSubmit": new AuthFormListener("form", "submit", this.formSubmitCallback)
+            "showHide": new Listener("#toggle", "click", this.#showHideCallback),
+            "formSubmit": new Listener("form", "submit", this.formSubmitCallback)
         };
     }
 
