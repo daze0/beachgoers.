@@ -1,11 +1,8 @@
-import { ProfileViewLayout } from './view-layouts/profileViewLayout.js';
+import { ProfileRequest } from "./profileRequest.js";
 
 function init() {
-    const components = undefined;
-
-    const layout = new ProfileViewLayout(components);
-    
-    layout.render(document.querySelector("main"));
+    const request = new ProfileRequest();
+    request.loadRequest();
 }
 
 init();
