@@ -14,9 +14,9 @@ class IndexViewLayout {
                 <div class="container-fluid py-5">
                     <div class="row">
                         <p class="col-12 fs-4 text-light">
-                            <b>Connect</b> with your family, friends and people from all over the world.
+                            <strong>Connect</strong> with your family, friends and people from all over the world.
                             <br /><br />
-                            <b>Explore</b> and <b>thrive</b> in this new and unique social universe, always remember to show
+                            <strong>Explore</strong> and <strong>thrive</strong> in this new and unique social universe, always remember to show
                             some respect to other people, be kind.
                             <br /><br />
                             Now that you know what you're getting into...
@@ -34,7 +34,7 @@ class IndexViewLayout {
                             </a>
                         </div>
                         <div class="col-9">
-                            <p class="text-start text-light p-2"><i>Don't have an account? Register <a class="text-dark" href="signup.php"><b>here</b></a></i></p>
+                            <p class="text-start text-light p-2"><i>Don't have an account? Register <a class="text-dark" href="signup.php"><strong>here</strong></a></i></p>
                         </div>
                     </div>
                 </div>
