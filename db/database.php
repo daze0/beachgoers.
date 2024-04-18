@@ -5,10 +5,12 @@ ini_set('display_errors', 1);
 /**
  * Class for db communication.
  */
-class DatabaseHelper {
+class DatabaseHelper
+{
     private $db;
 
-    public function __construct($servername, $username, $password, $dbname, $port) {
+    public function __construct($servername, $username, $password, $dbname, $port)
+    {
         $this->db = new mysqli($servername, $username, $password, $dbname, $port);
         if ($this->db->connect_error) {
             die("Connection failed: " . $this->db->connect_error);
@@ -18,20 +20,22 @@ class DatabaseHelper {
     /**
      * Creates a new record for the new user.
      */
-    public function registerUser($email, $username, $password, $name, $surname, $userimg) {
+    public function registerUser($email, $username, $password, $name, $surname, $userimg)
+    {
         $query = "INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `userimg`) VALUES (?, ?, ?, ?, ?, ?);";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ssssss", $username, $password, $email, $name, $surname, $userimg);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         return $this->getUserByUsername($username);
     }
 
     /**
      * Returns false if email has already been used, true otherwise.
      */
-    public function checkUserEmailRegistration($email) {
+    public function checkUserEmailRegistration($email)
+    {
         $query = "SELECT email FROM user WHERE email=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $email);
@@ -44,7 +48,8 @@ class DatabaseHelper {
     /**
      * Returns false if username has already been used, true otherwise.
      */
-    public function checkUsernameRegistration($username) {
+    public function checkUsernameRegistration($username)
+    {
         $query = "SELECT username FROM user WHERE username=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
@@ -59,7 +64,8 @@ class DatabaseHelper {
      * Returns an empty associative array if they're not, 
      * otherwise the user record is returned.
      */
-    public function checkLogin($username, $password) {
+    public function checkLogin($username, $password)
+    {
         $query = "SELECT * FROM user WHERE username=? AND password=? ORDER BY userid";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ss", $username, $password);
@@ -69,7 +75,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserFollowersNumById($userid) {
+    public function getUserFollowersNumById($userid)
+    {
         $query = "SELECT COUNT(*) FROM user_follows_user WHERE followed=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -79,7 +86,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_NUM);
     }
 
-    public function getUserFollowersById($userid) {
+    public function getUserFollowersById($userid)
+    {
         $query = "SELECT userid, username, userimg FROM user_follows_user, user WHERE followed=? AND follower=userid";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -89,7 +97,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserFollowingNumById($userid) {
+    public function getUserFollowingNumById($userid)
+    {
         $query = "SELECT COUNT(*) FROM user_follows_user WHERE follower=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -99,7 +108,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_NUM);
     }
 
-    public function getUserFollowingById($userid) {
+    public function getUserFollowingById($userid)
+    {
         $query = "SELECT userid, username, userimg FROM user_follows_user, user WHERE follower=? AND followed=userid";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -109,7 +119,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserPostsNumById($userid) {
+    public function getUserPostsNumById($userid)
+    {
         $query = "SELECT COUNT(*) FROM post WHERE author=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -118,8 +129,9 @@ class DatabaseHelper {
 
         return $result->fetch_all(MYSQLI_NUM);
     }
-    
-    public function getUserLikesNumById($userid) {
+
+    public function getUserLikesNumById($userid)
+    {
         $query = "SELECT COUNT(*) FROM post, user_likes_post WHERE post=postid AND author=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -132,7 +144,8 @@ class DatabaseHelper {
     /**
      * Returns the full user record given his/hers/its username.
      */
-    public function getUsernameById($userid) {
+    public function getUsernameById($userid)
+    {
         $query = "SELECT username FROM user WHERE userid=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -141,8 +154,9 @@ class DatabaseHelper {
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
-    public function getUserImgById($userid) {
+
+    public function getUserImgById($userid)
+    {
         $query = "SELECT userimg FROM user WHERE userid=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -152,7 +166,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPostsByUserId($userid) {
+    public function getPostsByUserId($userid)
+    {
         $query = "SELECT author, postid, img, content FROM post WHERE author=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -162,7 +177,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPostLikesById($postid) {
+    public function getPostLikesById($postid)
+    {
         $query = "SELECT COUNT(*) FROM user_likes_post WHERE post=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $postid);
@@ -172,7 +188,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_NUM);
     }
 
-    public function getCommentsByPostId($postid) {
+    public function getCommentsByPostId($postid)
+    {
         // Refactoring note: change post with postid
         $query = "SELECT commentid, userid, post, username, comment, likes FROM comment, user WHERE post=? AND userid=user ORDER BY commentid";
         $stmt = $this->db->prepare($query);
@@ -183,7 +200,8 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function addFollowerToUser($followerid, $followedid) {
+    public function addFollowerToUser($followerid, $followedid)
+    {
         if (!$this->isUserFollowedByUser($followedid, $followerid)) {
             $query = "INSERT INTO `user_follows_user` (`followed`, `follower`) VALUES (?, ?);";
             $stmt = $this->db->prepare($query);
@@ -191,10 +209,10 @@ class DatabaseHelper {
             $stmt->execute();
             $result = $stmt->get_result();
         }
-        
     }
 
-    public function removeFollowerFromUser($followerid, $followedid) {
+    public function removeFollowerFromUser($followerid, $followedid)
+    {
         $query = "DELETE FROM user_follows_user WHERE followed=? AND follower=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $followedid, $followerid);
@@ -202,7 +220,8 @@ class DatabaseHelper {
         $result = $stmt->get_result();
     }
 
-    public function isUserFollowedByUser($followed_userid, $follower_userid) {
+    public function isUserFollowedByUser($followed_userid, $follower_userid)
+    {
         $query = "SELECT COUNT(*) FROM user_follows_user WHERE followed=? AND follower=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $followed_userid, $follower_userid);
@@ -211,14 +230,15 @@ class DatabaseHelper {
         $stmt->fetch();
         $stmt->close();
 
-        if($count == 0) {
+        if ($count == 0) {
             return false;
         } else {
             return true;
         }
     }
 
-    public function createNewPost($userid, $postimg, $postcontent) {
+    public function createNewPost($userid, $postimg, $postcontent)
+    {
         $query = "INSERT INTO `post` (`author`, `img`, `content`) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sss", $userid, $postimg, $postcontent);
@@ -226,7 +246,8 @@ class DatabaseHelper {
         $stmt->close();
     }
 
-    public function doesUserAlreadyLikePost($userid, $postid) {
+    public function doesUserAlreadyLikePost($userid, $postid)
+    {
         $query = "SELECT COUNT(*) FROM user_likes_post WHERE user=? AND post=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $userid, $postid);
@@ -235,14 +256,15 @@ class DatabaseHelper {
         $stmt->fetch();
         $stmt->close();
 
-        if($count == 0) {
+        if ($count == 0) {
             return false;
         } else {
             return true;
         }
     }
 
-    public function addLikeToPost($userid, $postid) {
+    public function addLikeToPost($userid, $postid)
+    {
         $query = "INSERT INTO `user_likes_post` (`user`, `post`) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $userid, $postid);
@@ -250,7 +272,17 @@ class DatabaseHelper {
         $stmt->close();
     }
 
-    public function addCommentToPost($postid, $comment) {
+    public function removeLikeFromPost($userid, $postid)
+    {
+        $query = "DELETE FROM user_likes_post WHERE user=? AND post=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $userid, $postid);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function addCommentToPost($postid, $comment)
+    {
         $query = "INSERT INTO `comment` (`user`, `post`, `comment`) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iis", $_SESSION["userid"], $postid, $comment);
@@ -261,7 +293,8 @@ class DatabaseHelper {
     /**
      * Returns the full user record given his/hers/its username.
      */
-    private function getUserByUsername($username) {
+    private function getUserByUsername($username)
+    {
         $query = "SELECT * FROM user WHERE username=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
@@ -273,5 +306,3 @@ class DatabaseHelper {
 
     // Add db communication methods below
 }
-
-?>
