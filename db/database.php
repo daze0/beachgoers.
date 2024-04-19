@@ -24,7 +24,7 @@ class DatabaseHelper
     {
         $query = "INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `userimg`) VALUES (?, ?, ?, ?, ?, ?);";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssssss", $username, $password, $email, $name, $surname, $userimg);
+        $stmt->bind_param("ssssss", $username, password_hash($password, PASSWORD_DEFAULT), $email, $name, $surname, $userimg);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -64,15 +64,21 @@ class DatabaseHelper
      * Returns an empty associative array if they're not, 
      * otherwise the user record is returned.
      */
-    public function checkLogin($username, $password)
+    public function checkLogin($username, $password) 
     {
-        $query = "SELECT * FROM user WHERE username=? AND password=? ORDER BY userid";
+        $query = "SELECT * FROM user WHERE username=?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ss", $username, $password);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+        if(empty($users)) return false;
+        $user = $users[0];
+        if(password_verify($password, $user['password'])){
+            return $user;
+        }else{
+            return [];
+        }
     }
 
     public function getUserFollowersNumById($userid)
