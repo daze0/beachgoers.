@@ -22,9 +22,10 @@ class DatabaseHelper
      */
     public function registerUser($email, $username, $password, $name, $surname, $userimg)
     {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $query = "INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `userimg`) VALUES (?, ?, ?, ?, ?, ?);";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssssss", $username, password_hash($password, PASSWORD_DEFAULT), $email, $name, $surname, $userimg);
+        $stmt->bind_param("ssssss", $username, $passwordHash, $email, $name, $surname, $userimg);
         $stmt->execute();
         $result = $stmt->get_result();
 

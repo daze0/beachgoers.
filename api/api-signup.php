@@ -14,9 +14,14 @@ if (isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["passwor
 
     if ($signup_data["signup_email_available"] && $signup_data["signup_username_available"]) {
         $userimgFilename = uploadImg("profilepicture");
-        $newlyRegisteredUser = $dbh->registerUser($_POST["email"], $_POST["username"], $_POST["password"], $_POST["name"], $_POST["surname"], $userimgFilename);
-        registerLoggedUser($newlyRegisteredUser[0]);
-        $signup_data["username"] = $_POST["username"];
+        if(is_array($userimgFilename)){
+            //uploadimg failed
+            $signup_data["signup_error"] = "Failed to upload image.";
+        }else{
+            $newlyRegisteredUser = $dbh->registerUser($_POST["email"], $_POST["username"], $_POST["password"], $_POST["name"], $_POST["surname"], $userimgFilename);
+            registerLoggedUser($newlyRegisteredUser[0]);
+            $signup_data["username"] = $_POST["username"];
+        }
     } else {
         $signup_data["signup_error"] = "Invalid username or password.";
     }

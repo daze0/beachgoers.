@@ -22,7 +22,8 @@ function unregisterLoggedUser() {
  *  this function assumes that $_FILES[$filename] is set.
  */
 function uploadImg($filename) {
-    $targetFile = "../" . UPLOAD_DIR . $_FILES[$filename]["name"];
+    $targetFileName = time().'_'.$_FILES[$filename]["name"];
+    $targetFile = "../" . UPLOAD_DIR . $targetFileName;
     $uploadOk = true;
     $errorMsgs = array();
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -37,9 +38,9 @@ function uploadImg($filename) {
     }
 
     // Check if image already exists
-    if (!file_exists($targetFile)) {
+    if (file_exists($targetFile)) {
         $uploadOk = false;
-        array_push($errorMsgs, "File not found");
+        array_push($errorMsgs, "File already exists");
     }
 
     // Check if image size is below maximum upload size value
@@ -58,7 +59,7 @@ function uploadImg($filename) {
         return $errorMsgs;
     } else {
         if (move_uploaded_file($_FILES[$filename]["tmp_name"], $targetFile)) {
-            return $_FILES[$filename]["name"];
+            return $targetFileName;
         } else {
             return "Failed to move uploaded file";
         }
