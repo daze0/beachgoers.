@@ -27,10 +27,10 @@ class NavbarViewLayout {
         </a>
         <div class="d-flex mt-2 mb-2">
             <a href="feed.php" class="navbar-brand mb-0 h1">
-                <img class="d-inline-block align-top" src="upload/feed.png" width="30" height="30" />
+                <img class="d-inline-block align-top" src="img/feed.png" width="30" height="30" />
             </a>
             <a href="profile.php" class="navbar-brand mb-0 h1">
-                <img class="d-inline-block align-top" src="upload/profile.png" width="30" height="30" />
+                <img class="d-inline-block align-top" src="img/profile.png" width="30" height="30" />
             </a>
             <form class="form-inline">
                 <div class="input-group">

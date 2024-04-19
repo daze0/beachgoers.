@@ -97,8 +97,8 @@ class LoginAuthForm extends AuthForm {
         super(
             "Log-In", 
             {
-                "Username": "upload/user.png",
-                "Password": "upload/padlock.png"
+                "Username": "img/user.png",
+                "Password": "img/padlock.png"
             }
         );
     }
@@ -169,9 +169,9 @@ class SignupAuthForm extends AuthForm {
         super(
             "Sign-Up", 
             {
-                "Email": "upload/mail.png",
-                "Username": "upload/user.png",
-                "Password": "upload/padlock.png",
+                "Email": "img/mail.png",
+                "Username": "img/user.png",
+                "Password": "img/padlock.png",
                 "Name": "",
                 "Surname": "",
                 "Profile Picture": ""

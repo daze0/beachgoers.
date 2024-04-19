@@ -20,7 +20,7 @@ class AuthViewLayout {
             <div class="p-5 rounded-3">
                 <div class="row container-fluid py-5">
                     <div class="col-md-5">
-                        <img class="img-fluid mt-2" src="upload/iphone.png" alt="iphone frame" />
+                        <img class="img-fluid mt-2" src="img/iphone.png" alt="iphone frame" />
                     </div>`;
         res += this.#components["authForm"].generateComponent().outerHTML;
         res += `

@@ -12,7 +12,7 @@ class LogoutIcon {
     generateComponent(data=null) {
         this._img.id = "logoutIcon";
         this._img.classList.add("d-inline-block", "align-top");
-        this._img.src = "upload/logout.png";
+        this._img.src = "img/logout.png";
         this._img.width = 30;
         this._img.height = 30;
 
