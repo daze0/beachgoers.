@@ -8,7 +8,7 @@ class Utils {
     with given classname, ariaLabel and 
     inner path element d attribute(pathD) 
     */
-    static generateSvg(classname, ariaLabel, pathD) {
+    /* static generateSvg(classname, ariaLabel, pathD) {
         const dstSvg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
         const svgTitle = document.createElement("title");
 
@@ -31,7 +31,7 @@ class Utils {
         dstSvg.appendChild(pathElement);
 
         return dstSvg;
-    }
+    } */
 }
 
 export {Utils}

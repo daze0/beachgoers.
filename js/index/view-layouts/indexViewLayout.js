@@ -29,7 +29,7 @@ class IndexViewLayout {
                         <div class="col-3">
                             <a href="login.php">
                                 <button class="btn btn-light btn-lg text-dark" type="button">
-                                    <img class="me-2" src="img/index-login-btn-icon.png" alt="Log-in" />Log-in
+                                    <i class="bi bi-box-arrow-in-right"></i> Log-in
                                 </button>
                             </a>
                         </div>

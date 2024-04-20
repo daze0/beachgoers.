@@ -84,10 +84,10 @@ class AuthForm {
         const toggle = document.getElementById('toggle');
         if (passwordInput.type === 'password') {
             passwordInput.setAttribute('type', 'text');
-            toggle.innerHTML = '&#128064;';
+            toggle.innerHTML = '<i class="bi bi-eye-slash"></i>';
         } else {
             passwordInput.setAttribute('type', 'password');
-            toggle.innerHTML = '&#128065;';
+            toggle.innerHTML = '<i class="bi bi-eye"></i>';
         }
     }
 }
@@ -97,8 +97,8 @@ class LoginAuthForm extends AuthForm {
         super(
             "Log-In", 
             {
-                "Username": "img/user.png",
-                "Password": "img/padlock.png"
+                "Username": "bi bi-person",
+                "Password": "bi bi-key"
             }
         );
     }
@@ -109,17 +109,17 @@ class LoginAuthForm extends AuthForm {
         `;
     }
 
-    _generateFormElement(label, textIconUrl) {
+    _generateFormElement(label, classIcon) {
         let res = `
         <div class="input-group mt-2 mb-2 flex-nowrap">
             <label for="input${label}Login" class="form-label visually-hidden">${label}</label>
-            <span class="input-group-text"><img src="${textIconUrl}" alt="${label.toLowerCase()} icon" /></span>
-            `
+            <span class="input-group-text"><i class="${classIcon}"></i></span>
+            `;
         if (label === "Password") {
             res += `
             <input type="${label.toLowerCase()}" id="input${label}" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
             <button class="btn btn-outline-secondary" type="button" id="toggle">
-                &#128065;
+                <i class="bi bi-eye"></i>
             </button>`;
         } else {
             res += `
@@ -169,9 +169,9 @@ class SignupAuthForm extends AuthForm {
         super(
             "Sign-Up", 
             {
-                "Email": "img/mail.png",
-                "Username": "img/user.png",
-                "Password": "img/padlock.png",
+                "Email": "bi bi-envelope",
+                "Username": "bi bi-person",
+                "Password": "bi bi-key",
                 "Name": "",
                 "Surname": "",
                 "Profile Picture": ""
@@ -185,7 +185,7 @@ class SignupAuthForm extends AuthForm {
         `;
     }
 
-    _generateFormElement(label, textIconUrl) {
+    _generateFormElement(label, classIcon) {
 
         const formKeys = Object.keys(this._formLabels);
         let trimmedLabel = label.replace(/\s/g, "");
@@ -195,7 +195,7 @@ class SignupAuthForm extends AuthForm {
             res = `
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
-                <span class="input-group-text"><img src="${textIconUrl}" alt="${label.toLowerCase()} icon" /></span>
+                <span class="input-group-text"><i class="${classIcon}"></i></span>
                 `;
             
             if (label === formKeys[2]) {
