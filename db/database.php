@@ -173,6 +173,17 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getUserTelegramUsernameById($userid)
+    {
+        $query = "SELECT telegramUsername FROM user WHERE userid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $userid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getPostsByUserId($userid)
     {
         $query = "SELECT author, postid, img, content FROM post WHERE author=?";

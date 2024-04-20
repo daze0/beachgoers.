@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `telegramUsername` VARCHAR(32) NULL DEFAULT NULL AFTER `userimg`;

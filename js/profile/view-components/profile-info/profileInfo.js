@@ -1,13 +1,16 @@
 import { Utils } from '../../../utils/utils.js';
 import { FollowButton } from './followButton.js';
+import { TelegramButton } from './telegramButton.js';
 
 class ProfileInfo {
     #components;
 
     constructor() {
         this.#components = {
-            "followButton": new FollowButton()
-        }; //TODO: define components
+            "followButton": new FollowButton(),
+            "telegramButton": new TelegramButton()
+        };
+         //TODO: define components
     }
 
     generateComponent(data) {
@@ -39,6 +42,7 @@ class ProfileInfo {
         </div>
         <div class="col-3 py-4 pe-0">
             ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"])}
+            ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
         </div>
         `;
     }
