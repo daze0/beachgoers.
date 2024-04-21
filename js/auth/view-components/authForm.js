@@ -12,7 +12,7 @@ class AuthForm {
         };
     }
 
-    generateComponent(data=null) {
+    generateComponent(data = null) {
         const formContainer = document.createElement('div');
         formContainer.classList.add("col-md-7");
         this._form.action = "#";
@@ -71,7 +71,7 @@ class AuthForm {
         throw new Error("method generateFormElement needs implementation");
     }
 
-    _authenticate() { 
+    _authenticate() {
         throw new Error("method authenticate needs implementation");
     }
 
@@ -95,7 +95,7 @@ class AuthForm {
 class LoginAuthForm extends AuthForm {
     constructor() {
         super(
-            "Log-In", 
+            "Log-In",
             {
                 "Username": "bi bi-person",
                 "Password": "bi bi-key"
@@ -131,7 +131,7 @@ class LoginAuthForm extends AuthForm {
         return res;
     }
 
-    _authenticate() {  
+    _authenticate() {
         this._form = document.querySelector("form");
         const data = new FormData(this._form);
         console.log(data);
@@ -167,14 +167,15 @@ class LoginAuthForm extends AuthForm {
 class SignupAuthForm extends AuthForm {
     constructor() {
         super(
-            "Sign-Up", 
+            "Sign-Up",
             {
                 "Email": "bi bi-envelope",
                 "Username": "bi bi-person",
                 "Password": "bi bi-key",
                 "Name": "",
                 "Surname": "",
-                "Profile Picture": ""
+                "Profile Picture": "",
+                "Telegram username": ""
             }
         );
     }
@@ -190,14 +191,14 @@ class SignupAuthForm extends AuthForm {
         const formKeys = Object.keys(this._formLabels);
         let trimmedLabel = label.replace(/\s/g, "");
         let res = "";
-    
+
         if (label === formKeys[0] || label === formKeys[1] || label === formKeys[2]) {
             res = `
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
                 <span class="input-group-text"><i class="${classIcon}"></i></span>
                 `;
-            
+
             if (label === formKeys[2]) {
                 res += `
                 <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
@@ -224,13 +225,13 @@ class SignupAuthForm extends AuthForm {
                 `;
             }
         }
-        
+
         res += `</div>`;
-    
+
         return res;
     }
 
-    _authenticate() {  
+    _authenticate() {
         this._form = document.querySelector("form");
         const data = new FormData(this._form);
         console.log(data);

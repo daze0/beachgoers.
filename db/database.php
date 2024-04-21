@@ -20,12 +20,12 @@ class DatabaseHelper
     /**
      * Creates a new record for the new user.
      */
-    public function registerUser($email, $username, $password, $name, $surname, $userimg)
+    public function registerUser($email, $username, $password, $name, $surname, $userimg, $telegramUsername)
     {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `userimg`) VALUES (?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `userimg`, `telegramUsername`) VALUES (?, ?, ?, ?, ?, ?, ?);";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssssss", $username, $passwordHash, $email, $name, $surname, $userimg);
+        $stmt->bind_param("sssssss", $username, $passwordHash, $email, $name, $surname, $userimg, $telegramUsername);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -65,7 +65,7 @@ class DatabaseHelper
      * Returns an empty associative array if they're not, 
      * otherwise the user record is returned.
      */
-    public function checkLogin($username, $password) 
+    public function checkLogin($username, $password)
     {
         $query = "SELECT * FROM user WHERE username=?";
         $stmt = $this->db->prepare($query);
@@ -73,11 +73,11 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result();
         $users = $result->fetch_all(MYSQLI_ASSOC);
-        if(empty($users)) return false;
+        if (empty($users)) return false;
         $user = $users[0];
-        if(password_verify($password, $user['password'])){
+        if (password_verify($password, $user['password'])) {
             return $user;
-        }else{
+        } else {
             return [];
         }
     }
