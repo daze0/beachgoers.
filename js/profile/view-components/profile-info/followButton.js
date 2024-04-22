@@ -1,28 +1,44 @@
 import { Listener } from '../../../utils/listener.js';
 
 class FollowButton {
-    #button;
+    #followButton;
+    #unfollowButton;
     _listeners;
 
     constructor() {
-        this.#button = undefined;
+        this.#followButton = undefined;
+        this.#unfollowButton = undefined;
         this._listeners = {
             "followButtonClick": new Listener("#followButton", "click", this.followButtonCallback),
-            //"unfollowButtonClick": new Listener("#followButton", "click", this.unfollowButtonCallback)
+            "unfollowButtonClick": new Listener("#unfollowButton", "click", this.unfollowButtonCallback)
         };
     }
 
-    generateComponent(data) {
-        this.#generateFollowButton(data["personal_profile"], data["follow_status"]);
-        return (this.#button instanceof HTMLElement) ? this.#button.outerHTML : "";
+    generateComponent(personal_profile, follow_status) {
+        this.#generateFollowButton(personal_profile, follow_status);
+        this.#generateUnfollowButton(personal_profile, follow_status);
+        if(personal_profile){
+            return "";
+        }
+        return this.#followButton.outerHTML+this.#unfollowButton.outerHTML;
     }
 
     followButtonCallback() {
-
+        axios.get("api/api-profile.php?follow=true").then(response => {
+           document.getElementById("followButton").classList.add("d-none");
+           document.getElementById("unfollowButton").classList.remove("d-none");
+        }).catch(error => {
+            console.log("Error detected while following: " + error);
+        });
     }
 
     unfollowButtonCallback() {
-
+        axios.get("api/api-profile.php?follow=false").then(response => {
+            document.getElementById("unfollowButton").classList.add("d-none");
+            document.getElementById("followButton").classList.remove("d-none");
+        }).catch(error => {
+            console.log("Error detected while unfollowing: " + error);
+        });
     }
 
     getListener(label) {
@@ -37,14 +53,26 @@ class FollowButton {
 
     #generateFollowButton(isPersonalProfile, followStatus) {
         if (!isPersonalProfile) {
-            this.#button = document.createElement("button");
-            this.#button.id = "followButton";
-            this.#button.type = "button";
-            this.#button.classList.add("btn");
-            if (!followStatus) {
-                this.#button.textContent = "Follow";
-            } else {
-                this.#button.textContent = "Unfollow";
+            this.#followButton = document.createElement("button");
+            this.#followButton.id = "followButton";
+            this.#followButton.type = "button";
+            this.#followButton.classList.add("btn");
+            this.#followButton.textContent = "Follow";
+            if(followStatus){
+                this.#followButton.classList.add("d-none");
+            }
+        }
+    }
+
+    #generateUnfollowButton(isPersonalProfile, followStatus) {
+        if (!isPersonalProfile) {
+            this.#unfollowButton = document.createElement("button");
+            this.#unfollowButton.id = "unfollowButton";
+            this.#unfollowButton.type = "button";
+            this.#unfollowButton.classList.add("btn");
+            this.#unfollowButton.textContent = "Unfollow";
+            if(!followStatus){
+                this.#unfollowButton.classList.add("d-none");
             }
         }
     }

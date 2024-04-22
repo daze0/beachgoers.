@@ -12,7 +12,7 @@ if (isUserLoggedIn()) {
         $profile_data["following"] = $dbh->getUserFollowingNumById($_SESSION["profile_uid"])[0][0];
         $profile_data["posts"] = $dbh->getUserPostsNumById($_SESSION["profile_uid"])[0][0];
         $profile_data["likes"] = $dbh->getUserLikesNumById($_SESSION["profile_uid"])[0][0];
-        $profile_data["telegram_username"] = $dbh->getUserTelegramUsernameById($_SESSION["profile_uid"])[0][0];
+        $profile_data["telegram_username"] = $dbh->getUserTelegramUsernameById($_SESSION["profile_uid"])[0]["telegramUsername"];
         $profile_data["personal_profile"] = false;
         if (isset($_GET["follow"])) {
             /**
