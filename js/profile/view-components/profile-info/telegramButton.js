@@ -27,7 +27,7 @@ class TelegramButton {
     }
 
     #generateTelegramButton(isPersonalProfile, telegramUsername) {
-        if(telegramUsername){
+        if(telegramUsername && !isPersonalProfile){
             this.#button = document.createElement("a");
             this.#button.id = "telegramButton";
             this.#button.type = "button";
