@@ -19,5 +19,8 @@ class PopupCancelButton {
 
     #popupCancelCallback() {
         this.#popup.togglePopupState(false);
+        this.#popup.render();
     }
 }
+
+export { PopupCancelButton };

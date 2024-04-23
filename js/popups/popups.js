@@ -12,8 +12,11 @@ class AbstractPopup {
     }
 
     render() {
-        // Could be helpful to check popup state before generating content.
-        return this._generate();
+        if (this.#popupState) {
+            this._generate();
+        } else {
+            this._remove();
+        }
     }
 
     togglePopupState(state) {
@@ -22,6 +25,10 @@ class AbstractPopup {
 
     _generate() {
         throw new Error("method generate needs implementation");
+    }
+
+    _remove() {
+        throw new Error("method remove needs implementation");
     }
 }
 
