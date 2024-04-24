@@ -10,7 +10,8 @@ class PopupCancelButton {
     }
 
     generateComponent() {
-        return `TODO`;
+        // Create button with same id as the one inside the listener above.
+        return `<button class="close-button" id="popupCancelButton">&#10006</button>`;
     }
 
     getListener() {

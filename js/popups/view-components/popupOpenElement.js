@@ -17,7 +17,7 @@ class PopupOpenElement {
             - In the second case the popup class only needs to be extended with another method
                 that allows post-creation data setup. 
                 So basically there'd be a request, its response data is given to the popup that stores
-                and displays it to the user.
+                and displays it to the user. (CHOOSEN WAY, for now)
     */
     constructor(popupId, popup) {
         this.#popup = popup;
@@ -35,7 +35,16 @@ class PopupOpenElement {
 
     #popupOpenCallback() {
         this.#popup.togglePopupState(true);
+
+        // Send request to get data for the popup and store it in the popup instance.
+        const popupData = this._requestData();
+        this.#popup.setData(popupData);
+
         this.#popup.render();
+    }
+
+    _requestData() {
+        throw new Error("method _requestData needs implementation");
     }
 }
 

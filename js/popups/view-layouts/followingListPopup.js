@@ -5,18 +5,51 @@ import { FollowingListElement } from '../../profile/view-components/profile-info
 class FollowingListPopup extends AbstractDataPopup {
     constructor(data) {
         components = {
-            "popupCancelButton": new PopupCancelButton(),
-            "popupOpenElement": new FollowingListElement()
+            "popupCancelButton": new PopupCancelButton(this),
+            "popupOpenElement": new FollowingListElement(this)
         };
         super(components, data);
     }
 
     _generate() {
-        // TODO
+        const followingPopupContent = this.#generateFollowingPopupContent(this._data);
+        this._popup = document.createElement('div');
+        this._popup.innerHTML = followingPopupContent;
+        this._popup.classList.add('popup');
+        this._popup.appendChild(this._components["popupCancelButton"].generateComponent());
+
+        document.body.appendChild(this._popup);
+    }
+
+    /*
+    REFACTORING NOTES:
+    - The following code repeats itself also in followersListPopup class.
+    - It would be better to extract this code to the base class AbstractDataPopup.
+    */
+
+    #generateFollowingPopupContent(followingList) {
+        let content = '<h2>Following</h2>';
+        content += '<table>';
+
+        for (const following of followingList) {
+            const followingItem = generateFollowingItem(following);
+            content += `<tr>${followingItem}</tr>`;
+        }
+
+        content += '</table>';
+
+        return content;
+    }
+
+    #generateFollowingItem(following) {
+        return `
+            <td><img src="upload/profile.png" alt="Profile Picture"></td>
+            <td>${follower.name}</td>
+        `;
     }
 
     _remove() {
-        // TODO
+        document.body.removeChild(this._popup);
     }
 }
 

@@ -3,12 +3,16 @@
  * quick element creation purposes.
  */
 class Utils {
+    constructor() {
+        // This constructor prevents instantiation
+        throw new Error("This class should not be instantiated");
+    }
     /**
     Generates and returns an svg element 
     with given classname, ariaLabel and 
     inner path element d attribute(pathD) 
     */
-    /* static generateSvg(classname, ariaLabel, pathD) {
+    static generateSvg(classname, ariaLabel, pathD) {
         const dstSvg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
         const svgTitle = document.createElement("title");
 
@@ -31,7 +35,7 @@ class Utils {
         dstSvg.appendChild(pathElement);
 
         return dstSvg;
-    } */
+    }
 }
 
-export {Utils}
+export { Utils }

@@ -10,7 +10,7 @@ class ProfileInfo {
             "followButton": new FollowButton(),
             "telegramButton": new TelegramButton()
         };
-         //TODO: define components
+        //TODO: define components
     }
 
     generateComponent(data) {
@@ -59,6 +59,7 @@ class ProfileInfo {
     }
 
     #generateUserInfo(userData) {
+        // TODO: Add following and followers list element(they trigger popups) along with likes and posts number
         return undefined;
     }
 

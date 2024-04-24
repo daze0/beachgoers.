@@ -5,6 +5,7 @@
 class AbstractPopup {
     #components;
     #popupState;
+    _popup;
 
     constructor(components) {
         this.#components = components;
@@ -40,9 +41,17 @@ class AbstractPopup {
 class AbstractDataPopup extends AbstractPopup {
     #data;
 
-    constructor(components, data) {
+    constructor(components, data = undefined) {
         super(components);
         this.#data = data;
+    }
+
+    setData(data) {
+        if (data == undefined || data == null) {
+            throw new Error("data is undefined");
+        } else {
+            this.#data = data;
+        }
     }
 }
 
