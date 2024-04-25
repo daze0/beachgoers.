@@ -17,16 +17,16 @@ class FollowButton {
     generateComponent(personal_profile, follow_status) {
         this.#generateFollowButton(personal_profile, follow_status);
         this.#generateUnfollowButton(personal_profile, follow_status);
-        if(personal_profile){
+        if (personal_profile) {
             return "";
         }
-        return this.#followButton.outerHTML+this.#unfollowButton.outerHTML;
+        return this.#followButton.outerHTML + this.#unfollowButton.outerHTML;
     }
 
     followButtonCallback() {
         axios.get("api/api-profile.php?follow=true").then(response => {
-           document.getElementById("followButton").classList.add("d-none");
-           document.getElementById("unfollowButton").classList.remove("d-none");
+            document.getElementById("followButton").classList.add("d-none");
+            document.getElementById("unfollowButton").classList.remove("d-none");
         }).catch(error => {
             console.log("Error detected while following: " + error);
         });
@@ -58,7 +58,7 @@ class FollowButton {
             this.#followButton.type = "button";
             this.#followButton.classList.add("btn");
             this.#followButton.textContent = "Follow";
-            if(followStatus){
+            if (followStatus) {
                 this.#followButton.classList.add("d-none");
             }
         }
@@ -71,7 +71,7 @@ class FollowButton {
             this.#unfollowButton.type = "button";
             this.#unfollowButton.classList.add("btn");
             this.#unfollowButton.textContent = "Unfollow";
-            if(!followStatus){
+            if (!followStatus) {
                 this.#unfollowButton.classList.add("d-none");
             }
         }

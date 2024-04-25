@@ -22,7 +22,6 @@ class Listener {
         }
         console.log("selector: " + this.#selector);
         document.querySelector(this.#selector).addEventListener(this.#event, this.#listener);
-        console.log("logout action attached");
     }
 
     detachListener() {

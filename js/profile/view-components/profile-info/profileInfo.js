@@ -1,6 +1,7 @@
-import { Utils } from '../../../utils/utils.js';
 import { FollowButton } from './followButton.js';
 import { TelegramButton } from './telegramButton.js';
+import { FollowersListPopup } from '../../../popups/view-layouts/followersListPopup.js';
+import { FollowingListPopup } from '../../../popups/view-layouts/followingListPopup.js';
 
 class ProfileInfo {
     #components;
@@ -8,9 +9,10 @@ class ProfileInfo {
     constructor() {
         this.#components = {
             "followButton": new FollowButton(),
-            "telegramButton": new TelegramButton()
+            "telegramButton": new TelegramButton(),
+            "followersListPopup": undefined,
+            "followingListPopup": undefined
         };
-        //TODO: define components
     }
 
     generateComponent(data) {
@@ -54,30 +56,54 @@ class ProfileInfo {
     #generateUsername(userData) {
         return `
             <div class="row">
-                <p class="text-center fs-5">@${userData["username"]}</p>
-            </div>`;
+                <p class="text-start fs-5">@${userData["username"]}</p>
+            </div>
+        `;
     }
 
     #generateUserInfo(userData) {
-        // TODO: Add following and followers list element(they trigger popups) along with likes and posts number
-        return undefined;
+        // Renders following and followers list elements(they trigger popups) along with likes and posts number elements
+        return `
+        <div class="row">
+            ${this.#populateUserInfoRow(userData)
+            }
+        </div>
+    `;
     }
 
-    /* #generateFollowersSvg() {
-        return Utils.generateSvg("bi-people", "followers", "M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z");
+    #populateUserInfoRow(userData) {
+        this.#components["followersListPopup"] = new FollowersListPopup(userData["followers_list"]);
+        this.#components["followingListPopup"] = new FollowingListPopup(userData["following_list"]);
+
+        const userInfoElements = {
+            "followers": this.#components["followersListPopup"].getPopupOpenElement().generateComponent(userData["followers"]),
+            "following": this.#components["followingListPopup"].getPopupOpenElement().generateComponent(userData["following"]),
+            "likes": `
+                <span>
+                    <i class='bi bi-heart'></i>
+                    <p>${userData["likes"]}</p>
+                </span>
+            `,
+            "posts": `
+                <span>
+                    <i class='bi bi-file-text'></i>
+                    <p>${userData["posts"]}</p>
+                </span>
+            `
+        };
+
+        let res = "";
+
+        for (const key of Object.keys(userInfoElements)) {
+            res += `
+                <div class="col-3">
+                    ${userInfoElements[key]}
+                </div >
+            `;
+        }
+
+        return res;
     }
-    
-    #generateFollowingSvg() {
-        return Utils.generateSvg("bi-people-fill", "following", "M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z");
-    }
-    
-    #generatePostsSvg() {
-        return Utils.generateSvg("bi-file-text-fill", "posts", "M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z");
-    }
-    
-    #generateLikesSvg() {
-        return Utils.generateSvg("bi-hearth-fill", "likes", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
-    } */
 }
 
 export { ProfileInfo }

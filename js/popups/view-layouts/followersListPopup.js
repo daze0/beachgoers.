@@ -4,11 +4,11 @@ import { FollowersListElement } from '../../profile/view-components/profile-info
 
 class FollowersListPopup extends AbstractDataPopup {
     constructor(data) {
-        components = {
-            "popupCancelButton": new PopupCancelButton(this),
-            "popupOpenElement": new FollowersListElement(this)
-        };
-        super(components, data);
+        console.log(data);
+        super(data);
+        console.log(this._data);
+        this._setComponent("popupCancelButton", new PopupCancelButton(this));
+        this._setComponent("popupOpenElement", new FollowersListElement(this));
     }
 
     _generate() {
@@ -16,12 +16,16 @@ class FollowersListPopup extends AbstractDataPopup {
         this._popup = document.createElement('div');
         this._popup.innerHTML = followersPopupContent;
         this._popup.classList.add('popup');
-        this._popup.appendChild(this._components["popupCancelButton"].generateComponent());
+        this._popup.appendChild(this._getComponent("popupCancelButton").generateComponent());
 
         document.body.appendChild(this._popup);
     }
 
     #generateFollowersPopupContent(followersList) {
+        if (followersList.length === 0) {
+            return '<h2>No followers</h2>';
+        }
+
         let content = '<h2>Followers</h2>';
         content += '<table>';
 

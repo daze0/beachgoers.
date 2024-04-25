@@ -1,14 +1,12 @@
 import { AbstractDataPopup } from '../popups.js';
 import { PopupCancelButton } from '../view-components/popupCancelButton.js';
-import { FollowingListElement } from '../../profile/view-components/profile-info/FollowingListElement.js';
+import { FollowingListElement } from '../../profile/view-components/profile-info/followingListElement.js';
 
 class FollowingListPopup extends AbstractDataPopup {
     constructor(data) {
-        components = {
-            "popupCancelButton": new PopupCancelButton(this),
-            "popupOpenElement": new FollowingListElement(this)
-        };
-        super(components, data);
+        super(data);
+        this._setComponent("popupCancelButton", new PopupCancelButton(this));
+        this._setComponent("popupOpenElement", new FollowingListElement(this));
     }
 
     _generate() {
@@ -16,7 +14,7 @@ class FollowingListPopup extends AbstractDataPopup {
         this._popup = document.createElement('div');
         this._popup.innerHTML = followingPopupContent;
         this._popup.classList.add('popup');
-        this._popup.appendChild(this._components["popupCancelButton"].generateComponent());
+        this._popup.appendChild(this._getComponent("popupCancelButton").generateComponent());
 
         document.body.appendChild(this._popup);
     }
@@ -28,6 +26,10 @@ class FollowingListPopup extends AbstractDataPopup {
     */
 
     #generateFollowingPopupContent(followingList) {
+        if (followingList.length === 0) {
+            return '<h2>No following</h2>';
+        }
+
         let content = '<h2>Following</h2>';
         content += '<table>';
 

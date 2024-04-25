@@ -7,21 +7,85 @@ class AbstractPopup {
     #popupState;
     _popup;
 
-    constructor(components) {
-        this.#components = components;
+    constructor() {
+        this.#components = {
+            "popupCancelButton": undefined,
+            /*
+             It is important to name the component below 
+             'popupOpenElement' because the method
+             getPopupOpenElement checks for this key.
+            */
+            "popupOpenElement": undefined
+        };
         this.#popupState = false;
     }
 
     render() {
+        console.log("render popupState=" + this.#popupState);
         if (this.#popupState) {
             this._generate();
+            this._attachInnerListeners();
         } else {
+            this._detachInnerListeners();
             this._remove();
         }
     }
 
+    /*
+    These two methods below are standard for all view-layouts,
+    in this case there's some particularity:
+    - We want to call these methods from profileInfo in order
+      to attach the listener to the component that opens the popup.
+    - We also have more components inside the popup just as the popup
+        open element, though they're considered of inner level so they will
+        need to be attached/detached from within the popup. See _attachInnerListeners/_detachInnerListeners
+    */
+    attachListeners() {
+        this.#components["popupOpenElement"].getListener().attachListener();
+    }
+
+    detachListeners() {
+        this.#components["popupOpenElement"].getListener().detachListener();
+    }
+
+    _attachInnerListeners() {
+        Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement")
+            .forEach(([label, component]) => {
+                component.getListener().attachListener();
+            });
+    }
+
+    _detachInnerListeners() {
+        Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement")
+            .forEach(([label, component]) => {
+                component.getListener().detachListener();
+            });
+    }
+
     togglePopupState(state) {
         this.#popupState = state;
+    }
+
+    getPopupOpenElement() {
+        if ("popupOpenElement" in this.#components && this.#components["popupOpenElement"] != undefined) {
+            return this.#components.popupOpenElement;
+        }
+        return undefined;
+    }
+
+    _setComponent(label, component) {
+        if (label in this.#components) {
+            this.#components[label] = component;
+        } else {
+            throw new Error("AbstractPopup[_setComponent]: component does not exist");
+        }
+    }
+
+    _getComponent(label) {
+        if (label in this.#components) {
+            return this.#components[label];
+        }
+        return undefined;
     }
 
     _generate() {
@@ -39,18 +103,18 @@ class AbstractPopup {
  * @param {Object} data
  */
 class AbstractDataPopup extends AbstractPopup {
-    #data;
+    _data;
 
-    constructor(components, data = undefined) {
-        super(components);
-        this.#data = data;
+    constructor(data) {
+        super();
+        this._data = data;
     }
 
     setData(data) {
         if (data == undefined || data == null) {
             throw new Error("data is undefined");
         } else {
-            this.#data = data;
+            this._data = data;
         }
     }
 }

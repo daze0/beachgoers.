@@ -1,3 +1,5 @@
+import { Listener } from '../../utils/listener.js';
+
 /**
  * PopupOpenElement is a base class for all popup open elements.
  * It provides a method to generate the popup open element.
@@ -14,15 +16,13 @@ class PopupOpenElement {
             or via profile info(or profile feed in case of new post popup):
             - In the first case this class needs to be modified in order to create and store 
                 internally the popup that the element the class represents triggers when you click it.
-            - In the second case the popup class only needs to be extended with another method
-                that allows post-creation data setup. 
-                So basically there'd be a request, its response data is given to the popup that stores
-                and displays it to the user. (CHOOSEN WAY, for now)
+            - In the second case the popup open element stays inside popup. (CHOOSEN WAY, for now)
     */
     constructor(popupId, popup) {
         this.#popup = popup;
         this.#element = undefined;
-        this.#listener = new Listener(popupId, "click", this.#popupOpenCallback);
+        this.popupOpenCallback = this.popupOpenCallback.bind(this);
+        this.#listener = new Listener(popupId, "click", this.popupOpenCallback);
     }
 
     generateComponent() {
@@ -33,18 +33,9 @@ class PopupOpenElement {
         return this.#listener;
     }
 
-    #popupOpenCallback() {
+    popupOpenCallback() {
         this.#popup.togglePopupState(true);
-
-        // Send request to get data for the popup and store it in the popup instance.
-        const popupData = this._requestData();
-        this.#popup.setData(popupData);
-
         this.#popup.render();
-    }
-
-    _requestData() {
-        throw new Error("method _requestData needs implementation");
     }
 }
 

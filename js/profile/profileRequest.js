@@ -9,7 +9,7 @@ class ProfileRequest {
     };
     #layout = undefined;
 
-    #profileFeedCallback(userData, userFeedData, firstLoad=true) {
+    #profileFeedCallback(userData, userFeedData, firstLoad = true) {
         this.#layout = new ProfileViewLayout(this.#components, userData, userFeedData);
         this.#layout.render(document.querySelector("main"));
         if (firstLoad) {/*
@@ -22,8 +22,8 @@ class ProfileRequest {
             attachProfileFeedListeners(userData, userFeedData);*/
         }
     }
-    
-    #profileInfoCallback(userData, firstLoad=true) {
+
+    #profileInfoCallback(userData, firstLoad = true) {
         axios.get("api/api-profile-feed.php").then(response => {
             if (firstLoad) {
                 this.#profileFeedCallback(userData, response.data);
@@ -32,9 +32,9 @@ class ProfileRequest {
             }
         });
     }
-    
-    loadRequest(firstLoad=true) {
-        axios.get("api/api-profile.php").then(response => {
+
+    loadRequest(firstLoad = true) {
+        axios.get("api/api-profile.php?followers_list=true&following_list=true").then(response => {
             this.#profileInfoCallback(response.data, firstLoad);
         });
     }
