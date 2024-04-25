@@ -17,21 +17,27 @@ if (isUserLoggedIn()) {
         if (isset($_GET["follow"])) {
             /**
              *  api/api-profile.php?follow=... => ... = [true, false]
-             */ 
+             */
             if ($_GET["follow"] == "true") {
                 $dbh->addFollowerToUser($_SESSION["userid"], $_SESSION["profile_uid"]);
             } elseif ($_GET["follow"] == "false") {
                 $dbh->removeFollowerFromUser($_SESSION["userid"], $_SESSION["profile_uid"]);
             }
         } elseif (isset($_GET["followers_list"]) && $_GET["followers_list"] == "true") {
-             /** 
-              * api/api-profile.php?followers_list=true
-              */
+            /** 
+             * api/api-profile.php?followers_list=true
+             */
             $profile_data["followers_list"] = $dbh->getUserFollowersById($_SESSION["profile_uid"]);
+            if (isset($_GET["following_list"]) && $_GET["following_list"] == "true") {
+                /** 
+                 * api/api-profile.php?followers_list=true&following_list=true
+                 */
+                $profile_data["following_list"] = $dbh->getUserFollowingById($_SESSION["profile_uid"]);
+            }
         } elseif (isset($_GET["following_list"]) && $_GET["following_list"] == "true") {
-             /**
-              * api/api-profile.php?following_list=true
-              */
+            /**
+             * api/api-profile.php?following_list=true
+             */
             $profile_data["following_list"] = $dbh->getUserFollowingById($_SESSION["profile_uid"]);
         }
         $profile_data["follow_status"] = $dbh->isUserFollowedByUser($_SESSION["profile_uid"], $_SESSION["userid"]);
@@ -46,19 +52,17 @@ if (isUserLoggedIn()) {
         $profile_data["personal_profile"] = true;
         if (isset($_GET["followers_list"]) && $_GET["followers_list"] == "true") {
             /** 
-              * api/api-profile.php?followers_list=true
-              */
+             * api/api-profile.php?followers_list=true
+             */
             $profile_data["followers_list"] = $dbh->getUserFollowersById($_SESSION["userid"]);
         } elseif (isset($_GET["following_list"]) && $_GET["following_list"] == "true") {
             /**
-              * api/api-profile.php?following_list=true
-              */
+             * api/api-profile.php?following_list=true
+             */
             $profile_data["following_list"] = $dbh->getUserFollowingById($_SESSION["userid"]);
         }
-    } 
+    }
 }
 
 header("Content-Type: application/json");
 echo json_encode($profile_data);
-
-?>
