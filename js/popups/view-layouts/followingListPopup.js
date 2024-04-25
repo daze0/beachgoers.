@@ -45,8 +45,8 @@ class FollowingListPopup extends AbstractDataPopup {
 
     #generateFollowingItem(following) {
         return `
-            <td><img src="upload/profile.png" alt="Profile Picture"></td>
-            <td>${following.name}</td>
+            <td><img src="upload/${following.userimg}" alt="Profile Picture"></td>
+            <td>${following.username}</td>
         `;
     }
 

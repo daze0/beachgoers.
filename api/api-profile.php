@@ -20,8 +20,10 @@ if (isUserLoggedIn()) {
              */
             if ($_GET["follow"] == "true") {
                 $dbh->addFollowerToUser($_SESSION["userid"], $_SESSION["profile_uid"]);
+                $profile_data["followers"]++;
             } elseif ($_GET["follow"] == "false") {
                 $dbh->removeFollowerFromUser($_SESSION["userid"], $_SESSION["profile_uid"]);
+                $profile_data["followers"]--;
             }
         } elseif (isset($_GET["followers_list"]) && $_GET["followers_list"] == "true") {
             /** 

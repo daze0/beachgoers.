@@ -30,6 +30,12 @@ class FollowButton {
             // document.getElementById("unfollowButton").classList.remove("d-none");
             const request = new ProfileRequest();
             request.loadRequest();
+            /*
+             NOTE: 
+                This works but it is inefficient, everything could be done 
+                using response.data and tweaking profileRequest.
+                1 request is better than 3.
+            */
         }).catch(error => {
             console.log("Error detected while following: " + error);
         });

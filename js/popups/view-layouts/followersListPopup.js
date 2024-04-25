@@ -40,8 +40,8 @@ class FollowersListPopup extends AbstractDataPopup {
 
     #generateFollowerItem(follower) {
         return `
-            <td><img src="upload/profile.png" alt="Profile Picture"></td>
-            <td>${follower.name}</td>
+            <td><img src="upload/${follower.userimg}" alt="Profile Picture"></td>
+            <td>${follower.username}</td>
         `;
     }
 
