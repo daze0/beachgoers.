@@ -34,7 +34,7 @@ class FollowingListPopup extends AbstractDataPopup {
         content += '<table>';
 
         for (const following of followingList) {
-            const followingItem = generateFollowingItem(following);
+            const followingItem = this.#generateFollowingItem(following);
             content += `<tr>${followingItem}</tr>`;
         }
 
@@ -46,7 +46,7 @@ class FollowingListPopup extends AbstractDataPopup {
     #generateFollowingItem(following) {
         return `
             <td><img src="upload/profile.png" alt="Profile Picture"></td>
-            <td>${follower.name}</td>
+            <td>${following.name}</td>
         `;
     }
 

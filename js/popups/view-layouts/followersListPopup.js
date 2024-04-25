@@ -4,7 +4,6 @@ import { FollowersListElement } from '../../profile/view-components/profile-info
 
 class FollowersListPopup extends AbstractDataPopup {
     constructor(data) {
-        console.log(data);
         super(data);
         console.log(this._data);
         this._setComponent("popupCancelButton", new PopupCancelButton(this));
@@ -30,7 +29,7 @@ class FollowersListPopup extends AbstractDataPopup {
         content += '<table>';
 
         for (const follower of followersList) {
-            const followerItem = generateFollowerItem(follower);
+            const followerItem = this.#generateFollowerItem(follower);
             content += `<tr>${followerItem}</tr>`;
         }
 

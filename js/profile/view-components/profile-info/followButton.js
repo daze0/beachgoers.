@@ -1,4 +1,5 @@
 import { Listener } from '../../../utils/listener.js';
+import { ProfileRequest } from '../../profileRequest.js';
 
 class FollowButton {
     #followButton;
@@ -25,8 +26,10 @@ class FollowButton {
 
     followButtonCallback() {
         axios.get("api/api-profile.php?follow=true").then(response => {
-            document.getElementById("followButton").classList.add("d-none");
-            document.getElementById("unfollowButton").classList.remove("d-none");
+            // document.getElementById("followButton").classList.add("d-none");
+            // document.getElementById("unfollowButton").classList.remove("d-none");
+            const request = new ProfileRequest();
+            request.loadRequest();
         }).catch(error => {
             console.log("Error detected while following: " + error);
         });
@@ -34,8 +37,10 @@ class FollowButton {
 
     unfollowButtonCallback() {
         axios.get("api/api-profile.php?follow=false").then(response => {
-            document.getElementById("unfollowButton").classList.add("d-none");
-            document.getElementById("followButton").classList.remove("d-none");
+            // document.getElementById("unfollowButton").classList.add("d-none");
+            // document.getElementById("followButton").classList.remove("d-none");
+            const request = new ProfileRequest();
+            request.loadRequest();
         }).catch(error => {
             console.log("Error detected while unfollowing: " + error);
         });
