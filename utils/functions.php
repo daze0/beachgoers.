@@ -1,16 +1,19 @@
 <?php
-function isUserLoggedIn() {
+function isUserLoggedIn()
+{
     return !empty($_SESSION["userid"]);
 }
 
-function registerLoggedUser($user) {
+function registerLoggedUser($user)
+{
     $_SESSION["userid"] = $user["userid"];
     $_SESSION["username"] = $user["username"];
     $_SESSION["password"] = $user["password"];
     $_SESSION["email"] = $user["email"];
 }
 
-function unregisterLoggedUser() {
+function unregisterLoggedUser()
+{
     unset($_SESSION["userid"]);
     unset($_SESSION["username"]);
     unset($_SESSION["password"]);
@@ -21,8 +24,9 @@ function unregisterLoggedUser() {
  * Uploads a file, given its filename:
  *  this function assumes that $_FILES[$filename] is set.
  */
-function uploadImg($filename) {
-    $targetFileName = time().'_'.$_FILES[$filename]["name"];
+function uploadImg($filename)
+{
+    $targetFileName = time() . '_' . $_FILES[$filename]["name"];
     $targetFile = "../" . UPLOAD_DIR . $targetFileName;
     $uploadOk = true;
     $errorMsgs = array();
