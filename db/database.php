@@ -186,7 +186,7 @@ class DatabaseHelper
 
     public function getPostsByUserId($userid)
     {
-        $query = "SELECT author, postid, img, content FROM post WHERE author=?";
+        $query = "SELECT author, postid, img, content, createdAt FROM post WHERE author=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
         $stmt->execute();
@@ -209,7 +209,7 @@ class DatabaseHelper
     public function getCommentsByPostId($postid)
     {
         // Refactoring note: change post with postid
-        $query = "SELECT commentid, userid, post, username, comment, likes FROM comment, user WHERE post=? AND userid=user ORDER BY commentid";
+        $query = "SELECT commentid, userid, post, username, comment, likes, createdAt FROM comment, user WHERE post=? AND userid=user ORDER BY commentid";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $postid);
         $stmt->execute();

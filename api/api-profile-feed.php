@@ -27,6 +27,7 @@ if (isUserLoggedIn()) {
                 $rich_post["content"] = $post["content"];
                 $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0];
                 $rich_post["comments"] = $dbh->getCommentsByPostId($post["postid"]);
+                $rich_post["createdAt"] = $post["createdAt"];
                 array_push($profile_feed_data["posts"], $rich_post);
             }
         }
@@ -47,6 +48,7 @@ if (isUserLoggedIn()) {
                 $rich_post["content"] = $post["content"];
                 $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0];
                 $rich_post["comments"] = $dbh->getCommentsByPostId($post["postid"]);
+                $rich_post["createdAt"] = $post["createdAt"];
                 array_push($profile_feed_data["posts"], $rich_post);
             }
         }
