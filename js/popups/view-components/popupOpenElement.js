@@ -11,22 +11,15 @@ class PopupOpenElement {
     #element;
     #listener;
 
-    /*
-     TODO: decide if it's better to handle popups within each respective trigger element 
-            or via profile info(or profile feed in case of new post popup):
-            - In the first case this class needs to be modified in order to create and store 
-                internally the popup that the element the class represents triggers when you click it.
-            - In the second case the popup open element stays inside popup. (CHOOSEN WAY, for now)
-    */
     constructor(popupId, popup) {
         this.#popup = popup;
         this.#element = undefined;
         this.popupOpenCallback = this.popupOpenCallback.bind(this);
-        this.#listener = new Listener(popupId, "click", this.popupOpenCallback);
+        this.#listener = undefined;
     }
 
     generateComponent() {
-        throw new Error("method generate needs implementation");
+        throw new Error("method generateComponent needs implementation");
     }
 
     getListener() {

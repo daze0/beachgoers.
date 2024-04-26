@@ -21,14 +21,7 @@ class AbstractPopup {
     }
 
     render() {
-        console.log("render popupState=" + this.#popupState);
-        if (this.#popupState) {
-            this._generate();
-            this._attachInnerListeners();
-        } else {
-            this._detachInnerListeners();
-            this._remove();
-        }
+        this._generate();
     }
 
     /*
@@ -41,22 +34,26 @@ class AbstractPopup {
         need to be attached/detached from within the popup. See _attachInnerListeners/_detachInnerListeners
     */
     attachListeners() {
-        this.#components["popupOpenElement"].getListener().attachListener();
+        if (this.#components["popupOpenElement"].getListener() != undefined) {
+            this.#components["popupOpenElement"].getListener().attachListener();
+        }
     }
 
     detachListeners() {
-        this.#components["popupOpenElement"].getListener().detachListener();
+        if (this.#components["popupOpenElement"].getListener() != undefined) {
+            this.#components["popupOpenElement"].getListener().detachListener();
+        }
     }
 
     _attachInnerListeners() {
-        Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement")
+        Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement" && label != "popupCancelButton")
             .forEach(([label, component]) => {
                 component.getListener().attachListener();
             });
     }
 
     _detachInnerListeners() {
-        Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement")
+        Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement" && label != "popupCancelButton")
             .forEach(([label, component]) => {
                 component.getListener().detachListener();
             });
@@ -68,7 +65,7 @@ class AbstractPopup {
 
     getPopupOpenElement() {
         if ("popupOpenElement" in this.#components && this.#components["popupOpenElement"] != undefined) {
-            return this.#components.popupOpenElement;
+            return this.#components["popupOpenElement"];
         }
         return undefined;
     }

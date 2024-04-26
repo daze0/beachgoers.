@@ -2,13 +2,15 @@ import { PopupOpenElement } from "../../../popups/view-components/popupOpenEleme
 
 class FollowersListElement extends PopupOpenElement {
     constructor(popup) {
-        super("#followersListPopupOpen", popup);
+        super("#followersListPopup", popup);
     }
 
     generateComponent(data) {
         return `
-        <i class='bi bi-people' id="followersListPopupOpen"></i>
-        <p>${data}</p>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#followersListPopup">
+            <i class='bi bi-people'></i>
+            <p>${data}</p>
+        </button>
         `;
     }
 }

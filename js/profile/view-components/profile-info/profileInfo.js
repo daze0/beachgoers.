@@ -5,6 +5,7 @@ import { FollowingListPopup } from '../../../popups/view-layouts/followingListPo
 
 class ProfileInfo {
     #components;
+    #data;
 
     constructor() {
         this.#components = {
@@ -13,17 +14,24 @@ class ProfileInfo {
             "followersListPopup": undefined,
             "followingListPopup": undefined
         };
+        this.#data = undefined;
     }
 
     generateComponent(data) {
+        this.#data = data;
         const profileInfo = this.#generateProfileInfo(data);
         return profileInfo;
     }
 
     attachListeners() {
-        Object.entries(this.#components).forEach(([label, component]) => {
-            component.attachListeners();
-        });
+        if (!this.#data["personal_profile"]) {
+            Object.entries(this.#components)
+                .forEach(([label, component]) => component.attachListeners());
+        } else {
+            Object.entries(this.#components)
+                .filter(([label, component]) => label != "followButton" && label != "telegramButton")
+                .forEach(([label, component]) => component.attachListeners());
+        }
     }
 
     #generateProfileInfo(userData) {
@@ -74,21 +82,27 @@ class ProfileInfo {
     #populateUserInfoRow(userData) {
         this.#components["followersListPopup"] = new FollowersListPopup(userData["followers_list"]);
         this.#components["followingListPopup"] = new FollowingListPopup(userData["following_list"]);
+        this.#components["followersListPopup"].render();
+        this.#components["followingListPopup"].render();
 
         const userInfoElements = {
-            "followers": this.#components["followersListPopup"].getPopupOpenElement().generateComponent(userData["followers"]),
-            "following": this.#components["followingListPopup"].getPopupOpenElement().generateComponent(userData["following"]),
+            "followers": `
+                ${this.#components["followersListPopup"].getPopupOpenElement().generateComponent(userData["followers"])}
+            `,
+            "following": `
+                ${this.#components["followingListPopup"].getPopupOpenElement().generateComponent(userData["following"])}
+            `,
             "likes": `
-                <span>
+                <button class="btn">
                     <i class='bi bi-heart'></i>
                     <p>${userData["likes"]}</p>
-                </span>
+                </button>
             `,
             "posts": `
-                <span>
+                <button class="btn">
                     <i class='bi bi-file-text'></i>
                     <p>${userData["posts"]}</p>
-                </span>
+                </button>
             `
         };
 

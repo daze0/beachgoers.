@@ -13,16 +13,15 @@ class PopupCancelButton {
         this.#popup = popup;
         this.#button = undefined;
         this.popupCancelCallback = this.popupCancelCallback.bind(this);
-        this.#listener = new Listener("#popupCancelButton", "click", this.popupCancelCallback);
+        this.#listener = undefined;
     }
 
     generateComponent() {
-        // Create button with same id as the one inside the listener above.
-        this.#button = document.createElement("button");
-        this.#button.id = "popupCancelButton";
-        this.#button.classList.add("close-button");
-        this.#button.innerHTML = "&#10006";
-
+        this.#button = document.createElement('button');
+        this.#button.type = 'button';
+        this.#button.classList.add('btn-close');
+        this.#button.setAttribute('data-bs-dismiss', 'modal');
+        this.#button.setAttribute('aria-label', 'Close');
         return this.#button;
     }
 

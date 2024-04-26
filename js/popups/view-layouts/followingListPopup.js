@@ -10,12 +10,24 @@ class FollowingListPopup extends AbstractDataPopup {
     }
 
     _generate() {
-        const followingPopupContent = this.#generateFollowingPopupContent(this._data);
         this._popup = document.createElement('div');
-        this._popup.innerHTML = followingPopupContent;
-        this._popup.classList.add('popup');
+        this._popup.classList.add('modal', 'fade');
+        this._popup.id = "followingListPopup";
+        this._popup.tabIndex = -1;
+        this._popup.setAttribute('aria-labelledby', 'followingListPopupLabel');
+        this._popup.setAttribute('aria-hidden', 'true');
+
+        const popupDialog = document.createElement('div');
+        popupDialog.classList.add('modal-dialog', 'modal-dialog-scrollable', 'modal-dialog-centered');
+        popupDialog.innerHTML = this.#generateFollowingPopupContent(this._data);
+
+        this._popup.appendChild(popupDialog);
         this._popup.appendChild(this._getComponent("popupCancelButton").generateComponent());
 
+        const alreadyPresentPopup = document.getElementById("followingListPopup");
+        if (alreadyPresentPopup) {
+            document.body.removeChild(alreadyPresentPopup);
+        }
         document.body.appendChild(this._popup);
     }
 
@@ -26,19 +38,39 @@ class FollowingListPopup extends AbstractDataPopup {
     */
 
     #generateFollowingPopupContent(followingList) {
+        let content = '<div class="modal-content">';
+
         if (followingList.length === 0) {
-            return '<h2>No following</h2>';
+            content += `
+                <div class="modal-header">
+                    <h2 class="modal-title" id="followingListPopupLabel">No following</h2>
+                    ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
+                </div>
+            `;
+        } else {
+            content += `
+                <div class="modal-header">
+                    <h2>Following</h2>
+                    ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
+                </div>
+            `;
+            content += `
+                <div class="modal-body">
+                    <table>
+            `;
+
+            for (const following of followingList) {
+                const followingItem = this.#generateFollowingItem(following);
+                content += `<tr>${followingItem}</tr>`;
+            }
+
+            content += `
+                    </table>
+                </div>
+            `;
         }
 
-        let content = '<h2>Following</h2>';
-        content += '<table>';
-
-        for (const following of followingList) {
-            const followingItem = this.#generateFollowingItem(following);
-            content += `<tr>${followingItem}</tr>`;
-        }
-
-        content += '</table>';
+        content += "</div>";
 
         return content;
     }
