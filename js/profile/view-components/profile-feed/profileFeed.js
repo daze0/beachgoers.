@@ -1,8 +1,14 @@
+import { NewPostButton } from "./newPostButton.js";
+import { Post } from "./post.js";
+
 class ProfileFeed {
     #components;
 
     constructor() {
-        this.#components = {}; //TODO: define components
+        this.#components = {
+            "newPostButton": new NewPostButton(),
+            //post-ID dynamic components...
+        };
     }
 
     generateComponent(userData, userFeedData) {
@@ -17,11 +23,20 @@ class ProfileFeed {
     }
 
     #generateProfileFeed(userData, userFeedData) {
-        return undefined;
+        let content = `
+        <div class="col-3 p-4 text-center">
+            ${this.#components["newPostButton"].generateComponent(userData["personal_profile"])}
+        </div>
+        `;
+
+        for(const postData of userFeedData.posts){
+            const postComponent = new Post();
+            this.#components["post-"+postData.postid] = postComponent;
+            content += postComponent.generateComponent(postData);
+        }
+
+        return content;
     }
-
-
-
 }
 
 export { ProfileFeed }
