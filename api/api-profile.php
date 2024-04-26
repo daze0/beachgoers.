@@ -57,6 +57,12 @@ if (isUserLoggedIn()) {
              * api/api-profile.php?followers_list=true
              */
             $profile_data["followers_list"] = $dbh->getUserFollowersById($_SESSION["userid"]);
+            if (isset($_GET["following_list"]) && $_GET["following_list"] == "true") {
+                /** 
+                 * api/api-profile.php?followers_list=true&following_list=true
+                 */
+                $profile_data["following_list"] = $dbh->getUserFollowingById($_SESSION["userid"]);
+            }
         } elseif (isset($_GET["following_list"]) && $_GET["following_list"] == "true") {
             /**
              * api/api-profile.php?following_list=true
