@@ -26,7 +26,7 @@ class ProfileViewLayout {
             <div id="commentSection" class="d-none"></div>
             <div id="spacingCenterSection" class="d-none"></div>
             <div id="postSection" class="col-6 overflow-auto">
-                <div class="row bg-light">
+                <div class="bg-light">
                     ${this.#components["profileFeed"].generateComponent(this.#userData, this.#userFeedData)}
                 </div>
             </div>

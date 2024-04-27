@@ -25,7 +25,6 @@ class NewPostButton {
     }
 
     attachListeners() {
-        // WARNING: attach one or the other listener, action must be follow or unfollow only
         const listeners = Object.values(this._listeners);
         listeners.forEach(listener => listener.attachListener());
     }

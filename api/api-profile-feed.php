@@ -25,7 +25,8 @@ if (isUserLoggedIn()) {
                 $rich_post["postid"] = $post["postid"]; 
                 $rich_post["img"] = $post["img"];
                 $rich_post["content"] = $post["content"];
-                $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0];
+                $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
+                $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0][0];
                 $rich_post["comments"] = $dbh->getCommentsByPostId($post["postid"]);
                 $rich_post["createdAt"] = $post["createdAt"];
                 array_push($profile_feed_data["posts"], $rich_post);
@@ -46,7 +47,8 @@ if (isUserLoggedIn()) {
                 $rich_post["postid"] = $post["postid"]; 
                 $rich_post["img"] = $post["img"];
                 $rich_post["content"] = $post["content"];
-                $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0];
+                $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
+                $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0][0];
                 $rich_post["comments"] = $dbh->getCommentsByPostId($post["postid"]);
                 $rich_post["createdAt"] = $post["createdAt"];
                 array_push($profile_feed_data["posts"], $rich_post);
@@ -59,6 +61,7 @@ if (isUserLoggedIn()) {
             $dbh->addLikeToPost($_GET["userid"], $_GET["postid"]);
             $profile_feed_data["like_success"] = true;
         } else {
+            $dbh->removeLikeFromPost($_GET["userid"], $_GET["postid"]);
             $profile_feed_data["like_success"] = false;
         }
     }

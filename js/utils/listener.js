@@ -14,8 +14,8 @@ class Listener {
     attachListener() {
         this.#listener = e => {
             e.preventDefault();
-            console.log(e.target);
-            if (e.target.matches(this.#selector)) {
+            console.log(e.currentTarget);
+            if (e.currentTarget.matches(this.#selector)) {
                 console.log("matched");
                 this.#callback();
             }
