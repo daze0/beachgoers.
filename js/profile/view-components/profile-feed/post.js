@@ -1,13 +1,16 @@
+import { PostLikeButton } from "./postLikeButton.js";
+
 class Post {
     #components;
 
     constructor() {
         this.#components = {
-            
+            "postLikeButton": undefined
         };
     }
 
     generateComponent(data, authorUsername) {
+        this.#components.postLikeButton= new PostLikeButton(data.postid, data.author, data.hasMyLike);
         const post = this.#generatePost(data, authorUsername);
         return post;
     }
@@ -29,7 +32,7 @@ class Post {
                 <p class="card-text">${postData.content}</p>
             </div>
             <div class="card-body">
-                
+                ${this.#components["postLikeButton"].generateComponent()}
             </div>
         </div>
         `;
