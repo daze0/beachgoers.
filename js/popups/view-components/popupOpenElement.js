@@ -11,7 +11,7 @@ class PopupOpenElement {
     #element;
     #listener;
 
-    constructor(popupId, popup) {
+    constructor(popup) {
         this.#popup = popup;
         this.#element = undefined;
         this.popupOpenCallback = this.popupOpenCallback.bind(this);
@@ -27,8 +27,19 @@ class PopupOpenElement {
     }
 
     popupOpenCallback() {
-        this.#popup.togglePopupState(true);
-        this.#popup.render();
+        const popupId = this.#popup.getPopupId();
+        const modalController = new bootstrap.Modal(document.getElementById(popupId));
+        modalController.show();
+    }
+
+    _generateReactiveElement(id, className) {
+        this.#element = document.createElement('i');
+        this.#element.classList.add('bi', className);
+        this.#element.id = id;
+
+        this.#listener = new Listener(`#${this.#element.id}`, "click", this.popupOpenCallback);
+
+        return this.#element;
     }
 }
 

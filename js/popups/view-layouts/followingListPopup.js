@@ -56,7 +56,7 @@ class FollowingListPopup extends AbstractDataPopup {
             `;
             content += `
                 <div class="modal-body">
-                    <table>
+                    <table class="table table-hover align-middle">
             `;
 
             for (const following of followingList) {
@@ -77,8 +77,8 @@ class FollowingListPopup extends AbstractDataPopup {
 
     #generateFollowingItem(following) {
         return `
-            <td><img src="upload/${following.userimg}" alt="Profile Picture"></td>
-            <td>${following.username}</td>
+            <td><a class="text-decoration-none text-dark" href="profile.php?uid=${following.userid}"><img src="upload/${following.userimg}" alt="Profile Picture"></a></td>
+            <td><a class="text-decoration-none text-dark" href="profile.php?uid=${following.userid}">${following.username}</a></td>
         `;
     }
 

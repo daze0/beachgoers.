@@ -93,16 +93,24 @@ class ProfileInfo {
                 ${this.#components["followingListPopup"].getPopupOpenElement().generateComponent(userData["following"])}
             `,
             "likes": `
-                <button class="btn">
-                    <i class='bi bi-heart'></i>
-                    <p>${userData["likes"]}</p>
-                </button>
+                <div class="row">
+                    <div class="col-6">
+                        <i class='bi bi-heart'></i>
+                    </div>
+                    <div class="col-6">
+                        <p>${userData["posts"]}</p>
+                    </div>
+                </div>
             `,
             "posts": `
-                <button class="btn">
-                    <i class='bi bi-file-text'></i>
-                    <p>${userData["posts"]}</p>
-                </button>
+                <div class="row">
+                    <div class="col-6">
+                        <i class='bi bi-file-text'></i>
+                    </div>
+                    <div class="col-6">
+                        <p>${userData["posts"]}</p>
+                    </div>
+                </div>
             `
         };
 

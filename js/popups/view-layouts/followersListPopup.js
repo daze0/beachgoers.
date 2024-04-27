@@ -44,23 +44,31 @@ class FollowersListPopup extends AbstractDataPopup {
             `;
         } else {
             content += `
-                <div class="modal-header">
+                <div class="modal-header px-4">
                     <h2>Followers</h2>
                     ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
                 </div>
             `;
             content += `
-                <div class="modal-body">
-                    <table>
+                <div class="modal-body p-4">
             `;
 
+            let isFirst = true;
             for (const follower of followersList) {
                 const followerItem = this.#generateFollowerItem(follower);
-                content += `<tr>${followerItem}</tr>`;
+                if (!isFirst) {
+                    content += `
+                        <hr />
+                        <div class="row">${followerItem}</div>
+                    `;
+                } else {
+                    content += `<div class="row">${followerItem}</div>`;
+                    isFirst = false;
+                }
+
             }
 
             content += `
-                    </table>
                 </div>
             `;
         }
@@ -72,8 +80,16 @@ class FollowersListPopup extends AbstractDataPopup {
 
     #generateFollowerItem(follower) {
         return `
-            <td><img src="upload/${follower.userimg}" alt="Profile Picture"></td>
-            <td>${follower.username}</td>
+            <div class="col-4">
+                <a class="text-decoration-none text-dark" href="profile.php?uid=${follower.userid}">
+                    <img class="img-thumbnail h-80 w-80" src="upload/${follower.userimg}" alt="Profile Picture">
+                </a>
+            </div>
+            <div class="col-8 d-flex align-items-center justify-content-center">
+                <a class="text-decoration-none text-dark" href="profile.php?uid=${follower.userid}">
+                    <p class="fs-3">@${follower.username}</p>
+                </a>
+            </div>
         `;
     }
 

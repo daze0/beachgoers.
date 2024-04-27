@@ -2,15 +2,19 @@ import { PopupOpenElement } from "../../../popups/view-components/popupOpenEleme
 
 class FollowersListElement extends PopupOpenElement {
     constructor(popup) {
-        super("#followersListPopup", popup);
+        super(popup);
     }
 
     generateComponent(data) {
         return `
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#followersListPopup">
-            <i class='bi bi-people'></i>
-            <p>${data}</p>
-        </button>
+            <div class="row">
+                <div class="col-6">
+                    ${this._generateReactiveElement('followersListPopupOpen', 'bi-people').outerHTML}
+                </div>
+                <div class="col-6">
+                    <p>${data}</p>
+                </div>
+            </div>
         `;
     }
 }

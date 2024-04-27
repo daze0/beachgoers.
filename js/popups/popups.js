@@ -85,6 +85,10 @@ class AbstractPopup {
         return undefined;
     }
 
+    getPopupId() {
+        return this._popup.id;
+    }
+
     _generate() {
         throw new Error("method generate needs implementation");
     }
