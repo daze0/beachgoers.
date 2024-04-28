@@ -14,10 +14,26 @@ class NewPostButton {
     generateComponent(isPersonalProfile) {
         this.#generateNewPostButton(isPersonalProfile);
         return (this.#newPostButton instanceof HTMLElement) ? this.#newPostButton.outerHTML : "";
+        /*
+        Leon's note(PART#2):
+         Per intenderci verrebbe fuori una roba del genere:
+            if (isPersonalProfile) {
+                return this._generateReactiveButton("newPostButton", "w-100", "bi-circle").outerHTML;
+            }
+         Poi se vuoi modificare il button lavori direttamente 
+         nel metodo this._generateReactiveButton della classe PopupOpenElement.
+        */
     }
 
     newPostButtonCallback() {
-       //TODO IMPLEMENT
+        //TODO IMPLEMENT
+        /*
+        Leon's note(PART#1):
+         Ho creato un metodo in popupOpenElement che potrebbe 
+         fare al caso tuo, modifica tranquillamente il codice a tuo piacimento, se necessario.
+         Inoltre ti consiglio, per semplificare il codice, di ereditare
+         da PopupOpenElement così che hai da gestire solo generateComponent.
+        */
     }
 
     getListener(label) {
@@ -30,7 +46,7 @@ class NewPostButton {
     }
 
     #generateNewPostButton(isPersonalProfile) {
-        if(isPersonalProfile){
+        if (isPersonalProfile) {
             this.#newPostButton = document.createElement("button");
             this.#newPostButton.id = "newPostButton";
             this.#newPostButton.type = "button";
