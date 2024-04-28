@@ -37,7 +37,7 @@ class FollowersListPopup extends AbstractDataPopup {
 
         if (followersList.length === 0) {
             content += `
-                <div class="modal-header">
+                <div class="modal-header px-4">
                     <h2 class="modal-title" id="followersListPopupLabel">No followers</h2>
                     ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
                 </div>
