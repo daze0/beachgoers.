@@ -1,19 +1,15 @@
-import { Listener } from '../../../utils/listener.js';
+import { PopupOpenElement } from '../../../popups/view-components/popupOpenElement.js';
 
-class NewPostButton {
-    #newPostButton;
-    _listeners;
+class NewPostButton extends PopupOpenElement {
 
-    constructor() {
-        this.#newPostButton = undefined;
-        this._listeners = {
-            "newPostButtonClick": new Listener("#newPostButton", "click", this.newPostButtonCallback)
-        };
+    constructor(popup) {
+        super(popup);
     }
 
-    generateComponent(isPersonalProfile) {
-        this.#generateNewPostButton(isPersonalProfile);
-        return (this.#newPostButton instanceof HTMLElement) ? this.#newPostButton.outerHTML : "";
+    generateComponent(isPersonalProfile) { 
+        if (isPersonalProfile) {
+            return this._generateReactiveButton("newPostButton", "btn", "bi-plus-circle").outerHTML;
+        }
         /*
         Leon's note(PART#2):
          Per intenderci verrebbe fuori una roba del genere:
@@ -25,7 +21,7 @@ class NewPostButton {
         */
     }
 
-    newPostButtonCallback() {
+    //newPostButtonCallback() {
         //TODO IMPLEMENT
         /*
         Leon's note(PART#1):
@@ -36,25 +32,6 @@ class NewPostButton {
             così facendo si risolve pure il problema del querySelector che da null, perchè newPostButton 
             non è presente, quando si visita il profilo di un'altro utente.
         */
-    }
-
-    getListener(label) {
-        return this._listeners[label];
-    }
-
-    attachListeners() {
-        const listeners = Object.values(this._listeners);
-        listeners.forEach(listener => listener.attachListener());
-    }
-
-    #generateNewPostButton(isPersonalProfile) {
-        if (isPersonalProfile) {
-            this.#newPostButton = document.createElement("button");
-            this.#newPostButton.id = "newPostButton";
-            this.#newPostButton.type = "button";
-            this.#newPostButton.classList.add("btn");
-            this.#newPostButton.innerHTML = "<i class='bi bi-plus-circle'></i>";
-        }
-    }
+    //}
 }
 export { NewPostButton }

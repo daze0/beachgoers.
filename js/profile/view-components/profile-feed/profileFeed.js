@@ -1,4 +1,4 @@
-import { NewPostButton } from "./newPostButton.js";
+import { NewPostPopup } from "../../../popups/view-layouts/newPostPopup.js";
 import { Post } from "./post.js";
 
 class ProfileFeed {
@@ -6,12 +6,14 @@ class ProfileFeed {
 
     constructor() {
         this.#components = {
-            "newPostButton": new NewPostButton(),
+            "newPostPopup": new NewPostPopup(),
             //post-ID dynamic components...
         };
     }
 
     generateComponent(userData, userFeedData) {
+        //this.#components.newPostPopup = new NewPostPopup();
+        this.#components.newPostPopup.render();
         const profileFeed = this.#generateProfileFeed(userData, userFeedData);
         return profileFeed;
     }
@@ -25,7 +27,7 @@ class ProfileFeed {
     #generateProfileFeed(userData, userFeedData) {
         let content = `
         <div class="col-3 p-4 text-center">
-            ${this.#components["newPostButton"].generateComponent(userData["personal_profile"])}
+            ${this.#components.newPostPopup.getPopupOpenElement().generateComponent(userData["personal_profile"])}
         </div>
         `;
 
