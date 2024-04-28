@@ -95,17 +95,17 @@ class ProfileInfo {
             "likes": `
                 <div class="row">
                     <div class="col-6">
-                        <i class='bi bi-heart'></i>
+                        <i class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></i>
                     </div>
                     <div class="col-6">
-                        <p>${userData["posts"]}</p>
+                        <p>${userData["likes"]}</p>
                     </div>
                 </div>
             `,
             "posts": `
                 <div class="row">
                     <div class="col-6">
-                        <i class='bi bi-file-text'></i>
+                        <i class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></i>
                     </div>
                     <div class="col-6">
                         <p>${userData["posts"]}</p>
