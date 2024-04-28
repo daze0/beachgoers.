@@ -29,10 +29,12 @@ class NewPostButton {
         //TODO IMPLEMENT
         /*
         Leon's note(PART#1):
-         Ho creato un metodo in popupOpenElement che potrebbe 
-         fare al caso tuo, modifica tranquillamente il codice a tuo piacimento, se necessario.
-         Inoltre ti consiglio, per semplificare il codice, di ereditare
-         da PopupOpenElement così che hai da gestire solo generateComponent.
+         - Ho creato un metodo in popupOpenElement che potrebbe 
+            fare al caso tuo, modifica tranquillamente il codice a tuo piacimento, se necessario.
+         - Inoltre ti consiglio, per semplificare il codice, di ereditare
+            da PopupOpenElement così che hai da gestire solo generateComponent, tra l'altro
+            così facendo si risolve pure il problema del querySelector che da null, perchè newPostButton 
+            non è presente, quando si visita il profilo di un'altro utente.
         */
     }
 
