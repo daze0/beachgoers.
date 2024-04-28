@@ -71,11 +71,7 @@ class AbstractPopup {
     }
 
     _setComponent(label, component) {
-        if (label in this.#components) {
-            this.#components[label] = component;
-        } else {
-            throw new Error("AbstractPopup[_setComponent]: component does not exist");
-        }
+        this.#components[label] = component;
     }
 
     _getComponent(label) {

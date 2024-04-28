@@ -1,12 +1,14 @@
 import { AbstractPopup } from '../popups.js';
 import { PopupCancelButton } from '../view-components/popupCancelButton.js';
 import { NewPostButton } from '../../profile/view-components/profile-feed/newPostButton.js';
+import { NewPostForm } from '../../profile/view-components/profile-feed/newPostForm.js';
 
 class NewPostPopup extends AbstractPopup {
     constructor() {
         super();
         this._setComponent("popupCancelButton", new PopupCancelButton(this));
         this._setComponent("popupOpenElement", new NewPostButton(this));
+        this._setComponent("newPostForm", new NewPostForm());
     }
 
     _generate() {
@@ -34,7 +36,20 @@ class NewPostPopup extends AbstractPopup {
     #generateNewPostPopupContent(data) {
         let content = '<div class="modal-content">';
 
-        content += "new post form..."
+        content += `
+            <div class="modal-header px-4">
+                <h3 class="modal-title" id="newPostPopupLabel">Write a post</h3>
+                ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
+            </div>
+        `;
+
+        content += `
+            <div class="modal-body p-4">
+        `;
+
+        content += this._getComponent("newPostForm").generateComponent().outerHTML;
+
+        content += "</div>";
 
         content += "</div>";
 
