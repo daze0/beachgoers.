@@ -186,7 +186,7 @@ class DatabaseHelper
 
     public function getPostsByUserId($userid)
     {
-        $query = "SELECT author, postid, img, content, createdAt FROM post WHERE author=?";
+        $query = "SELECT author, postid, img, content, createdAt FROM post WHERE author=? ORDER BY postid DESC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
         $stmt->execute();

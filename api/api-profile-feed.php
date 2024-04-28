@@ -35,7 +35,13 @@ if (isUserLoggedIn()) {
     } else {
         if (isset($_FILES["postimg"]) && isset($_POST["content"])) {
             $newPostImgFilename = uploadImg("postimg");
-            $dbh->createNewPost($_SESSION["userid"], $newPostImgFilename, $_POST["content"]);
+            if(is_array($newPostImgFilename)){
+                $profile_feed_data["post_success"] = false;
+                $profile_feed_data["post_error"] = implode(", ", $newPostImgFilename);
+            }else{
+                $dbh->createNewPost($_SESSION["userid"], $newPostImgFilename, $_POST["content"]);
+                $profile_feed_data["post_success"] = true;
+            }
         }
         $profile_feed_data["userid"] = $_SESSION["userid"];
         $profile_feed_data["username"] = $_SESSION["username"];

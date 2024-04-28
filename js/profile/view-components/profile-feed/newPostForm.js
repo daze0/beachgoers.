@@ -6,7 +6,7 @@ class NewPostForm{
         this.formSubmitCallback = this.formSubmitCallback.bind(this);
         
         this._listeners = {
-            "formSubmit": new Listener("form", "submit", this.formSubmitCallback)
+            "formSubmit": new Listener("#newPostForm", "submit", this.formSubmitCallback)
         };
     }
 
@@ -14,11 +14,13 @@ class NewPostForm{
         const formContainer = document.createElement('div');
         formContainer.classList.add("col-md-7");
         this._form.action = "#";
+        this._form.id = "newPostForm";
         this._form.method = "post";
         this._form.classList.add("was-validate");
         this._form.enctype = "multipart/form-data";
         this._form.accept = "image/*";
         const pError = document.createElement("p");
+        pError.id = "newPostFormError";
         pError.classList.add("text-danger");
         this._form.appendChild(pError);
         this._form.innerHTML += `${this.#generateNewPostForm()}`;
@@ -42,8 +44,15 @@ class NewPostForm{
     }
 
     formSubmitCallback(){
-        //TODO IMPLEMENT
-        console.log("submit form");
+        this._form = document.querySelector("#newPostForm");
+        const data = new FormData(this._form);
+        axios.post("api/api-profile-feed.php", data).then(response => {
+            if (response.data["post_success"]) {
+                document.location.reload();
+            } else {
+                document.querySelector("#newPostFormError").textContent = response.data["post_error"];
+            }
+        });
     }
 
     #generateNewPostForm(){
@@ -73,7 +82,7 @@ class NewPostForm{
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="imageUploadInput" class="form-label visually-hidden">Immagine</label>
             
-                <input type="file" id="imageUploadInput" name="img" class="form-control" placeholder="Immagine">
+                <input type="file" id="imageUploadInput" name="postimg" class="form-control" placeholder="Immagine">
             </div>
         `;
     }

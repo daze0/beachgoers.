@@ -37,25 +37,27 @@ class AbstractPopup {
         if (this.#components["popupOpenElement"].getListener() != undefined) {
             this.#components["popupOpenElement"].getListener().attachListener();
         }
+        this._attachInnerListeners();
     }
 
     detachListeners() {
         if (this.#components["popupOpenElement"].getListener() != undefined) {
             this.#components["popupOpenElement"].getListener().detachListener();
         }
+        this._detachInnerListeners();
     }
 
     _attachInnerListeners() {
         Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement" && label != "popupCancelButton")
             .forEach(([label, component]) => {
-                component.getListener().attachListener();
+                component.attachListeners();
             });
     }
 
     _detachInnerListeners() {
         Object.entries(this.#components).filter(([label, component]) => label != "popupOpenElement" && label != "popupCancelButton")
             .forEach(([label, component]) => {
-                component.getListener().detachListener();
+                component.detachListeners();
             });
     }
 
