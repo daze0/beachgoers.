@@ -46,6 +46,11 @@ class PopupOpenElement {
         this.#element.classList.add('bi', className);
         this.#element.id = id;
 
+        // Accessibility attrs
+        this.#element.setAttribute('aria-hidden', 'true');
+        this.#element.setAttribute('aria-label', id);
+        this.#element.title = id;
+
         this.#listener = new Listener(`#${this.#element.id}`, "click", this.popupOpenCallback);
 
         return this.#element;
@@ -65,6 +70,12 @@ class PopupOpenElement {
         this.#element.id = id;
         this.#element.classList.add('btn', className);
         this.#element.type = 'button';
+
+        // Accessibility attrs
+        this.#element.title = id;
+        this.#element.setAttribute('aria-hidden', 'true');
+        this.#element.setAttribute('aria-label', id);
+
         this.#element.innerHTML = `<i class="bi ${iconClassName}"></i>`;
 
         this.#listener = new Listener(`#${this.#element.id}`, "click", this.popupOpenCallback);
