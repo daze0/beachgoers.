@@ -70,9 +70,9 @@ class NewPostForm{
     #generateContentInput(){
         return `
             <div class="input-group mt-2 mb-2 flex-nowrap">
-                <label for="contentInput" class="form-label visually-hidden">Contenuto</label>
+                <label for="contentInput" class="form-label visually-hidden">Content</label>
             
-                <textarea id="contentInput" name="content" class="form-control" placeholder="Contenuto"></textarea>
+                <textarea id="contentInput" name="content" class="form-control" placeholder="Inserisci contenuto"></textarea>
             </div>
         `;
     }
@@ -80,9 +80,9 @@ class NewPostForm{
     #generateImageUploadInput(){
         return `
             <div class="input-group mt-2 mb-2 flex-nowrap">
-                <label for="imageUploadInput" class="form-label visually-hidden">Immagine</label>
+                <label for="imageUploadInput" class="form-label visually-hidden">Image</label>
             
-                <input type="file" id="imageUploadInput" name="postimg" class="form-control" placeholder="Immagine">
+                <input type="file" id="imageUploadInput" name="postimg" class="form-control" placeholder="Image">
             </div>
         `;
     }

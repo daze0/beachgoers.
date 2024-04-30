@@ -16,6 +16,7 @@ if (isUserLoggedIn()) {
     if (isset($_SESSION["profile_uid"]) && $_SESSION["profile_uid"] != $_SESSION["userid"]) {
         $profile_feed_data["userid"] = $_SESSION["profile_uid"];
         $profile_feed_data["username"] = $dbh->getUsernameById($_SESSION["profile_uid"])[0]["username"];
+        $profile_feed_data["userimg"] = $dbh->getUserImgById($_SESSION["profile_uid"])[0]["userimg"];
         $profile_feed_data["posts"] = array();
         $posts = $dbh->getPostsByUserId($_SESSION["profile_uid"]);
         if (!empty($posts)) {
@@ -45,6 +46,7 @@ if (isUserLoggedIn()) {
         }
         $profile_feed_data["userid"] = $_SESSION["userid"];
         $profile_feed_data["username"] = $_SESSION["username"];
+        $profile_feed_data["userimg"] = $dbh->getUserImgById($_SESSION["userid"])[0]["userimg"];
         $profile_feed_data["posts"] = array();
         $posts = $dbh->getPostsByUserId($_SESSION["userid"]);
         if (!empty($posts)) {

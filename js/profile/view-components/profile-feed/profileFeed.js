@@ -34,7 +34,7 @@ class ProfileFeed {
         for(const postData of userFeedData.posts){
             const postComponent = new Post();
             this.#components["post-"+postData.postid] = postComponent;
-            content += postComponent.generateComponent(postData, userFeedData.username);
+            content += postComponent.generateComponent(postData, userFeedData.username, userFeedData.userimg);
         }
 
         return content;
