@@ -36,6 +36,29 @@ class Utils {
 
         return dstSvg;
     }
+
+    static generateTimeElapsedString(createdAt){
+        const actualDate = new Date();
+        const createdAtDate = new Date(createdAt);
+        const elapsedMs = actualDate - createdAtDate;
+        const elapsedDays =  Math.floor(elapsedMs / 86_400_000);
+        if(elapsedDays){
+            return elapsedDays+" g";
+        }
+        const elapsedHours = Math.floor(elapsedMs / 3_600_000);
+        if(elapsedHours){
+            return elapsedHours+" h";
+        }
+        const elapsedMinutes = Math.floor(elapsedMs / 60_000);
+        if(elapsedMinutes){
+            return elapsedMinutes+" m";
+        }
+        const elapsedSeconds = Math.floor(elapsedMs / 1_000);
+        if(elapsedSeconds){
+            return elapsedSeconds+" s";
+        }
+        return "";
+    }
 }
 
 export { Utils }
