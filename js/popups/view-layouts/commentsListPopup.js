@@ -117,6 +117,7 @@ class CommentsListPopup extends AbstractDataPopup {
             const newCommentList = this.#generateCommentsList(response.data.comments);
             const commentListElement = document.getElementById('commentsList-'+this._data.postid);
             commentListElement.innerHTML = newCommentList;
+            this._getComponent('popupOpenElement').updateCommentsCount(response.data.comments.length);
         });
     }
 
