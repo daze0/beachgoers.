@@ -1,4 +1,5 @@
 import { CommentsButton } from '../../profile/view-components/profile-feed/commentsButton.js';
+import { NewCommentForm } from '../../profile/view-components/profile-feed/newCommentForm.js';
 import { Utils } from '../../utils/utils.js';
 import { AbstractDataPopup } from '../popups.js';
 import { PopupCancelButton } from '../view-components/popupCancelButton.js';
@@ -8,6 +9,7 @@ class CommentsListPopup extends AbstractDataPopup {
         super(data);
         this._setComponent("popupCancelButton", new PopupCancelButton(this));
         this._setComponent("popupOpenElement", new CommentsButton(this));
+        this._setComponent("newCommentForm", new NewCommentForm(data.postid, this));
     }
 
     _generate() {
@@ -45,8 +47,42 @@ class CommentsListPopup extends AbstractDataPopup {
             <div class="modal-body p-4">
         `;
 
+        content += `
+            <div id="commentsList-${this._data.postid}">
+        `;
+        content += this.#generateCommentsList(data.comments);
+        content += `
+            </div>
+        `;
+
+        content += `
+            </div>
+        `;
+
+        content += `
+            <div class="modal-footer">
+        `;
+
+        content += this._getComponent("newCommentForm").generateComponent().outerHTML;
+
+        content += `
+            </div>
+        `;
+
+        content += "</div>";
+
+        return content;
+    }
+
+    #generateCommentsList(comments){
+        if(comments.length == 0){
+            return `
+                <p>No comments yet</p>
+            `;
+        }
+        let content = "";
         let isFirst = true;
-        for (const comment of data.comments) {
+        for (const comment of comments) {
             const commentItem = this.#generateCommentItem(comment);
             if (!isFirst) {
                 content += `
@@ -57,15 +93,7 @@ class CommentsListPopup extends AbstractDataPopup {
                 content += `<div class="row">${commentItem}</div>`;
                 isFirst = false;
             }
-
         }
-
-        content += `
-            </div>
-        `;
-
-        content += "</div>";
-
         return content;
     }
 
@@ -78,6 +106,18 @@ class CommentsListPopup extends AbstractDataPopup {
                 <p>${comment.comment}</p>
             </div>
         `;
+    }
+
+    updateCommentsList(){
+        axios.get("api/api-comments.php",{
+            params:{
+                pid: this._data.postid
+            }
+        }).then(response => {
+            const newCommentList = this.#generateCommentsList(response.data.comments);
+            const commentListElement = document.getElementById('commentsList-'+this._data.postid);
+            commentListElement.innerHTML = newCommentList;
+        });
     }
 
     _remove() {

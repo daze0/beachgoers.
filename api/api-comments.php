@@ -9,7 +9,13 @@ if(isUserLoggedIn()) {
     } elseif (isset($_POST["pid"]) && isset($_POST["comment"])) {
         $comments_data["pid"] = $_POST["pid"];
         $comments_data["comment"] = $_POST["comment"];
-        $dbh->addCommentToPost($_POST["pid"], $_POST["comment"]);
+        if(empty($comments_data["comment"])){
+            $comments_data["comment_error"] = "Comment not specified";
+            $comments_data["comment_success"] = false;
+        }else{
+            $dbh->addCommentToPost($_POST["pid"], $_POST["comment"]);
+            $comments_data["comment_success"] = true;
+        }
     }
 }
 

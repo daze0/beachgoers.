@@ -72,7 +72,7 @@ class NewPostForm{
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="contentInput" class="form-label visually-hidden">Content</label>
             
-                <textarea id="contentInput" name="content" class="form-control" placeholder="Inserisci contenuto"></textarea>
+                <textarea id="contentInput" name="content" class="form-control" placeholder="Write a post"></textarea>
             </div>
         `;
     }

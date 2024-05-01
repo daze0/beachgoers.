@@ -57,7 +57,7 @@ class Utils {
         if(elapsedSeconds){
             return elapsedSeconds+" s";
         }
-        return "";
+        return "Now";
     }
 }
 
