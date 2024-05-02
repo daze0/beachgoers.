@@ -26,14 +26,14 @@ class ProfileFeed {
 
     #generateProfileFeed(userData, userFeedData) {
         let content = `
-        <div class="col-3 p-4 text-center">
+        <div class="col p-4 text-center w-100">
             ${this.#components.newPostPopup.getPopupOpenElement().generateComponent(userData["personal_profile"])}
         </div>
         `;
 
-        for(const postData of userFeedData.posts){
+        for (const postData of userFeedData.posts) {
             const postComponent = new Post();
-            this.#components["post-"+postData.postid] = postComponent;
+            this.#components["post-" + postData.postid] = postComponent;
             content += postComponent.generateComponent(postData, userFeedData.username, userFeedData.userimg);
         }
 
