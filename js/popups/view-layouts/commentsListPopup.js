@@ -100,6 +100,7 @@ class CommentsListPopup extends AbstractDataPopup {
     #generateCommentItem(comment) {
         return `
             <div>
+                <img src="upload/${comment.userimg}" alt="Profile image" class="img-thumbnail rounded-circle" style="width:50px; height:50px"/>
                 <span class="">${comment.username}</span>
                 <span class="text-muted float-end pt-2">${Utils.generateTimeElapsedString(comment.createdAt)}</span>
 
