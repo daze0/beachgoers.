@@ -209,7 +209,7 @@ class DatabaseHelper
     public function getCommentsByPostId($postid)
     {
         // Refactoring note: change post with postid
-        $query = "SELECT commentid, userid, post, username, comment, likes, createdAt FROM comment, user WHERE post=? AND userid=user ORDER BY commentid DESC";
+        $query = "SELECT commentid, userid, post, username, userimg, comment, likes, createdAt FROM comment, user WHERE post=? AND userid=user ORDER BY commentid DESC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $postid);
         $stmt->execute();
