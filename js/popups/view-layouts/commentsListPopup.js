@@ -1,15 +1,17 @@
 import { CommentsButton } from '../../profile/view-components/profile-feed/commentsButton.js';
-import { NewCommentForm } from '../../profile/view-components/profile-feed/newCommentForm.js';
-import { Utils } from '../../utils/utils.js';
 import { AbstractDataPopup } from '../popups.js';
 import { PopupCancelButton } from '../view-components/popupCancelButton.js';
+import { CommentsList } from '../../profile/view-components/profile-feed/commentsList.js';
+import { NewCommentForm } from '../../profile/view-components/profile-feed/newCommentForm.js';
+
 
 class CommentsListPopup extends AbstractDataPopup {
     constructor(data) {
         super(data);
         this._setComponent("popupCancelButton", new PopupCancelButton(this));
         this._setComponent("popupOpenElement", new CommentsButton(this));
-        this._setComponent("newCommentForm", new NewCommentForm(data.postid, this));
+        this._setComponent("commentsList", new CommentsList());
+        this._setComponent("newCommentForm", new NewCommentForm(data.postid, this._getComponent('commentsList')));
     }
 
     _generate() {
@@ -47,13 +49,7 @@ class CommentsListPopup extends AbstractDataPopup {
             <div class="modal-body p-4">
         `;
 
-        content += `
-            <div id="commentsList-${this._data.postid}">
-        `;
-        content += this.#generateCommentsList(data.comments);
-        content += `
-            </div>
-        `;
+        content += this._getComponent('commentsList').generateComponent(data, this._getComponent('popupOpenElement'));
 
         content += `
             </div>
@@ -74,53 +70,6 @@ class CommentsListPopup extends AbstractDataPopup {
         return content;
     }
 
-    #generateCommentsList(comments){
-        if(comments.length == 0){
-            return `
-                <p>No comments yet</p>
-            `;
-        }
-        let content = "";
-        let isFirst = true;
-        for (const comment of comments) {
-            const commentItem = this.#generateCommentItem(comment);
-            if (!isFirst) {
-                content += `
-                    <hr />
-                    <div class="row">${commentItem}</div>
-                `;
-            } else {
-                content += `<div class="row">${commentItem}</div>`;
-                isFirst = false;
-            }
-        }
-        return content;
-    }
-
-    #generateCommentItem(comment) {
-        return `
-            <div>
-                <img src="upload/${comment.userimg}" alt="Profile image" class="img-thumbnail rounded-circle" style="width:50px; height:50px"/>
-                <span class="">${comment.username}</span>
-                <span class="text-muted float-end pt-2">${Utils.generateTimeElapsedString(comment.createdAt)}</span>
-
-                <p>${comment.comment}</p>
-            </div>
-        `;
-    }
-
-    updateCommentsList(){
-        axios.get("api/api-comments.php",{
-            params:{
-                pid: this._data.postid
-            }
-        }).then(response => {
-            const newCommentList = this.#generateCommentsList(response.data.comments);
-            const commentListElement = document.getElementById('commentsList-'+this._data.postid);
-            commentListElement.innerHTML = newCommentList;
-            this._getComponent('popupOpenElement').updateCommentsCount(response.data.comments.length);
-        });
-    }
 
     _remove() {
         document.body.removeChild(this._popup);

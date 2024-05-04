@@ -215,7 +215,11 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $comments = $result->fetch_all(MYSQLI_ASSOC);
+        foreach($comments as $idx => $comment){
+            $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
+        }
+        return $comments;
     }
 
     public function addFollowerToUser($followerid, $followedid)
@@ -304,6 +308,26 @@ class DatabaseHelper
         $query = "INSERT INTO `comment` (`user`, `post`, `comment`) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iis", $_SESSION["userid"], $postid, $comment);
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    public function getCommentById($commentid)
+    {
+        $query = "SELECT commentid, user, post, comment, createdAt FROM comment WHERE commentid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $commentid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function removeCommentById($commentid)
+    {
+        $query = "DELETE FROM comment WHERE commentid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $commentid);
         $stmt->execute();
         $stmt->close();
     }
