@@ -64,9 +64,9 @@ if (isUserLoggedIn()) {
         }
     }
 
-    if (isset($_GET["userid"]) && isset($_GET["postid"])) {
-        if (!$dbh->doesUserAlreadyLikePost($_GET["userid"], $_GET["postid"])) {
-            $dbh->addLikeToPost($_GET["userid"], $_GET["postid"]);
+    if (isset($_GET["postid"])) {
+        if (!$dbh->doesUserAlreadyLikePost($_SESSION["userid"], $_GET["postid"])) {
+            $dbh->addLikeToPost($_SESSION["userid"], $_GET["postid"]);
             if (!empty($profile_feed_data["posts"])) {
                 foreach ($profile_feed_data["posts"] as $post) {
                     if ($post["postid"] == $_GET["postid"]) {
@@ -76,7 +76,7 @@ if (isUserLoggedIn()) {
             }
             $profile_feed_data["like_success"] = true;
         } else {
-            $dbh->removeLikeFromPost($_GET["userid"], $_GET["postid"]);
+            $dbh->removeLikeFromPost($_SESSION["userid"], $_GET["postid"]);
             if (!empty($profile_feed_data["posts"])) {
                 foreach ($profile_feed_data["posts"] as $post) {
                     if ($post["postid"] == $_GET["postid"]) {

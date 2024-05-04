@@ -37,7 +37,7 @@ class PostLikeButton {
     }
 
     postLikeButtonCallback = () => { // If i directly declare the function "this" is the Listener object, using lambda this is the current PostLikeButton object
-        axios.get("api/api-profile-feed.php?userid=" + this.#userid + "&postid=" + this.#postid).then(response => {
+        axios.get("api/api-profile-feed.php?postid=" + this.#postid).then(response => {
             // console.log(response);
             if (response.data.like_success) {
                 // Like
