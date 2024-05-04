@@ -41,12 +41,12 @@ class PostLikeButton {
             // console.log(response);
             if (response.data.like_success) {
                 // Like
-                this.getLayout().renderUpdate("USER_INFO", "add_like");
+                this.getLayout().renderUpdate("USER_INFO", "add_like", response.data);
                 document.getElementById("postLikeButton-" + this.#postid).classList.add("d-none");
                 document.getElementById("postRemoveLikeButton-" + this.#postid).classList.remove("d-none");
             } else {
                 // Dislike
-                this.getLayout().renderUpdate("USER_INFO", "remove_like");
+                this.getLayout().renderUpdate("USER_INFO", "remove_like", response.data);
                 document.getElementById("postLikeButton-" + this.#postid).classList.remove("d-none");
                 document.getElementById("postRemoveLikeButton-" + this.#postid).classList.add("d-none");
             }

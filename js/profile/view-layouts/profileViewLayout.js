@@ -13,6 +13,9 @@ class ProfileViewLayout {
         if (updateType == "USER_INFO") {
             // Save user info before render
             const userInfo = this.#components["profileInfo"].getUserInfo();
+            // In this case data is the userFeedData to be propagated to the next render
+            this.#userFeedData = data;
+            // Render updated user info
             this.render(document.querySelector("main"), userInfo);
             // Update user info after render
             if (action == "add_like") {
