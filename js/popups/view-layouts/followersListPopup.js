@@ -5,7 +5,6 @@ import { FollowersListElement } from '../../profile/view-components/profile-info
 class FollowersListPopup extends AbstractDataPopup {
     constructor(data) {
         super(data);
-        console.log(this._data);
         this._setComponent("popupCancelButton", new PopupCancelButton(this));
         this._setComponent("popupOpenElement", new FollowersListElement(this));
     }
