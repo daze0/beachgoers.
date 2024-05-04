@@ -12,9 +12,9 @@ class Post {
         };
     }
 
-    generateComponent(data, authorUsername, authorImg) {
-        this.#components.postLikeButton= new PostLikeButton(data.postid, data.author, data.hasMyLike);
-        this.#components.commentsListPopup= new CommentsListPopup(data);
+    generateComponent(data, authorUsername, authorImg, layout) {
+        this.#components.postLikeButton = new PostLikeButton(data.postid, data.author, data.hasMyLike, layout);
+        this.#components.commentsListPopup = new CommentsListPopup(data);
         this.#components.commentsListPopup.render();
         const post = this.#generatePost(data, authorUsername, authorImg);
         return post;
@@ -26,7 +26,7 @@ class Post {
         });
     }
 
-    #generateThumbnail(authorImg){
+    #generateThumbnail(authorImg) {
         return `<img src="upload/${authorImg}" alt="Profile image" class="img-thumbnail rounded-circle" style="width:50px; height:50px"/>`;
     }
 

@@ -6,6 +6,7 @@ import { FollowingListPopup } from '../../../popups/view-layouts/followingListPo
 class ProfileInfo {
     #components;
     #data;
+    #userInfo;
 
     constructor() {
         this.#components = {
@@ -15,10 +16,52 @@ class ProfileInfo {
             "followingListPopup": undefined
         };
         this.#data = undefined;
+        this.#userInfo = {
+            "followers": undefined,
+            "following": undefined,
+            "likes": undefined,
+            "posts": undefined
+        };
     }
 
-    generateComponent(data) {
+    getUserInfo() {
+        return this.#userInfo;
+    }
+
+    updateUserInfo(label, value) {
+        // Sub-optimal solution, but it works for now
+        if (label in this.#userInfo) {
+            this.#userInfo[label] = value;
+            // Re-render user info
+            if (label == "followers") {
+                // not needed atm
+            } else if (label == "following") {
+                // not needed atm
+            } else if (label == "likes") {
+                const likes = document.querySelector(
+                    "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(3) > div.row > div:last-child > p"
+                );
+                likes.innerHTML = this.#userInfo[label];
+            } else if (label == "posts") {
+                // not needed atm
+            }
+        } else {
+            throw new Error("Info label provided is invalid.");
+        }
+    }
+
+    generateComponent(data, updatedUserInfo = undefined) {
         this.#data = data;
+
+        if (updatedUserInfo) {
+            this.#userInfo = updatedUserInfo;
+        } else {
+            this.#userInfo["followers"] = data["followers"];
+            this.#userInfo["following"] = data["following"];
+            this.#userInfo["likes"] = data["likes"];
+            this.#userInfo["posts"] = data["posts"];
+        }
+
         const profileInfo = this.#generateProfileInfo(data);
         return profileInfo;
     }
@@ -87,10 +130,10 @@ class ProfileInfo {
 
         const userInfoElements = {
             "followers": `
-                ${this.#components["followersListPopup"].getPopupOpenElement().generateComponent(userData["followers"])}
+                ${this.#components["followersListPopup"].getPopupOpenElement().generateComponent(this.#userInfo["followers"])}
             `,
             "following": `
-                ${this.#components["followingListPopup"].getPopupOpenElement().generateComponent(userData["following"])}
+                ${this.#components["followingListPopup"].getPopupOpenElement().generateComponent(this.#userInfo["following"])}
             `,
             "likes": `
                 <div class="row">
@@ -98,7 +141,7 @@ class ProfileInfo {
                         <i class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></i>
                     </div>
                     <div class="col-6">
-                        <p>${userData["likes"]}</p>
+                        <p>${this.#userInfo["likes"]}</p>
                     </div>
                 </div>
             `,
@@ -108,7 +151,7 @@ class ProfileInfo {
                         <i class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></i>
                     </div>
                     <div class="col-6">
-                        <p>${userData["posts"]}</p>
+                        <p>${this.#userInfo["posts"]}</p>
                     </div>
                 </div>
             `

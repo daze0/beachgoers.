@@ -2,6 +2,7 @@ import { NewPostPopup } from "../../../popups/view-layouts/newPostPopup.js";
 import { Post } from "./post.js";
 
 class ProfileFeed {
+    #layout;
     #components;
 
     constructor() {
@@ -11,10 +12,18 @@ class ProfileFeed {
         };
     }
 
-    generateComponent(userData, userFeedData) {
+    generateComponent(userData, userFeedData, layout) {
+        /*
+         Layout has to be defined prior to generating the component.
+         This is because the layout is used to determine the layout of the component,
+         to which it can send updates without needing to send another request to refresh
+         the page.       
+        */
+        this.#layout = layout;
         //this.#components.newPostPopup = new NewPostPopup();
         this.#components.newPostPopup.render();
         const profileFeed = this.#generateProfileFeed(userData, userFeedData);
+
         return profileFeed;
     }
 
@@ -34,7 +43,7 @@ class ProfileFeed {
         for (const postData of userFeedData.posts) {
             const postComponent = new Post();
             this.#components["post-" + postData.postid] = postComponent;
-            content += postComponent.generateComponent(postData, userFeedData.username, userFeedData.userimg);
+            content += postComponent.generateComponent(postData, userFeedData.username, userFeedData.userimg, this.#layout);
         }
 
         return content;
