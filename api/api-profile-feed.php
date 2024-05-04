@@ -23,7 +23,7 @@ if (isUserLoggedIn()) {
             $rich_post = array();
             foreach ($posts as $post) {
                 $rich_post["author"] = $post["author"];
-                $rich_post["postid"] = $post["postid"]; 
+                $rich_post["postid"] = $post["postid"];
                 $rich_post["img"] = $post["img"];
                 $rich_post["content"] = $post["content"];
                 $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
@@ -36,10 +36,10 @@ if (isUserLoggedIn()) {
     } else {
         if (isset($_FILES["postimg"]) && isset($_POST["content"])) {
             $newPostImgFilename = uploadImg("postimg");
-            if(is_array($newPostImgFilename)){
+            if (is_array($newPostImgFilename)) {
                 $profile_feed_data["post_success"] = false;
                 $profile_feed_data["post_error"] = implode(", ", $newPostImgFilename);
-            }else{
+            } else {
                 $dbh->createNewPost($_SESSION["userid"], $newPostImgFilename, $_POST["content"]);
                 $profile_feed_data["post_success"] = true;
             }
@@ -52,7 +52,7 @@ if (isUserLoggedIn()) {
         if (!empty($posts)) {
             foreach ($posts as $post) {
                 $rich_post["author"] = $post["author"];
-                $rich_post["postid"] = $post["postid"]; 
+                $rich_post["postid"] = $post["postid"];
                 $rich_post["img"] = $post["img"];
                 $rich_post["content"] = $post["content"];
                 $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
@@ -67,9 +67,23 @@ if (isUserLoggedIn()) {
     if (isset($_GET["userid"]) && isset($_GET["postid"])) {
         if (!$dbh->doesUserAlreadyLikePost($_GET["userid"], $_GET["postid"])) {
             $dbh->addLikeToPost($_GET["userid"], $_GET["postid"]);
+            if (!empty($profile_feed_data["posts"])) {
+                foreach ($profile_feed_data["posts"] as $post) {
+                    if ($post["postid"] == $_GET["postid"]) {
+                        $post["likes"] += 1;
+                    }
+                }
+            }
             $profile_feed_data["like_success"] = true;
         } else {
             $dbh->removeLikeFromPost($_GET["userid"], $_GET["postid"]);
+            if (!empty($profile_feed_data["posts"])) {
+                foreach ($profile_feed_data["posts"] as $post) {
+                    if ($post["postid"] == $_GET["postid"]) {
+                        $post["likes"] -= 1;
+                    }
+                }
+            }
             $profile_feed_data["like_success"] = false;
         }
     }
@@ -77,5 +91,3 @@ if (isUserLoggedIn()) {
 
 header("Content-Type: application/json");
 echo json_encode($profile_feed_data);
-
-?>
