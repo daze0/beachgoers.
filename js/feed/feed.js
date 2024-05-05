@@ -1,11 +1,8 @@
-import { FeedViewLayout } from './view-layouts/feedViewLayout.js';
+import { FeedRequest } from './feedRequest.js';
 
 function init() {
-    const components = undefined;
-
-    const layout = new FeedViewLayout(components);
-    
-    layout.render(document.querySelector("main"));
+    const request = new FeedRequest();
+    request.loadRequest();
 }
 
 init();

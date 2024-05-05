@@ -69,7 +69,6 @@ class ProfileViewLayout {
             </div>
             <div class="row bg-light pt-5 mb-5">
                 <div id="spacingStartSection" class="col-3"></div>
-                <div id="commentSection" class="d-none"></div>
                 <div id="spacingCenterSection" class="d-none"></div>
                 <div id="postSection" class="col-6 overflow-auto">
                     <div class="bg-light">

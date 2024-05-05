@@ -36,23 +36,41 @@ class PostLikeButton {
         return this.#postLikeButton.outerHTML + this.#postRemoveLikeButton.outerHTML;
     }
 
-    postLikeButtonCallback = () => { // If i directly declare the function "this" is the Listener object, using lambda this is the current PostLikeButton object
-        axios.get("api/api-profile-feed.php?postid=" + this.#postid).then(response => {
-            // console.log(response);
-            if (response.data.like_success) {
-                // Like
-                this.getLayout().renderUpdate("USER_INFO", "add_like", response.data);
-                document.getElementById("postLikeButton-" + this.#postid).classList.add("d-none");
-                document.getElementById("postRemoveLikeButton-" + this.#postid).classList.remove("d-none");
-            } else {
-                // Dislike
-                this.getLayout().renderUpdate("USER_INFO", "remove_like", response.data);
-                document.getElementById("postLikeButton-" + this.#postid).classList.remove("d-none");
-                document.getElementById("postRemoveLikeButton-" + this.#postid).classList.add("d-none");
-            }
-        }).catch(error => {
-            console.log("Error detected while liking/unliking post: " + error);
-        });
+    postLikeButtonCallback = () => { // remove the if condition and directly do a request to one merged endpoint
+        if (this.getLayout() != undefined) {
+            axios.get("api/api-profile-feed.php?postid=" + this.#postid).then(response => {
+                // console.log(response);
+                if (response.data.like_success) {
+                    // Like
+                    this.getLayout().renderUpdate("USER_INFO", "add_like", response.data);
+                    document.getElementById("postLikeButton-" + this.#postid).classList.add("d-none");
+                    document.getElementById("postRemoveLikeButton-" + this.#postid).classList.remove("d-none");
+                } else {
+                    // Dislike
+                    this.getLayout().renderUpdate("USER_INFO", "remove_like", response.data);
+                    document.getElementById("postLikeButton-" + this.#postid).classList.remove("d-none");
+                    document.getElementById("postRemoveLikeButton-" + this.#postid).classList.add("d-none");
+                }
+            }).catch(error => {
+                console.log("Error detected while liking/unliking post: " + error);
+            });
+        } else {
+            axios.get("api/api-feed.php?postid=" + this.#postid).then(response => {
+                // console.log(response);
+                if (response.data.like_success) {
+                    // Like
+                    document.getElementById("postLikeButton-" + this.#postid).classList.add("d-none");
+                    document.getElementById("postRemoveLikeButton-" + this.#postid).classList.remove("d-none");
+                } else {
+                    // Dislike
+                    document.getElementById("postLikeButton-" + this.#postid).classList.remove("d-none");
+                    document.getElementById("postRemoveLikeButton-" + this.#postid).classList.add("d-none");
+                }
+            }).catch(error => {
+                console.log("Error detected while liking/unliking post: " + error);
+            });
+        }
+
     }
 
     getListener(label) {

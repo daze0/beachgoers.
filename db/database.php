@@ -195,6 +195,17 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getFeedPostsByUserId($userid)
+    {
+        $query = "SELECT author, postid, img, content, createdAt FROM post WHERE author IN (SELECT followed FROM user_follows_user WHERE follower=?) ORDER BY createdAt DESC";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $userid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getPostLikesById($postid)
     {
         $query = "SELECT COUNT(*) FROM user_likes_post WHERE post=?";
@@ -216,7 +227,7 @@ class DatabaseHelper
         $result = $stmt->get_result();
 
         $comments = $result->fetch_all(MYSQLI_ASSOC);
-        foreach($comments as $idx => $comment){
+        foreach ($comments as $idx => $comment) {
             $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
         }
         return $comments;
@@ -311,7 +322,7 @@ class DatabaseHelper
         $stmt->execute();
         $stmt->close();
     }
-    
+
     public function getCommentById($commentid)
     {
         $query = "SELECT commentid, user, post, comment, createdAt FROM comment WHERE commentid=?";
