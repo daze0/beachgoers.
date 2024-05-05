@@ -7,7 +7,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if(isUserLoggedIn()) {
     if ($method == "GET" && isset($_GET["pid"])) {
-        $comments_data["comments"] = $dbh->getCommentsByPostId($_GET["pid"]);
+        $comments = $dbh->getCommentsByPostId($_GET["pid"]);
+        foreach($comments as $idx => $comment){
+            $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
+            $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($comment["commentid"], $_SESSION["userid"]);
+        }
+        $comments_data["comments"] = $comments;
     } elseif ($method == "POST" && isset($_POST["pid"]) && isset($_POST["comment"])) {
         $comments_data["pid"] = $_POST["pid"];
         $comments_data["comment"] = $_POST["comment"];

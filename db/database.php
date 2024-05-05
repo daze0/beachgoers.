@@ -225,12 +225,7 @@ class DatabaseHelper
         $stmt->bind_param("i", $postid);
         $stmt->execute();
         $result = $stmt->get_result();
-
-        $comments = $result->fetch_all(MYSQLI_ASSOC);
-        foreach ($comments as $idx => $comment) {
-            $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
-        }
-        return $comments;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function addFollowerToUser($followerid, $followedid)
@@ -342,6 +337,59 @@ class DatabaseHelper
         $stmt->execute();
         $stmt->close();
     }
+
+    public function doesUserAlreadyLikeComment($userid, $commentid)
+    {
+        $query = "SELECT COUNT(*) FROM user_likes_comment WHERE user=? AND comment=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $userid, $commentid);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($count == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function addLikeToComment($userid, $commentid)
+    {
+        $query = "INSERT INTO `user_likes_comment` (`user`, `comment`) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $userid, $commentid);
+        $stmt->execute();
+        $stmt->close();
+        updateCommentLikesCount();
+    }
+
+    public function removeLikeFromComment($userid, $commentid)
+    {
+        $query = "DELETE FROM user_likes_comment WHERE user=? AND comment=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $userid, $commentid);
+        $stmt->execute();
+        $stmt->close();
+        updateCommentLikesCount();
+    }
+
+    public function updateCommentLikesCount($commentid)
+    {
+        $countQuery = "SELECT COUNT(*) as likes FROM user_likes_comment WHERE comment=?";
+        $stmt = $this->db->prepare($countQuery);
+        $stmt->bind_param("i", $commentid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $likes = $result->fetch_all(MYSQLI_ASSOC)[0]['likes'];
+
+        $query = "UPDATE comment SET likes = ? WHERE commentid = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $likes, $commentid);
+        $stmt->execute();
+    }
+
 
     /**
      * Returns the full user record given his/hers/its username.
