@@ -35,7 +35,7 @@ class ProfileFeed {
 
     #generateProfileFeed(userData, userFeedData) {
         let content = `
-        <div class="col p-4 text-center w-100">
+        <div class="col py-4 text-center w-100">
             ${this.#components.newPostPopup.getPopupOpenElement().generateComponent(userData["personal_profile"])}
         </div>
         `;

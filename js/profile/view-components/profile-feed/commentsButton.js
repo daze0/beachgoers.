@@ -7,26 +7,26 @@ class CommentsButton extends PopupOpenElement {
         super(popup);
     }
 
-    generateComponent(postid, commentsCount) { 
+    generateComponent(postid, commentsCount) {
         this.#postid = postid;
-        const button = this._generateReactiveButton("commentsButton-"+postid, "btn", "bi-chat");
+        const button = this._generateReactiveButton("commentsButton-" + postid, "btn", "bi-chat");
         const badge = document.createElement('span');
-        badge.id = "commentsButtonCountBadge-"+postid;
-        badge.classList.add('badge','text-dark')
+        badge.id = "commentsButtonCountBadge-" + postid;
+        badge.classList.add('badge', 'text-dark', 'pe-0');
         badge.textContent = commentsCount;
-        if(!commentsCount){
+        if (!commentsCount) {
             badge.classList.add('d-none');
         }
         button.append(badge);
         return button.outerHTML;
     }
 
-    updateCommentsCount(commentsCount){
-        const badge = document.getElementById("commentsButtonCountBadge-"+this.#postid);
+    updateCommentsCount(commentsCount) {
+        const badge = document.getElementById("commentsButtonCountBadge-" + this.#postid);
         badge.textContent = commentsCount;
-        if(commentsCount){
+        if (commentsCount) {
             badge.classList.remove('d-none');
-        }else{
+        } else {
             badge.classList.add('d-none');
         }
     }
