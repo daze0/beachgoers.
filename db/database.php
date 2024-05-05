@@ -362,7 +362,7 @@ class DatabaseHelper
         $stmt->bind_param("ii", $userid, $commentid);
         $stmt->execute();
         $stmt->close();
-        updateCommentLikesCount();
+        $this->updateCommentLikesCount($commentid);
     }
 
     public function removeLikeFromComment($userid, $commentid)
@@ -372,7 +372,7 @@ class DatabaseHelper
         $stmt->bind_param("ii", $userid, $commentid);
         $stmt->execute();
         $stmt->close();
-        updateCommentLikesCount();
+        $this->updateCommentLikesCount($commentid);
     }
 
     public function updateCommentLikesCount($commentid)
