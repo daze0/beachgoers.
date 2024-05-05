@@ -4,6 +4,7 @@ import { FollowersListPopup } from '../../../popups/view-layouts/followersListPo
 import { FollowingListPopup } from '../../../popups/view-layouts/followingListPopup.js';
 
 class ProfileInfo {
+    #layout;
     #components;
     #data;
     #userInfo;
@@ -34,9 +35,15 @@ class ProfileInfo {
             this.#userInfo[label] = value;
             // Re-render user info
             if (label == "followers") {
-                // not needed atm
+                const followers = document.querySelector(
+                    "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(1) > div.row > div:last-child > p"
+                );
+                followers.innerHTML = this.#userInfo[label];
             } else if (label == "following") {
-                // not needed atm
+                const following = document.querySelector(
+                    "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(2) > div.row > div:last-child > p"
+                );
+                following.innerHTML = this.#userInfo[label];
             } else if (label == "likes") {
                 const likes = document.querySelector(
                     "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(3) > div.row > div:last-child > p"
@@ -50,8 +57,9 @@ class ProfileInfo {
         }
     }
 
-    generateComponent(data, updatedUserInfo = undefined) {
+    generateComponent(data, layout, updatedUserInfo = undefined) {
         this.#data = data;
+        this.#layout = layout;
 
         if (updatedUserInfo) {
             this.#userInfo = updatedUserInfo;
@@ -94,7 +102,7 @@ class ProfileInfo {
             </div>
         </div>
         <div class="col-3 py-4 pe-0">
-            ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"])}
+            ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"], this.#layout)}
             ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
         </div>
         `;

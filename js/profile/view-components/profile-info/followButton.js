@@ -2,6 +2,7 @@ import { Listener } from '../../../utils/listener.js';
 import { ProfileRequest } from '../../profileRequest.js';
 
 class FollowButton {
+    #layout;
     #followButton;
     #unfollowButton;
     _listeners;
@@ -9,13 +10,16 @@ class FollowButton {
     constructor() {
         this.#followButton = undefined;
         this.#unfollowButton = undefined;
+        this.followButtonCallback = this.followButtonCallback.bind(this);
+        this.unfollowButtonCallback = this.unfollowButtonCallback.bind(this);
         this._listeners = {
             "followButtonClick": new Listener("#followButton", "click", this.followButtonCallback),
             "unfollowButtonClick": new Listener("#unfollowButton", "click", this.unfollowButtonCallback)
         };
     }
 
-    generateComponent(personal_profile, follow_status) {
+    generateComponent(personal_profile, follow_status, layout) {
+        this.#layout = layout;
         this.#generateFollowButton(personal_profile, follow_status);
         this.#generateUnfollowButton(personal_profile, follow_status);
         if (personal_profile) {
@@ -24,18 +28,26 @@ class FollowButton {
         return this.#followButton.outerHTML + this.#unfollowButton.outerHTML;
     }
 
+    getLayout() {
+        return this.#layout;
+    }
+
     followButtonCallback() {
         axios.get("api/api-profile.php?follow=true").then(response => {
-            // document.getElementById("followButton").classList.add("d-none");
-            // document.getElementById("unfollowButton").classList.remove("d-none");
-            const request = new ProfileRequest();
-            request.loadRequest();
+            // const request = new ProfileRequest();
+            // request.loadRequest();
             /*
              NOTE: 
-                This works but it is inefficient, everything could be done 
+                The code above works but it is inefficient, everything could be done 
                 using response.data and tweaking profileRequest.
                 1 request is better than 3.
+
+             NOTE#2:
+                The code below is more efficient since it updates the component via js.
             */
+            this.getLayout().renderUpdate("USER_INFO", "add_follower");
+            document.getElementById("followButton").classList.add("d-none");
+            document.getElementById("unfollowButton").classList.remove("d-none");
         }).catch(error => {
             console.log("Error detected while following: " + error);
         });
@@ -43,10 +55,11 @@ class FollowButton {
 
     unfollowButtonCallback() {
         axios.get("api/api-profile.php?follow=false").then(response => {
-            // document.getElementById("unfollowButton").classList.add("d-none");
-            // document.getElementById("followButton").classList.remove("d-none");
-            const request = new ProfileRequest();
-            request.loadRequest();
+            // const request = new ProfileRequest();
+            // request.loadRequest();
+            this.getLayout().renderUpdate("USER_INFO", "remove_follower");
+            document.getElementById("unfollowButton").classList.add("d-none");
+            document.getElementById("followButton").classList.remove("d-none");
         }).catch(error => {
             console.log("Error detected while unfollowing: " + error);
         });

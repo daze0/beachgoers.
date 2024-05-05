@@ -13,8 +13,10 @@ class ProfileViewLayout {
         if (updateType == "USER_INFO") {
             // Save user info before render
             const userInfo = this.#components["profileInfo"].getUserInfo();
-            // In this case data is the userFeedData to be propagated to the next render
-            this.#userFeedData = data;
+            // If defined, data is the userFeedData to be propagated to the next render
+            if (data != undefined) {
+                this.#userFeedData = data;
+            }
             // Render updated user info
             this.render(document.querySelector("main"), userInfo);
             // Update user info after render
@@ -26,6 +28,22 @@ class ProfileViewLayout {
                 console.log("[USER_INFO] remove_like");
                 let preRenderLikes = userInfo["likes"];
                 this.#components["profileInfo"].updateUserInfo("likes", --preRenderLikes);
+            } else if (action == "add_follower") {
+                console.log("[USER_INFO] add_follower");
+                let preRenderFollowers = userInfo["followers"];
+                this.#components["profileInfo"].updateUserInfo("followers", ++preRenderFollowers);
+            } else if (action == "remove_follower") {
+                console.log("[USER_INFO] remove_follower");
+                let preRenderFollowers = userInfo["followers"];
+                this.#components["profileInfo"].updateUserInfo("followers", --preRenderFollowers);
+            } else if (action == "add_following") {
+                console.log("[USER_INFO] add_following");
+                let preRenderFollowing = userInfo["following"];
+                this.#components["profileInfo"].updateUserInfo("following", ++preRenderFollowing);
+            } else if (action == "remove_following") {
+                console.log("[USER_INFO] remove_following");
+                let preRenderFollowing = userInfo["following"];
+                this.#components["profileInfo"].updateUserInfo("following", --preRenderFollowing);
             }
         }
     }
@@ -45,8 +63,8 @@ class ProfileViewLayout {
         let res = `
             <div class="row bg-light">
                 ${updatedUserInfo == undefined ?
-                this.#components["profileInfo"].generateComponent(this.#userData) :
-                this.#components["profileInfo"].generateComponent(this.#userData, updatedUserInfo)
+                this.#components["profileInfo"].generateComponent(this.#userData, this) :
+                this.#components["profileInfo"].generateComponent(this.#userData, this, updatedUserInfo)
             }
             </div>
             <div class="row bg-light pt-5 mb-5">
