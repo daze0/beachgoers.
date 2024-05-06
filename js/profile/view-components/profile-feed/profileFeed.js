@@ -1,5 +1,5 @@
 import { NewPostPopup } from "../../../popups/view-layouts/newPostPopup.js";
-import { Post } from "./post.js";
+import { Post } from "../../../feed/view-components/post/post.js";
 
 class ProfileFeed {
     #layout;

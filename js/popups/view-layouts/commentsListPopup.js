@@ -1,8 +1,8 @@
-import { CommentsButton } from '../../profile/view-components/profile-feed/commentsButton.js';
+import { CommentsButton } from '../../feed/view-components/comment/commentsButton.js';
 import { AbstractDataPopup } from '../popups.js';
 import { PopupCancelButton } from '../view-components/popupCancelButton.js';
-import { CommentsList } from '../../profile/view-components/profile-feed/commentsList.js';
-import { NewCommentForm } from '../../profile/view-components/profile-feed/newCommentForm.js';
+import { CommentsList } from '../../feed/view-components/comment/commentsList.js';
+import { NewCommentForm } from '../../feed/view-components/comment/newCommentForm.js';
 
 
 class CommentsListPopup extends AbstractDataPopup {
@@ -17,9 +17,9 @@ class CommentsListPopup extends AbstractDataPopup {
     _generate() {
         this._popup = document.createElement('div');
         this._popup.classList.add('modal', 'fade');
-        this._popup.id = "commentsListPopup-"+this._data.postid;
+        this._popup.id = "commentsListPopup-" + this._data.postid;
         this._popup.tabIndex = -1;
-        this._popup.setAttribute('aria-labelledby', 'commentsListPopupLabel-'+this._data.postid);
+        this._popup.setAttribute('aria-labelledby', 'commentsListPopupLabel-' + this._data.postid);
         this._popup.setAttribute('aria-hidden', 'true');
 
         const popupDialog = document.createElement('div');
