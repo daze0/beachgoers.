@@ -138,6 +138,9 @@ class LoginAuthForm extends AuthForm {
         axios.post("api/api-login.php", data).then(response => {
             if (response.data["login_success"]) {
                 document.querySelector("main").innerHTML = this.generateLoginSuccessLayout(response.data["username"]);
+                setTimeout(() => {
+                    window.location.href = "feed.php";
+                }, 500);
             } else {
                 document.querySelector("div.row.p-2 > form > p").innerHTML = response.data["login_error"];
             }
@@ -238,6 +241,9 @@ class SignupAuthForm extends AuthForm {
         axios.post("api/api-signup.php", data).then(response => {
             if (response.data["signup_success"]) {
                 document.querySelector("main").innerHTML = this.generateSignupSuccessLayout(response.data["username"]);
+                setTimeout(() => {
+                    window.location.href = "profile.php";
+                }, 500);
             } else {
                 document.querySelector("div.row.p-2 > form > p").innerHTML = response.data["signup_error"];
             }

@@ -2,7 +2,7 @@ import { LoginAuthForm } from './view-components/authForm.js';
 import { AuthViewLayout } from './view-layouts/authViewLayout.js';
 
 function init() {
-    const components = {"authForm": new LoginAuthForm()};
+    const components = { "authForm": new LoginAuthForm() };
 
     const layout = new AuthViewLayout(components);
 
@@ -11,9 +11,11 @@ function init() {
             layout.render(document.querySelector("main"));
         } else {
             document.querySelector("main").innerHTML = components["authForm"].generateLoginSuccessLayout(response.data["username"]);
+            setTimeout(() => {
+                window.location.href = "feed.php";
+            }, 500);
         }
     });
-    
 }
 
 init();
