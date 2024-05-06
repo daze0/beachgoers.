@@ -1,4 +1,4 @@
-import { Post } from "../../profile/view-components/profile-feed/post.js";
+import { Post } from "../view-components/post/post.js";
 
 class FeedViewLayout {
     #components;
