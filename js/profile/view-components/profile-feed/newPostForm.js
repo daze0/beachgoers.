@@ -1,16 +1,16 @@
 import { Listener } from "../../../utils/listener.js";
 
-class NewPostForm{
-    constructor(){
+class NewPostForm {
+    constructor() {
         this._form = document.createElement('form');
         this.formSubmitCallback = this.formSubmitCallback.bind(this);
-        
+
         this._listeners = {
             "formSubmit": new Listener("#newPostForm", "submit", this.formSubmitCallback)
         };
     }
 
-    generateComponent(){
+    generateComponent() {
         const formContainer = document.createElement('div');
         formContainer.classList.add("col-md-7");
         this._form.action = "#";
@@ -23,7 +23,7 @@ class NewPostForm{
         pError.id = "newPostFormError";
         pError.classList.add("text-danger");
         this._form.appendChild(pError);
-        this._form.innerHTML += `${this.#generateNewPostForm()}`;
+        this._form.innerHTML = `${this.#generateNewPostForm()}`;
         formContainer.innerHTML = this._form.outerHTML;
 
         return formContainer;
@@ -43,7 +43,7 @@ class NewPostForm{
         listeners.forEach(listener => listener.detachListener());
     }
 
-    formSubmitCallback(){
+    formSubmitCallback() {
         this._form = document.querySelector("#newPostForm");
         const data = new FormData(this._form);
         axios.post("api/api-profile-feed.php", data).then(response => {
@@ -55,7 +55,7 @@ class NewPostForm{
         });
     }
 
-    #generateNewPostForm(){
+    #generateNewPostForm() {
         let content = ``;
 
         content += this.#generateContentInput();
@@ -67,7 +67,7 @@ class NewPostForm{
         return content;
     }
 
-    #generateContentInput(){
+    #generateContentInput() {
         return `
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="contentInput" class="form-label visually-hidden">Content</label>
@@ -77,7 +77,7 @@ class NewPostForm{
         `;
     }
 
-    #generateImageUploadInput(){
+    #generateImageUploadInput() {
         return `
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="imageUploadInput" class="form-label visually-hidden">Image</label>
@@ -87,7 +87,7 @@ class NewPostForm{
         `;
     }
 
-    #generateSubmitButton(){
+    #generateSubmitButton() {
         return `
             <div class="input-group">            
                 <input type="submit" class="btn btn primary" value="Pubblica">
@@ -95,4 +95,4 @@ class NewPostForm{
         `;
     }
 }
-export {NewPostForm};
+export { NewPostForm };
