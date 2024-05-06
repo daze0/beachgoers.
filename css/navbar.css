@@ -1,0 +1,13 @@
+.form-input-fade-out {
+    transition: opacity 1s ease;
+    opacity: 0;
+}
+
+.form-input-fade-in {
+    transition: opacity 1s ease;
+    opacity: 1;
+}
+
+.form-input-disabled {
+    pointer-events: none;
+}

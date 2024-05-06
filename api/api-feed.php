@@ -3,7 +3,7 @@ require_once("../bootstrap.php");
 /*
 TODO: 
     - Paginazione feed
-    - Tutti i post utenti(user compreso)
+    - Tutti i post utenti(user non compreso)
 */
 $feed_data = array();
 

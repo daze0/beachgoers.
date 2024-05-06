@@ -390,6 +390,36 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function doesUserExistByUsername($username)
+    {
+        $query = "SELECT COUNT(*) FROM user WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($count == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Returns the user id given his/hers/its username.
+     */
+    public function getUserIdByUsername($username)
+    {
+        $query = "SELECT userid FROM user WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
     /**
      * Returns the full user record given his/hers/its username.

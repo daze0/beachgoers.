@@ -1,6 +1,9 @@
 import { Listener } from "../../utils/listener.js";
 
 class LogoutIcon {
+    _icon;
+    _listeners;
+
     constructor() {
         this._icon = document.createElement('i');
         this.logoutCallback = this.logoutCallback.bind(this);
@@ -9,7 +12,7 @@ class LogoutIcon {
         };
     }
 
-    generateComponent(data=null) {
+    generateComponent(data = undefined) {
         this._icon.id = "logoutIcon";
         this._icon.classList.add("d-inline-block", "align-top", "bi", "bi-box-arrow-right");
 
@@ -40,4 +43,4 @@ class LogoutIcon {
     }
 }
 
-export { LogoutIcon }
+export { LogoutIcon };
