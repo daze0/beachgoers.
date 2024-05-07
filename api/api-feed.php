@@ -23,7 +23,12 @@ if (isUserLoggedIn()) {
             $rich_post["content"] = $post["content"];
             $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
             $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0][0];
-            $rich_post["comments"] = $dbh->getCommentsByPostId($post["postid"]);
+            $comments = $dbh->getCommentsByPostId($post["postid"]);
+            foreach($comments as $idx => $comment){
+                $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
+                $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($_SESSION["userid"], $comment["commentid"]);
+            } 
+            $rich_post["comments"] = $comments;
             $rich_post["createdAt"] = $post["createdAt"];
             array_push($feed_data["posts"], $rich_post);
         }
