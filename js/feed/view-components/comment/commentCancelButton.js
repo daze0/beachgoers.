@@ -20,7 +20,7 @@ class CommentCancelButton{
         this.#commentCancelButton.id = "commentCancelButton-"+this.#commentid;
         this.#commentCancelButton.type = 'button';
         this.#commentCancelButton.innerHTML = "<i class='bi bi-trash'></i>";
-        this.#commentCancelButton.classList.add('btn','text-danger','float-end');
+        this.#commentCancelButton.classList.add('btn','text-danger');
         return this.#commentCancelButton;
     }
 

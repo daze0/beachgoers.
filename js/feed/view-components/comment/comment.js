@@ -1,12 +1,14 @@
 import { Utils } from "../../../utils/utils.js";
 import { CommentCancelButton } from "./commentCancelButton.js";
+import { CommentLikeButton } from "./commentLikeButton.js";
 
 class Comment {
     #components;
 
     constructor() {
         this.#components = {
-            //"commentCancelButton": undefined,
+            "commentLikeButton": undefined,
+            //"commentCancelButton": undefined, //The component exists only if user can delete this comment
         };
     }
 
@@ -14,6 +16,10 @@ class Comment {
         if(commentData.canDelete){
             this.#components.commentCancelButton= new CommentCancelButton(commentData, commentsList);
         }
+        this.#components.commentLikeButton = new CommentLikeButton(
+            commentData.commentid,
+            commentData.hasMyLike
+        );
         const comment = this.#generateComment(commentData);
         return comment;
     }
@@ -44,6 +50,7 @@ class Comment {
                 <span class="">${comment.username}</span>
                 <span class="float-end pt-2"> 
                     ${this.#generateCommentCancelButton()}
+                    ${this.#components.commentLikeButton.generateComponent()}
                 </span>
             </div>
             <div>

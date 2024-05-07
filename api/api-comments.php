@@ -10,7 +10,7 @@ if(isUserLoggedIn()) {
         $comments = $dbh->getCommentsByPostId($_GET["pid"]);
         foreach($comments as $idx => $comment){
             $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
-            $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($comment["commentid"], $_SESSION["userid"]);
+            $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($_SESSION["userid"], $comment["commentid"]);
         }
         $comments_data["comments"] = $comments;
     } elseif ($method == "POST" && isset($_POST["pid"]) && isset($_POST["comment"])) {
@@ -30,9 +30,21 @@ if(isUserLoggedIn()) {
             $comments_data["comment_delete"] = true;
         }else{
             $comments_data["comment_delete"] = false;
+        }        
+    } else if($method == "POST" && isset($_POST["commentid"]) && isset($_POST['addLike'])){
+        if(!$dbh->doesUserAlreadyLikeComment($_SESSION['userid'], $_POST["commentid"])){
+            $dbh->addLikeToComment($_SESSION['userid'], $_POST["commentid"]);
+            $comments_data["comment_add_like_success"] = true;
+        }else{
+            $comments_data["comment_add_like_success"] = false;
         }
-
-        
+    } else if($method == "POST" && isset($_POST["commentid"]) && isset($_POST['removeLike'])){
+        if($dbh->doesUserAlreadyLikeComment($_SESSION['userid'], $_POST["commentid"])){
+            $dbh->removeLikeFromComment($_SESSION['userid'], $_POST["commentid"]);
+            $comments_data["comment_remove_like_success"] = true;
+        }else{
+            $comments_data["comment_remove_like_success"] = false;
+        }
     }
 }
 

@@ -31,7 +31,7 @@ if (isUserLoggedIn()) {
                 $comments = $dbh->getCommentsByPostId($post["postid"]);
                 foreach($comments as $idx => $comment){
                     $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
-                    $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($comment["commentid"], $_SESSION["userid"]);
+                    $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($_SESSION["userid"], $comment["commentid"]);
                 }
                 $rich_post["comments"] = $comments;
                 $rich_post["createdAt"] = $post["createdAt"];
@@ -65,7 +65,7 @@ if (isUserLoggedIn()) {
                 $comments = $dbh->getCommentsByPostId($post["postid"]);
                 foreach($comments as $idx => $comment){
                     $comments[$idx]["canDelete"] = $comment["userid"] == $_SESSION["userid"];
-                    $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($comment["commentid"], $_SESSION["userid"]);
+                    $comments[$idx]["hasMyLike"] = $dbh->doesUserAlreadyLikeComment($_SESSION["userid"], $comment["commentid"]);
                 }
                 $rich_post["comments"] = $comments;
                 $rich_post["createdAt"] = $post["createdAt"];
