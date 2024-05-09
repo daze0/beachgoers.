@@ -1,4 +1,5 @@
 import { Listener } from "../../utils/listener.js";
+import { Utils } from "../../utils/utils.js";
 
 class SearchForm {
     _form;
@@ -16,8 +17,17 @@ class SearchForm {
         this._form.action = "#";
         this._form.id = "searchForm";
         this._form.method = "get";
+        this._form.autocomplete = "off";
         this._form.classList.add("form-inline");
         this._form.innerHTML = this.#generateSearchForm();
+
+        document.addEventListener("DOMContentLoaded", e => {
+            console.log(document.querySelector("#searchForm input[type='search']"));
+            Utils.setupAutocomplete(
+                document.querySelector("#searchForm input[type='search']"),
+                ["test", "onya", "workabroad101"]
+            );
+        });
 
         return this._form;
     }
