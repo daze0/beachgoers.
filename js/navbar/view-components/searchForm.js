@@ -23,10 +23,7 @@ class SearchForm {
 
         document.addEventListener("DOMContentLoaded", e => {
             console.log(document.querySelector("#searchForm input[type='search']"));
-            Utils.setupAutocomplete(
-                document.querySelector("#searchForm input[type='search']"),
-                ["test", "onya", "workabroad101"]
-            );
+            Utils.setupAutocomplete(document.querySelector("#searchForm input[type='search']"));
         });
 
         return this._form;

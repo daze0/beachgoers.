@@ -1,6 +1,8 @@
 <?php
 require_once("../bootstrap.php");
 
+$MAX_SUGGESTIONS = 5;
+
 $search_data = array();
 
 if (isUserLoggedIn()) {
@@ -11,6 +13,12 @@ if (isUserLoggedIn()) {
         } else {
             $search_data["search_success"] = false;
         }
+    } else if (isset($_GET["sq"])) { // sq = suggestions (input) query
+        $search_data["suggestions"] = $dbh->getSearchSuggestions(
+            $_SESSION["userid"],
+            $_GET["sq"],
+            $MAX_SUGGESTIONS
+        );
     }
 }
 

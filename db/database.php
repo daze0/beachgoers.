@@ -422,6 +422,36 @@ class DatabaseHelper
     }
 
     /**
+     * Returns ordered suggestions for user with userid that sent query inputQuery.
+     * Suggestions are made of a unique set of follower/following users whose
+     * usernames are matched against an input query.
+     * Limited to max N(=5) results
+     */
+    public function getSearchSuggestions($userid, $inputQuery, $maxSuggestions)
+    {
+        $query = "SELECT DISTINCT u.username, u.userimg 
+        FROM (
+            SELECT followed AS userid FROM user_follows_user WHERE follower = ? UNION
+            SELECT follower AS userid FROM user_follows_user WHERE followed = ?
+        ) AS relationships
+        JOIN user u ON u.userid = relationships.userid
+        ORDER BY CASE 
+            WHEN u.username LIKE CONCAT(?, '%') THEN 1
+            WHEN u.username LIKE CONCAT('%', ?, '%') THEN 2
+            WHEN u.username LIKE CONCAT('%', ?) THEN 3
+            ELSE 4
+        END, u.username
+        LIMIT ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iisssi", $userid, $userid, $inputQuery, $inputQuery, $inputQuery, $maxSuggestions);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /**
      * Returns the full user record given his/hers/its username.
      */
     private function getUserByUsername($username)
