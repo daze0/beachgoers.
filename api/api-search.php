@@ -2,7 +2,6 @@
 require_once("../bootstrap.php");
 
 $MAX_SUGGESTIONS = 5;
-
 $search_data = array();
 
 if (isUserLoggedIn()) {
