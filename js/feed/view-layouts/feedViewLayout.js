@@ -6,6 +6,7 @@ class FeedViewLayout {
     #listeners;
     #feedData;
     #nextPage;
+    #hasMoreData;
 
     constructor(components, feedData) {
         this.#components = components;
@@ -15,6 +16,7 @@ class FeedViewLayout {
         };
         this.#feedData = feedData;
         this.#nextPage = 2;
+        this.#hasMoreData = true;
     }
 
     scrollPostsCallback() {
@@ -28,12 +30,22 @@ class FeedViewLayout {
     }
 
     loadMorePosts() {
+        if (!this.#hasMoreData) {
+            return;
+        }
+
         const postSectionContainer = document.querySelector("#postSection > div");
+
+        // OPTIONAL: loading animation
 
         // Load more content
         axios.get(`api/api-feed.php?page=${this.#nextPage++}`).then(response => {
-            this.#feedData["posts"].push(response.data["posts"]);
-            postSectionContainer.innerHTML += this.#generatePosts(response.data["posts"]);
+            if (response.data["posts"].length > 0) {
+                this.#feedData["posts"].push(response.data["posts"]);
+                postSectionContainer.innerHTML += this.#generatePosts(response.data["posts"]);
+            } else {
+                this.#hasMoreData = false;
+            }
             // OPTIONAL: save nextPage in a cookie, this keeps memory of user's post scroll interaction
         }).catch(error => {
             console.error("Error while loading more posts: ", error);
@@ -44,6 +56,7 @@ class FeedViewLayout {
         rootElement.innerHTML = this.#generate();
         this.#attachListeners();
     }
+
     #attachListeners() {
         Object.entries(this.#components).forEach(([label, component]) => {
             component.attachListeners();
