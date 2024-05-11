@@ -12,6 +12,11 @@ class Listener {
     }
 
     attachListener() {
+        if (this.#selector === "document") {
+            document.addEventListener(this.#event, this.#callback);
+            return;
+        }
+
         this.#listener = e => {
             e.preventDefault();
             console.log(e.currentTarget);
@@ -25,6 +30,9 @@ class Listener {
     }
 
     detachListener() {
+        if (this.#selector === "document") {
+            document.removeEventListener(this.#event, this.#listener);
+        }
         document.querySelector(this.#selector).removeEventListener(this.#event, this.#listener);
     }
 }

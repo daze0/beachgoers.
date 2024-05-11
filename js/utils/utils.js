@@ -85,25 +85,30 @@ class Utils {
 
             // Populate autocomplete items wrapper with response data
             axios.get(`api/api-search.php?sq=${inputElementValue}`).then(response => {
-                for (const item of response.data["suggestions"]) {
-                    const autocompletedItem = document.createElement("div");
-                    if (inputElementValue.length <= item["username"].length &&
-                        inputElementValue.toUpperCase() == item["username"].substring(0, inputElementValue.length).toUpperCase()) {
-                        autocompletedItem.innerHTML = `<strong>${item["username"].substring(0, inputElementValue.length)}</strong>`;
-                        autocompletedItem.innerHTML += item["username"].substring(inputElementValue.length);
-                        autocompletedItem.innerHTML += `<input type="hidden" value="${item["username"]}" />`;
-                    } else {
-                        autocompletedItem.innerHTML += item["username"];
-                        autocompletedItem.innerHTML += `<input type="hidden" value="${item["username"]}" />`;
+                if (response.data["suggestions"]) {
+                    for (const item of response.data["suggestions"]) {
+                        const autocompletedItem = document.createElement("div");
+                        autocompletedItem.innerHTML = `
+                            <img class="me-3 img-thumbnail w-25 h-25" src="upload/${item["userimg"]}" alt="${item["username"]} profile picture" />
+                        `;
+                        if (inputElementValue.length <= item["username"].length &&
+                            inputElementValue.toUpperCase() == item["username"].substring(0, inputElementValue.length).toUpperCase()) {
+                            autocompletedItem.innerHTML += `<strong>${item["username"].substring(0, inputElementValue.length)}</strong>`;
+                            autocompletedItem.innerHTML += item["username"].substring(inputElementValue.length);
+                            autocompletedItem.innerHTML += `<input type="hidden" value="${item["username"]}" />`;
+                        } else {
+                            autocompletedItem.innerHTML += item["username"];
+                            autocompletedItem.innerHTML += `<input type="hidden" value="${item["username"]}" />`;
+                        }
+                        /*
+                            Execute when someone clicks on the item value
+                        */
+                        autocompletedItem.addEventListener("click", innerEvent => {
+                            inputElement.value = item["username"];
+                            closeAllLists();
+                        });
+                        autocompleteItemsWrapper.appendChild(autocompletedItem);
                     }
-                    /*
-                        Execute when someone clicks on the item value
-                    */
-                    autocompletedItem.addEventListener("click", innerEvent => {
-                        inputElement.value = item["username"];
-                        closeAllLists();
-                    });
-                    autocompleteItemsWrapper.appendChild(autocompletedItem);
                 }
             }).catch(error => {
                 console.error("Error when requesting search suggestions: ", error);
