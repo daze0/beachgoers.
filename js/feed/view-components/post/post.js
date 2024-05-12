@@ -1,6 +1,8 @@
 import { CommentsListPopup } from "../../../popups/view-layouts/commentsListPopup.js";
 import { Utils } from "../../../utils/utils.js";
+import { PostCancelButton } from "./postCancelButton.js";
 import { PostLikeButton } from "./postLikeButton.js";
+import { ProfileViewLayout } from "../../../profile/view-layouts/profileViewLayout.js";
 
 class Post {
     #components;
@@ -8,12 +10,16 @@ class Post {
     constructor() {
         this.#components = {
             "postLikeButton": undefined,
+            //"postCancelButton": undefined,
             "commentsListPopup": undefined
         };
     }
 
     generateComponent(data, authorUsername, authorImg, layout) {
         this.#components.postLikeButton = new PostLikeButton(data.postid, data.author, data.hasMyLike, layout);
+        if(layout instanceof ProfileViewLayout){
+            this.#components.postCancelButton = new PostCancelButton(data);
+        }
         this.#components.commentsListPopup = new CommentsListPopup(data);
         this.#components.commentsListPopup.render();
         const post = this.#generatePost(data, authorUsername, authorImg);
@@ -36,6 +42,7 @@ class Post {
             <div class="card-header">
                 ${this.#generateThumbnail(authorImg)}
                 ${authorUsername}
+                ${this.#generateCancelButton()}
                 <span class="text-muted float-end pt-2">${Utils.generateTimeElapsedString(postData.createdAt)}</span>
             </div>
             <img class="card-img rounded-0" src="upload/${postData.img}" alt="post image"/>
@@ -48,6 +55,13 @@ class Post {
             </div>
         </div>
         `;
+    }
+
+    #generateCancelButton(){
+        if(this.#components["postCancelButton"]){
+            return `<span class="float-end btn-sm mt-1 ms-2">${this.#components["postCancelButton"].generateComponent().outerHTML}</span>`;
+        }
+        return "";
     }
 }
 
