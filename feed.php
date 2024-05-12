@@ -4,7 +4,7 @@ require_once("utils/webpage.php");
 
 $webpage = new WebPage(
     "ConnectU - Feed",
-    array("global-style.css", "profile.css", "navbar.css"),
+    array("global-style.css", "profile.css", "navbar.css", "loading.css"),
     array("https://unpkg.com/axios/dist/axios.min.js"),
     array("js/feed/feed.js", "js/navbar/navbar.js", "js/footer/footer.js")
 );

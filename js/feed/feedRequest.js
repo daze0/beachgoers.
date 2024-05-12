@@ -1,11 +1,14 @@
 import { FeedViewLayout } from './view-layouts/feedViewLayout.js';
+import { LoadingElement } from './view-components/misc/loading.js';
 
 class FeedRequest {
     #components;
     #layout;
 
     constructor() {
-        this.#components = {};
+        this.#components = {
+            "loadingElement": new LoadingElement()
+        };
         this.#layout = undefined;
     }
 

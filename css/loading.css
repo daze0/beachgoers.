@@ -1,0 +1,32 @@
+.loading-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-dots span {
+    background-color: grey;
+    height: 10px;
+    width: 10px;
+    margin: 0 3px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: dotPulse 1.4s infinite linear;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0s;
+}

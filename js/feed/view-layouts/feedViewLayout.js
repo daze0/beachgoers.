@@ -7,6 +7,7 @@ class FeedViewLayout {
     #feedData;
     #nextPage;
     #hasMoreData;
+    #isAlreadyLoading;
 
     constructor(components, feedData) {
         this.#components = components;
@@ -17,12 +18,12 @@ class FeedViewLayout {
         this.#feedData = feedData;
         this.#nextPage = 2;
         this.#hasMoreData = true;
+        this.#isAlreadyLoading = false; // Lock-like variable to prevent problems with multiple scroll events
     }
 
     scrollPostsCallback() {
         console.log(`FEED - PAGE REQ #${this.#nextPage - 1} - scroll detected`);
-        // Check if the user has scrolled to the bottom of the content container
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (this.#hasMoreData && !this.#isAlreadyLoading) {
             console.log(`FEED - PAGE REQ #${this.#nextPage - 1} - lazy`);
             // Load more content
             this.loadMorePosts();
@@ -30,22 +31,22 @@ class FeedViewLayout {
     }
 
     loadMorePosts() {
-        if (!this.#hasMoreData) {
-            return;
-        }
+        const postSectionLoadingElem = document.querySelector("#postSection > div > div.loading-dots");
 
-        const postSectionContainer = document.querySelector("#postSection > div");
-
-        // OPTIONAL: loading animation
+        // Loading animation
+        this.#components["loadingElement"].toggleComponent();
+        this.#isAlreadyLoading = true;
 
         // Load more content
         axios.get(`api/api-feed.php?page=${this.#nextPage++}`).then(response => {
+            this.#components["loadingElement"].toggleComponent();
             if (response.data["posts"].length > 0) {
                 this.#feedData["posts"].push(response.data["posts"]);
-                postSectionContainer.innerHTML += this.#generatePosts(response.data["posts"]);
+                postSectionLoadingElem.insertAdjacentHTML("beforebegin", this.#generatePosts(response.data["posts"]));
             } else {
                 this.#hasMoreData = false;
             }
+            this.#isAlreadyLoading = false;
             // OPTIONAL: save nextPage in a cookie, this keeps memory of user's post scroll interaction
         }).catch(error => {
             console.error("Error while loading more posts: ", error);
@@ -74,6 +75,7 @@ class FeedViewLayout {
             <div id="postSection" class="col-6 overflow-auto">
                 <div class="bg-light">
                     ${this.#generatePosts(this.#feedData["posts"])}
+                    ${this.#components["loadingElement"].generateComponent()}
                 </div>
             </div>
             <div id="spacingEndSection" class="col-3 pe-0"></div>
