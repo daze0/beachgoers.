@@ -5,6 +5,7 @@ class FeedViewLayout {
     #components;
     #listeners;
     #feedData;
+
     #nextPage;
     #hasMoreData;
     #isAlreadyLoading;

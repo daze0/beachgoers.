@@ -185,14 +185,18 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPostsByUserId($userid)
+    public function getPostsByUserId($userid, $page_num)
     {
+        $batch_size = self::PAGINATION_BATCH_SIZE;
+        $offset = self::PAGINATION_BATCH_SIZE * ($page_num - 1);
+
         $query = "SELECT author, postid, img, content, createdAt FROM post 
         WHERE author=? 
-        ORDER BY postid DESC";
+        ORDER BY createdAt DESC
+        LIMIT ? OFFSET ?";
         // TODO: repeat same pagination setup as the method below
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $userid);
+        $stmt->bind_param("iii", $userid, $batch_size, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -348,7 +352,7 @@ class DatabaseHelper
         $stmt->close();
     }
 
-    
+
     public function getPostById($postid)
     {
         $query = "SELECT postid, author, img, content, createdAt FROM post WHERE postid=?";

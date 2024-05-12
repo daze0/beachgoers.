@@ -11,14 +11,8 @@ class ProfileViewLayout {
 
     renderUpdate(updateType, action, data) {
         if (updateType == "USER_INFO") {
-            // Save user info before render
+            // Save user info before update
             const userInfo = this.#components["profileInfo"].getUserInfo();
-            // If defined, data is the userFeedData to be propagated to the next render
-            if (data != undefined) {
-                this.#userFeedData = data;
-            }
-            // Render updated user info
-            this.render(document.querySelector("main"), userInfo);
             // Update user info after render
             if (action == "add_like") {
                 console.log("[USER_INFO] add_like");
@@ -48,6 +42,20 @@ class ProfileViewLayout {
         }
     }
 
+    getUserFeedData() {
+        return this.#userFeedData;
+    }
+
+    setUserFeedData(value) {
+        this.#userFeedData = value;
+    }
+
+    getComponent(label) {
+        if (label in this.#components) {
+            return this.#components[label];
+        }
+    }
+
     render(rootElement, updatedUserInfo = undefined) {
         rootElement.innerHTML = this.#generate(updatedUserInfo);
         this.#attachListeners();
@@ -73,6 +81,7 @@ class ProfileViewLayout {
                 <div id="postSection" class="col-6 overflow-auto">
                     <div class="bg-light">
                         ${this.#components["profileFeed"].generateComponent(this.#userData, this.#userFeedData, this)}
+                        ${this.#components["profileFeed"].getComponent("loadingElement").generateComponent()}
                     </div>
                 </div>
                 <div id="spacingEndSection" class="col-3 pe-0"></div>
