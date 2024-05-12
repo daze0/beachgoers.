@@ -3,6 +3,9 @@ require_once("../bootstrap.php");
 
 $profile_feed_data = array();
 
+$method = $_SERVER['REQUEST_METHOD'];
+
+
 if (isUserLoggedIn()) {
     /*if (isset($_SESSION["profile"]) && $_SESSION["profile"] == "true") {
         if (isset($_SESSION["profile_uid"]) && $_SESSION["profile_uid"] != $_SESSION["userid"]) {
@@ -13,6 +16,17 @@ if (isUserLoggedIn()) {
     } elseif(isset($_SESSION["feed"]) && $_SESSION["feed"] == "true") {
 
     }*/
+
+    if($method == "DELETE" && isset($_GET["postid"])){
+        $post = $dbh->getPostById($_GET["postid"])[0];
+        if($_SESSION['userid'] == $post['author']){
+            $dbh->removePostById($_GET["postid"]);
+            $profile_feed_data["post_delete"] = true;
+        }else{
+            $profile_feed_data["post_delete"] = false;
+        }        
+    }
+
     if (isset($_SESSION["profile_uid"]) && $_SESSION["profile_uid"] != $_SESSION["userid"]) {
         $profile_feed_data["userid"] = $_SESSION["profile_uid"];
         $profile_feed_data["username"] = $dbh->getUsernameById($_SESSION["profile_uid"])[0]["username"];
@@ -74,7 +88,7 @@ if (isUserLoggedIn()) {
         }
     }
 
-    if (isset($_GET["postid"])) {
+    if ($method == "GET" && isset($_GET["postid"])) {
         if (!$dbh->doesUserAlreadyLikePost($_SESSION["userid"], $_GET["postid"])) {
             $dbh->addLikeToPost($_SESSION["userid"], $_GET["postid"]);
             if (!empty($profile_feed_data["posts"])) {

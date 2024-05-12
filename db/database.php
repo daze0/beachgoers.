@@ -348,6 +348,27 @@ class DatabaseHelper
         $stmt->close();
     }
 
+    
+    public function getPostById($postid)
+    {
+        $query = "SELECT postid, author, img, content, createdAt FROM post WHERE postid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $postid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function removePostById($postid)
+    {
+        $query = "DELETE FROM post WHERE postid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $postid);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     public function doesUserAlreadyLikeComment($userid, $commentid)
     {
         $query = "SELECT COUNT(*) FROM user_likes_comment WHERE user=? AND comment=?";

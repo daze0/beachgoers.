@@ -39,13 +39,15 @@ class CommentCancelButton{
     }
 
     clickCallback = () => {
-        axios.delete("api/api-comments.php", {
-            params:{
-                commentid: this.#commentid
-            }
-        }).then(response => {
-            this.#commentsList.updateCommentsList();
-        });
+        if(confirm("Confermi di voler eliminare il commento selezionato?")){
+            axios.delete("api/api-comments.php", {
+                params:{
+                    commentid: this.#commentid
+                }
+            }).then(response => {
+                this.#commentsList.updateCommentsList();
+            });
+        }
     }
 }
 
