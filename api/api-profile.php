@@ -5,6 +5,10 @@ $profile_data = array();
 
 if (isUserLoggedIn()) {
     $profile_data["userid"] = $_SESSION["userid"];
+    if(isset($_GET["checkTelegramBotActivation"])){
+        $botHelper->updateChatsIds();
+        //$profile_data['telegram_bot_active'] = true;
+    }
     if (isset($_SESSION["profile_uid"]) && $_SESSION["profile_uid"] != $_SESSION["userid"]) {
         $profile_data["profile_picture"] = $dbh->getUserImgById($_SESSION["profile_uid"])[0]["userimg"];
         $profile_data["username"] = $dbh->getUsernameById($_SESSION["profile_uid"])[0]["username"];
