@@ -16,7 +16,7 @@ class ProfileInfo {
             "telegramButton": new TelegramButton(),
             "followersListPopup": undefined,
             "followingListPopup": undefined,
-            'telegramConnectorPopup':undefined
+            //'telegramConnectorPopup':undefined
         };
         this.#data = undefined;
         this.#userInfo = {
