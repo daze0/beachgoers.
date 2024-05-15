@@ -12,7 +12,8 @@ class BotHelper{
         return $this->sendMessage($chat_id, "Beachgoers notification activated!");
     }
 
-    public function sendNewLikeNotification($post, $postAuhor, $user): bool{
+    public function sendNewLikeNotification($post, $postAuthor, $user): bool{
+        //TODO UPDATE TEXT
         return $this->sendMessage($postAuthor["telegramChatId"], "New Like to your post ...");
     }
 
@@ -60,13 +61,16 @@ class BotHelper{
     }
 
     protected function sendMessage($chatId, $text): bool{
+        if(empty($chatId) || empty($text)){
+            return false;
+        }
         $query = http_build_query([
             'chat_id' => $chatId,
             'text' => $text,
         ]);
         $url = "https://api.telegram.org/bot{$this->token}/sendMessage?{$query}";
         $result = file_get_contents($url);
-        //... 
-        return true;
+        $resultData = json_decode($result, true);
+        return $resultData['ok'];
     }
 }
