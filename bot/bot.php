@@ -8,30 +8,30 @@ class BotHelper{
         $this->dbh = $dbh;
     }
 
-    public function sendBotActivatedNotification($chat_id): bool{
-        return $this->sendMessage($chat_id, "Beachgoers notification activated!");
+    public function sendBotActivatedNotification($user): bool{
+        return $this->sendMessage($user, "Beachgoers notification activated!");
     }
 
     public function sendNewLikeNotification($post, $postAuthor, $user): bool{
         //TODO UPDATE TEXT
-        return $this->sendMessage($postAuthor["telegramChatId"], "New Like to your post ...");
+        return $this->sendMessage($postAuthor, "New Like to your post ...");
     }
 
     public function sendNewCommentLikeNotification($comment, $commentAuthor, $user): bool{
         //TODO UPDATE TEXT
-        return $this->sendMessage($commentAuthor["telegramChatId"], "New Like to your comment ...");
+        return $this->sendMessage($commentAuthor, "New Like to your comment ...");
     }
 
     public function sendNewCommentNotification($post, $postAuthor, $commentText, $commentAuthor): bool{
         //TODO UPDATE TEXT
-        return $this->sendMessage($postAuthor["telegramChatId"], "New comment to your post...");
+        return $this->sendMessage($postAuthor, "New comment to your post...");
     }
 
     public function sendNewFollowerNotification($followed, $follower): bool{
         $followerUrl = BASE_URL."profile.php?uid=".$follower["userid"];
         $text = '<b><a href="'.$followerUrl.'">'.$follower["username"]."</a></b> started following you! 🚀";
         return $this->sendMessage(
-            $followed["telegramChatId"], 
+            $followed, 
             $text
         );
     }
@@ -48,7 +48,8 @@ class BotHelper{
                 $chat_id = $chat["id"];
                 $telegram_username = $chat["username"];
                 if($this->dbh->updateUserTelegramChatId($telegram_username, $chat_id)){
-                    $this->sendBotActivatedNotification($chat_id);
+                    $user = $this->dbh->getUserByTelegramUsername($telegram_username)[0];
+                    $this->sendBotActivatedNotification($user);
                 }
                 $lastUpdateId = $updateResult["update_id"];
             }
@@ -64,10 +65,14 @@ class BotHelper{
         }
     }
 
-    protected function sendMessage($chatId, $text): bool{
+    protected function sendMessage($user, $text): bool{
+        $chatId = $user["telegramChatId"];
         if(empty($chatId) || empty($text)){
             return false;
         }
+
+        $this->dbh->addNotification($user["userid"], $text);
+
         $query = http_build_query([
             'chat_id' => $chatId,
             'text' => $text,
