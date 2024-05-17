@@ -22,14 +22,14 @@ class BotHelper{
         return $this->sendMessage($commentAuthor["telegramChatId"], "New Like to your comment ...");
     }
 
-    public function sendNewCommentNotification($post, $postAuthor, $comment, $commentAuthor): bool{
-        //TODO IMPLEMENT
-        return false;
+    public function sendNewCommentNotification($post, $postAuthor, $commentText, $commentAuthor): bool{
+        //TODO UPDATE TEXT
+        return $this->sendMessage($postAuthor["telegramChatId"], "New comment to your post...");
     }
 
     public function sendNewFollowerNotification($followed, $follower): bool{
-        //TODO IMPLEMENT
-        return false;
+        //TODO UPDATE TEXT
+        return $this->sendMessage($followed["telegramChatId"], "New follower...");
     }
 
     public function updateChatsIds(){

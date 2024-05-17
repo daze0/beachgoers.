@@ -21,6 +21,10 @@ if(isUserLoggedIn()) {
             $comments_data["comment_success"] = false;
         }else{
             $dbh->addCommentToPost($_POST["pid"], $_POST["comment"]);
+            $post = $dbh->getPostById($_POST["pid"])[0];
+            $commentAuthor = $dbh->getUserById($_SESSION["userid"])[0];
+            $postAuthor = $dbh->getUserById($post["author"])[0];
+            $botHelper->sendNewCommentNotification($post, $postAuthor, $_POST["comment"], $commentAuthor);
             $comments_data["comment_success"] = true;
         }
     } else if($method == "DELETE" && isset($_GET["commentid"])){
