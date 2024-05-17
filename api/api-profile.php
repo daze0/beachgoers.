@@ -24,6 +24,10 @@ if (isUserLoggedIn()) {
              */
             if ($_GET["follow"] == "true") {
                 $dbh->addFollowerToUser($_SESSION["userid"], $_SESSION["profile_uid"]);
+                $botHelper->sendNewFollowerNotification(
+                    $dbh->getUserById($_SESSION["profile_uid"])[0],
+                    $dbh->getUserById($_SESSION["userid"])[0]
+                );
                 $profile_data["followers"]++;
             } elseif ($_GET["follow"] == "false") {
                 $dbh->removeFollowerFromUser($_SESSION["userid"], $_SESSION["profile_uid"]);
