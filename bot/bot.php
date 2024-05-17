@@ -18,8 +18,8 @@ class BotHelper{
     }
 
     public function sendNewCommentLikeNotification($comment, $commentAuthor, $user): bool{
-        //TODO IMPLEMENT
-        return false;
+        //TODO UPDATE TEXT
+        return $this->sendMessage($commentAuthor["telegramChatId"], "New Like to your comment ...");
     }
 
     public function sendNewCommentNotification($post, $postAuthor, $comment, $commentAuthor): bool{

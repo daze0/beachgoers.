@@ -34,6 +34,12 @@ if(isUserLoggedIn()) {
     } else if($method == "POST" && isset($_POST["commentid"]) && isset($_POST['addLike'])){
         if(!$dbh->doesUserAlreadyLikeComment($_SESSION['userid'], $_POST["commentid"])){
             $dbh->addLikeToComment($_SESSION['userid'], $_POST["commentid"]);
+            $comment = $dbh->getCommentById($_POST["commentid"])[0];
+            $botHelper->sendNewCommentLikeNotification(
+                $comment,
+                $dbh->getUserById($comment["user"])[0],
+                $dbh->getUserById($_SESSION['userid'])[0]
+            );
             $comments_data["comment_add_like_success"] = true;
         }else{
             $comments_data["comment_add_like_success"] = false;
