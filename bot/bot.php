@@ -28,8 +28,12 @@ class BotHelper{
     }
 
     public function sendNewFollowerNotification($followed, $follower): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($followed["telegramChatId"], "New follower...");
+        $followerUrl = BASE_URL."profile.php?uid=".$follower["userid"];
+        $text = '<b><a href="'.$followerUrl.'">'.$follower["username"]."</a></b> started following you! 🚀";
+        return $this->sendMessage(
+            $followed["telegramChatId"], 
+            $text
+        );
     }
 
     public function updateChatsIds(){
@@ -67,6 +71,7 @@ class BotHelper{
         $query = http_build_query([
             'chat_id' => $chatId,
             'text' => $text,
+            'parse_mode' => 'HTML'
         ]);
         $url = "https://api.telegram.org/bot{$this->token}/sendMessage?{$query}";
         $result = file_get_contents($url);

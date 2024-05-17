@@ -1,6 +1,7 @@
 <?php
 session_start();
 define("UPLOAD_DIR", "./upload/");
+define("BASE_URL", "http://127.0.0.1/Connect-U/");
 require_once("utils/functions.php");
 require_once("db/database.php");
 require_once("bot/bot.php");
