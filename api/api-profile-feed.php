@@ -86,7 +86,6 @@ if (isUserLoggedIn()) {
         if (!$dbh->doesUserAlreadyLikePost($_SESSION["userid"], $_GET["postid"])) {
             $dbh->addLikeToPost($_SESSION["userid"], $_GET["postid"]);
             $postData = $dbh->getPostById($_GET["postid"])[0];
-            $test = $dbh->getUserById($postData["author"]);
             $postAuthorData = $dbh->getUserById($postData["author"])[0];
             $userData = $dbh->getUserById($_SESSION["userid"])[0];
             $botHelper->sendNewLikeNotification(
