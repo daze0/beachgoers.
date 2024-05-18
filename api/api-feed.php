@@ -37,6 +37,14 @@ if (isUserLoggedIn()) {
     } else if (isset($_GET["postid"])) {
         if (!$dbh->doesUserAlreadylikePost($_SESSION["userid"], $_GET["postid"])) {
             $dbh->addLikeToPost($_SESSION["userid"], $_GET["postid"]);
+            $postData = $dbh->getPostById($_GET["postid"])[0];
+            $postAuthorData = $dbh->getUserById($postData["author"])[0];
+            $userData = $dbh->getUserById($_SESSION["userid"])[0];
+            $botHelper->sendNewLikeNotification(
+                $postData,
+                $postAuthorData,
+                $userData
+            );
             if (!empty($feed_data["posts"])) {
                 foreach ($feed_data["posts"] as $post) {
                     if ($post["postid"] == $_GET["postid"]) {

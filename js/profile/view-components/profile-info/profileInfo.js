@@ -2,6 +2,7 @@ import { FollowButton } from './followButton.js';
 import { TelegramButton } from './telegramButton.js';
 import { FollowersListPopup } from '../../../popups/view-layouts/followersListPopup.js';
 import { FollowingListPopup } from '../../../popups/view-layouts/followingListPopup.js';
+import { TelegramConnectorPopup } from '../../../popups/view-layouts/telegramConnectorPopup.js';
 
 class ProfileInfo {
     #layout;
@@ -14,7 +15,8 @@ class ProfileInfo {
             "followButton": new FollowButton(),
             "telegramButton": new TelegramButton(),
             "followersListPopup": undefined,
-            "followingListPopup": undefined
+            "followingListPopup": undefined,
+            //'telegramConnectorPopup':undefined
         };
         this.#data = undefined;
         this.#userInfo = {
@@ -104,8 +106,25 @@ class ProfileInfo {
         <div class="col-3 py-4 pe-0">
             ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"], this.#layout)}
             ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
+            ${this.#generateEnableNotificationContent(userData["personal_profile"], userData)}
         </div>
         `;
+    }
+
+    #generateEnableNotificationContent(isPersonalProfile, userData){
+        if(isPersonalProfile){
+            if(!userData["telegram_chat_id"]){
+                this.#components["telegramConnectorPopup"] = new TelegramConnectorPopup(userData);
+                this.#components["telegramConnectorPopup"].render();
+                return this.#components["telegramConnectorPopup"].getPopupOpenElement().generateComponent();
+            }else{
+                return `
+                    <p>Notifications enabled</p>
+                `;
+            }
+        }else{
+            return "";  
+        }
     }
 
     #generateUserImg(userData) {

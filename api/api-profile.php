@@ -5,6 +5,10 @@ $profile_data = array();
 
 if (isUserLoggedIn()) {
     $profile_data["userid"] = $_SESSION["userid"];
+    if(isset($_GET["checkTelegramBotActivation"])){
+        $botHelper->updateChatsIds();
+        $profile_data['telegram_bot_active'] = !empty($dbh->getUserTelegramChatIdById($_SESSION["userid"])[0]["telegramChatId"]);
+    }
     if (isset($_SESSION["profile_uid"]) && $_SESSION["profile_uid"] != $_SESSION["userid"]) {
         $profile_data["profile_picture"] = $dbh->getUserImgById($_SESSION["profile_uid"])[0]["userimg"];
         $profile_data["username"] = $dbh->getUsernameById($_SESSION["profile_uid"])[0]["username"];
@@ -20,6 +24,10 @@ if (isUserLoggedIn()) {
              */
             if ($_GET["follow"] == "true") {
                 $dbh->addFollowerToUser($_SESSION["userid"], $_SESSION["profile_uid"]);
+                $botHelper->sendNewFollowerNotification(
+                    $dbh->getUserById($_SESSION["profile_uid"])[0],
+                    $dbh->getUserById($_SESSION["userid"])[0]
+                );
                 $profile_data["followers"]++;
             } elseif ($_GET["follow"] == "false") {
                 $dbh->removeFollowerFromUser($_SESSION["userid"], $_SESSION["profile_uid"]);
@@ -51,6 +59,7 @@ if (isUserLoggedIn()) {
         $profile_data["posts"] = $dbh->getUserPostsNumById($_SESSION["userid"])[0][0];
         $profile_data["likes"] = $dbh->getUserLikesNumById($_SESSION["userid"])[0][0];
         $profile_data["telegram_username"] = $dbh->getUserTelegramUsernameById($_SESSION["userid"])[0]["telegramUsername"];
+        $profile_data["telegram_chat_id"] = $dbh->getUserTelegramChatIdById($_SESSION["userid"])[0]["telegramChatId"];
         $profile_data["personal_profile"] = true;
         if (isset($_GET["followers_list"]) && $_GET["followers_list"] == "true") {
             /** 

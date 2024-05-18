@@ -185,6 +185,66 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getUserTelegramChatIdById($userid)
+    {
+        $query = "SELECT telegramChatId FROM user WHERE userid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $userid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUserById($id)
+    {
+        $query = "SELECT * FROM user WHERE userid=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUserByTelegramUsername($telegramUsername)
+    {
+        $query = "SELECT * FROM user WHERE telegramUsername=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $telegramUsername);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUserTelegramChatIdByTelegramUsername($telegramUsername)
+    {
+        $query = "SELECT telegramChatId FROM user WHERE telegramUsername=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $telegramUsername);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateUserTelegramChatId($telegramUsername, $telegramChatId){
+        $result = $this->getUserTelegramChatIdByTelegramUsername($telegramUsername);
+        if(!isset($result[0])){
+            return false;
+        }
+        if($result[0]["telegramChatId"] == $telegramChatId){
+            return false;
+        }
+
+        $query = "UPDATE user SET telegramChatId = ? WHERE telegramUsername = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ss", $telegramChatId, $telegramUsername);
+        $stmt->execute();
+        return true;
+    }
+
     public function getPostsByUserId($userid, $page_num)
     {
         $batch_size = self::PAGINATION_BATCH_SIZE;
@@ -498,6 +558,15 @@ class DatabaseHelper
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function addNotification($userid, $content)
+    {
+        $query = "INSERT INTO `notification` (`user`, `content`) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("is", $userid, $content);
+        $stmt->execute();
+        $stmt->close();
     }
 
     // Add db communication methods below
