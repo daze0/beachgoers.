@@ -13,8 +13,7 @@ class AuthForm {
     }
 
     generateComponent(data = null) {
-        const formContainer = document.createElement('div');
-        formContainer.classList.add("col-md-7");
+        const formContainer = document.createElement('section');
         this._form.action = "#";
         this._form.method = "post";
         this._form.classList.add("was-validate");
@@ -28,10 +27,10 @@ class AuthForm {
         <header class="row p-2">
             <h2 class="display-4 text-center">${this._title}</h2>
         </header>
-        <div class="row p-2 rounded-3 border border-dark shadow">
+        <div class="row p-2 rounded-3 border">
             ${this._form.outerHTML}
         </div>
-        <div class="row p-2 mt-4 rounded-3 border border-dark shadow">
+        <div class="row p-2 mt-4 rounded-3 border">
             ${this._generateAuthQuestion()}
         </div>`;
 
@@ -57,8 +56,8 @@ class AuthForm {
         for (const key of Object.keys(this._formLabels)) {
             res += this._generateFormElement(key, this._formLabels[key]);
         }
-        res += `<div class="input-group">
-        <input type="submit" class="btn btn-primary" value="${this._title}">
+        res += `<div class="input-group mb-2">
+        <input type="submit" class="btn w-100" value="${this._title}">
         </div>`;
         return res;
     }
@@ -105,7 +104,7 @@ class LoginAuthForm extends AuthForm {
 
     _generateAuthQuestion() {
         return `
-        <p class="m-2 text-center align-middle">Don't have an account? <a href="signup.php">Sign-up</a></p>
+        <p class="m-2 text-center align-middle">Don't have an account? <a href="signup.php"><strong>Sign-up</strong></a></p>
         `;
     }
 
@@ -185,7 +184,7 @@ class SignupAuthForm extends AuthForm {
 
     _generateAuthQuestion() {
         return `
-        <p class="m-2 text-center align-middle">Already have an account? <a href="login.php">Log-in</a></p>
+        <p class="m-2 text-center align-middle">Already have an account? <a href="login.php"><strong>Log-in</strong></a></p>
         `;
     }
 

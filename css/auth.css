@@ -7,12 +7,12 @@ main > div.container > header > h1 > a {
     background-color: #69140E;
 }
 
-main > div.container > div {
+main > div.container > div > div {
     position: relative;
     z-index: 1;
 }
 
-main > div.container > div::before {
+main > div.container > div > div::before {
     content: "";
     position: absolute;
     top: 0;
@@ -24,18 +24,25 @@ main > div.container > div::before {
     border-radius: 0.3em; 
 }
 
-main > div.container > div .row > p,
-main > div.container > div div.row:last-child > div > p,
-main > div.container > div div.row:last-child > div > p  a {
+main > div.container > div > div > section > header {
     color: #F2F3AE;
 }
 
-main > div.container > div button {
+main > div.container > div > div > section > div {
     background-color: #F2F3AE;
     color: #A44200;
 }
 
-main > div.container > div button:hover {
+main > div.container > div > div > section > div > form input[type="submit"] {
     color: #F2F3AE;
     background-color: #A44200;
+}
+
+main > div.container > div > div > section > div > form input[type="submit"]:hover {
+    background-color: #F2F3AE;
+    color: #A44200;
+}
+
+main > div.container > div > div > section > div:last-child > p > a {
+    color: #A44200;
 }
