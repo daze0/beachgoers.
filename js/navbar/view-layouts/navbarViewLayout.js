@@ -23,7 +23,7 @@ class NavbarViewLayout {
     #generate() {
         return `
         <a href="#" class="navbar-brand navbar-color mb-0 h1 ms-2">
-        beachgoers
+            beachgoers.
         </a>
         ${this.#components["searchForm"].generateComponent().outerHTML}
         <div class="d-flex mt-2 mb-2">
