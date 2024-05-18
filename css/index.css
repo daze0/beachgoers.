@@ -6,6 +6,44 @@ body {
     background-attachment: fixed;
 }
 
-main > div.container.col-6 > div {
-    background-color: rgba(255, 255, 255, 0.25);
+main > div.container > header > h1 {
+    text-shadow: 2px 2px 5px rgba(213, 137, 54, 0.75);
+}
+
+main > div.container > header > h1 > a {
+    color: #F2F3AE;
+    background-color: #69140E;
+}
+
+main > div.container > div {
+    position: relative;
+    z-index: 1;
+}
+
+main > div.container > div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(105, 20, 14, 0.75);
+    z-index: -1;
+    border-radius: 0.3em; 
+}
+
+main > div.container > div .row > p,
+main > div.container > div div.row:last-child > div > p,
+main > div.container > div div.row:last-child > div > p  a {
+    color: #F2F3AE;
+}
+
+main > div.container > div button {
+    background-color: #F2F3AE;
+    color: #A44200;
+}
+
+main > div.container > div button:hover {
+    color: #F2F3AE;
+    background-color: #A44200;
 }

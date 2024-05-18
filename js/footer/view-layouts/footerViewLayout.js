@@ -5,7 +5,7 @@ class FooterViewLayout {
 
     #generate() {
         return `
-        <p class="text-light text-center align-middle">&copy; All rights reserved - Alma Pandolfi & Leon Baiocchi</p>
+        <p class="text-center align-middle">&copy; All rights reserved - Alma Pandolfi & Leon Baiocchi</p>
         `;
     }
 }

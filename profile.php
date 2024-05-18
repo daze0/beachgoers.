@@ -3,7 +3,7 @@ require_once("bootstrap.php");
 require_once("utils/webpage.php");
 
 $webpage = new WebPage(
-    "ConnectU - Profile",
+    "Beachgoers - Profile",
     array("global-style.css", "profile.css", "navbar.css", "loading.css"),
     array("https://unpkg.com/axios/dist/axios.min.js"),
     array("js/profile/profile.js", "js/navbar/navbar.js", "js/footer/footer.js")

@@ -9,7 +9,8 @@ body {
 }
 
 body > footer {
-    background-color: #323030;
+    background-color: #F2F3AE;
+    color: #A44200 !important;
 }
 
 footer {

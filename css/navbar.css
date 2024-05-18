@@ -1,3 +1,19 @@
+.navbar-bg-color {
+    background-color: #F2F3AE !important;
+}
+
+.navbar-color {
+    color: #A44200 !important;
+}
+
+div.input-group-append > button:hover {
+    background-color: #A44200;
+    color: #F2F3AE !important;
+}
+
+/********************************
+Error handling animation
+*/
 .form-input-fade-out {
     transition: opacity 1s ease;
     opacity: 0;

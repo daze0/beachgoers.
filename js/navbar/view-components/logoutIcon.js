@@ -14,7 +14,7 @@ class LogoutIcon {
 
     generateComponent(data = undefined) {
         this._icon.id = "logoutIcon";
-        this._icon.classList.add("d-inline-block", "align-top", "bi", "bi-box-arrow-right");
+        this._icon.classList.add("d-inline-block", "align-top", "bi", "bi-box-arrow-right", "navbar-color");
 
         return this._icon;
     }
