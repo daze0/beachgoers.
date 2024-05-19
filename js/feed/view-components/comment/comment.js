@@ -13,8 +13,8 @@ class Comment {
     }
 
     generateComponent(commentData, commentsList) {
-        if(commentData.canDelete){
-            this.#components.commentCancelButton= new CommentCancelButton(commentData, commentsList);
+        if (commentData.canDelete) {
+            this.#components.commentCancelButton = new CommentCancelButton(commentData, commentsList);
         }
         this.#components.commentLikeButton = new CommentLikeButton(
             commentData.commentid,
@@ -36,8 +36,8 @@ class Comment {
         });
     }
 
-    #generateCommentCancelButton(){
-        if(this.#components.commentCancelButton){
+    #generateCommentCancelButton() {
+        if (this.#components.commentCancelButton) {
             return this.#components.commentCancelButton.generateComponent().outerHTML;
         }
         return "";
@@ -54,7 +54,7 @@ class Comment {
                 </span>
             </div>
             <div>
-                <span class="text-muted float-end">${Utils.generateTimeElapsedString(comment.createdAt)}</span>
+                <span class="float-end">${Utils.generateTimeElapsedString(comment.createdAt)}</span>
 
                 <p class="pt-2 ps-2">${comment.comment}</p>
 

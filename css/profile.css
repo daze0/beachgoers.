@@ -40,6 +40,10 @@ div.modal-content > div.modal-footer {
     border-top: 1px solid #A44200;
 }
 
+div.modal-content > div.modal-body > div > div:last-child > span {
+    color: #D58936;
+}
+
 main > div.row:first-child button#followButton,
 main > div.row:first-child button#unfollowButton,
 div.modal-content > div.modal-header,
