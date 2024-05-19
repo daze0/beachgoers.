@@ -569,5 +569,33 @@ class DatabaseHelper
         $stmt->close();
     }
 
+    public function getLastUserNotifications($userid, $count = 10){
+        $query = "SELECT * FROM notification WHERE user=? ORDER BY createdAt DESC LIMIT ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $userid, $count);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $notifications = $result->fetch_all(MYSQLI_ASSOC);
+
+        $idsToRead = [];
+        foreach($notifications as $notification){
+            if(!$notification["read"]){
+                $idsToRead[] = $notification["id"];
+            }
+        }
+        if(!empty($idsToRead)){
+            $this->setNotificationsReadState($idsToRead);
+        }
+
+        return $notifications;
+    }
+
+    protected function setNotificationsReadState($idsNotifications){
+        $query = "UPDATE `notification` SET `read`=1 WHERE `id` IN (".implode(", ", $idsNotifications).")";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     // Add db communication methods below
 }
