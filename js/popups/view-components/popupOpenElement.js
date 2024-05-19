@@ -65,10 +65,11 @@ class PopupOpenElement {
      * @param {*} iconClassName 
      * @returns created reactive button.
      */
-    _generateReactiveButton(id, className, iconClassName) {
+    _generateReactiveButton(id, className, iconClassName, additionalClass = undefined) {
         this.#element = document.createElement('button');
         this.#element.id = id;
         this.#element.classList.add('btn', className);
+        if (additionalClass) this.#element.classList.add(additionalClass);
         this.#element.type = 'button';
 
         // Accessibility attrs
