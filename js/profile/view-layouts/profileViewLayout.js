@@ -69,22 +69,20 @@ class ProfileViewLayout {
 
     #generate(updatedUserInfo = undefined) {
         let res = `
-            <div class="row bg-light">
+            <div class="row gx-0">
                 ${updatedUserInfo == undefined ?
                 this.#components["profileInfo"].generateComponent(this.#userData, this) :
                 this.#components["profileInfo"].generateComponent(this.#userData, this, updatedUserInfo)
             }
             </div>
-            <div class="row bg-light pt-5 mb-5">
-                <div id="spacingStartSection" class="col-3"></div>
+            <div class="row gx-0 pt-5 mb-5">
+                <div id="spacingStartSection" class="col-sm-1 col-md-4"></div>
                 <div id="spacingCenterSection" class="d-none"></div>
-                <div id="postSection" class="col-6 overflow-auto">
-                    <div class="bg-light">
-                        ${this.#components["profileFeed"].generateComponent(this.#userData, this.#userFeedData, this)}
-                        ${this.#components["profileFeed"].getComponent("loadingElement").generateComponent()}
-                    </div>
+                <div id="postSection" class="col-sm-10 col-md-4">
+                    ${this.#components["profileFeed"].generateComponent(this.#userData, this.#userFeedData, this)}
+                    ${this.#components["profileFeed"].getComponent("loadingElement").generateComponent()}
                 </div>
-                <div id="spacingEndSection" class="col-3 pe-0"></div>
+                <div id="spacingEndSection" class="col-sm-1 col-md-4 pe-0"></div>
             </div>
         `;
 

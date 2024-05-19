@@ -90,7 +90,7 @@ class NewPostForm {
     #generateSubmitButton() {
         return `
             <div class="input-group">            
-                <input type="submit" class="btn btn primary" value="Pubblica">
+                <input type="submit" class="btn" value="Done">
             </div>
         `;
     }

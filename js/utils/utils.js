@@ -80,7 +80,7 @@ class Utils {
             // Create autocomplete items wrapper element
             const autocompleteItemsWrapper = document.createElement("div");
             autocompleteItemsWrapper.id = "autocompleteList" + e.target.id;
-            autocompleteItemsWrapper.classList.add('autocomplete-items');
+            autocompleteItemsWrapper.classList.add('autocomplete-items', 'navbar-dark-color');
             e.target.parentNode.appendChild(autocompleteItemsWrapper);
 
             // Populate autocomplete items wrapper with response data

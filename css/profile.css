@@ -1,89 +1,56 @@
-body {
-    background-image: url('../img/index-bg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-}
-
 main > div.row:first-child {
     margin-top: 12rem !important;
 }
 
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+main > div.row:first-child {
+    background-color: #F2F3AE;
+    color: #3C1518;
 }
 
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
+div.modal-content > div.modal-footer input[type="submit"]:hover,
+main > div.row:last-child button#newPostButton {
+    color: #A44200;
+    background-color: #F2F3AE;
 }
 
-.follower-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+div.modal-content > div.modal-footer input[type="submit"],
+main > div.row:last-child button#newPostButton:hover {
+    background-color: #A44200;
+    color: #F2F3AE;
 }
 
-.follower-item img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+div.modal-content > div.modal-body button,
+div.modal-content > div.modal-body hr,
+main > div.row:first-child button#telegramConnectorButton,
+main > div.row:first-child > div.col-6 > div.row > div.col-6:first-child > div.row > div.row:last-child {
+    color: #A44200;
 }
 
-.follower-item span {
-    font-size: 16px;
-    font-weight: bold;
+main > div.row:last-child button#newPostButton,
+main > div.row:first-child button#telegramConnectorButton:hover {
+    border-color: #A44200;
 }
 
-.popup {
-    width: 400px;
-    height: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
+div.modal-content {
+    background-color: #F2F3AE;
+    color: #3C1518;
 }
 
-.followers-list {
-    overflow: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-gap: 10px;
+div.modal-content > div.modal-footer {
+    border-top: 1px solid #A44200;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
+main > div.row:first-child button#followButton,
+main > div.row:first-child button#unfollowButton,
+div.modal-content > div.modal-header,
+div.modal-content > div.modal-body input[type="submit"] {
+    color: #F2F3AE;
+    background-color: #A44200;
 }
 
-td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 50%;
-    text-align: center;
-}
-
-td img {
-    width: 50px;
-    height: 50px;
-}
-
-table tr td:first-child {
-    width: 30%;
-}
-
-table tr td:last-child {
-    width: 70%;
+main > div.row:first-child button#followButton:hover,
+main > div.row:first-child button#unfollowButton:hover,
+div.modal-content > div.modal-body input[type="submit"]:hover {
+    background-color: #F2F3AE;
+    color: #A44200;
 }

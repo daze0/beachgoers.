@@ -1,6 +1,6 @@
 import { Listener } from '../../../utils/listener.js';
 
-class CommentCancelButton{
+class CommentCancelButton {
     #commentid;
     #commentsList;
     #commentCancelButton;
@@ -8,26 +8,26 @@ class CommentCancelButton{
     _listeners;
 
     constructor(commentData, commentsList) {
-        this.#commentid= commentData.commentid;
-        this.#commentsList = commentsList;    
+        this.#commentid = commentData.commentid;
+        this.#commentsList = commentsList;
         this._listeners = {
-            "commentCancelButtonClick": new Listener("#commentCancelButton-"+this.#commentid, "click", this.clickCallback)
+            "commentCancelButtonClick": new Listener("#commentCancelButton-" + this.#commentid, "click", this.clickCallback)
         };
     }
 
     generateComponent() {
         this.#commentCancelButton = document.createElement('button');
-        this.#commentCancelButton.id = "commentCancelButton-"+this.#commentid;
+        this.#commentCancelButton.id = "commentCancelButton-" + this.#commentid;
         this.#commentCancelButton.type = 'button';
         this.#commentCancelButton.innerHTML = "<i class='bi bi-trash'></i>";
-        this.#commentCancelButton.classList.add('btn','text-danger');
+        this.#commentCancelButton.classList.add('btn');
         return this.#commentCancelButton;
     }
 
     getListeners() {
         return this._listeners;
     }
-    
+
     attachListeners() {
         const listeners = Object.values(this._listeners);
         listeners.forEach(listener => listener.attachListener());
@@ -39,9 +39,9 @@ class CommentCancelButton{
     }
 
     clickCallback = () => {
-        if(confirm("Confermi di voler eliminare il commento selezionato?")){
+        if (confirm("Confermi di voler eliminare il commento selezionato?")) {
             axios.delete("api/api-comments.php", {
-                params:{
+                params: {
                     commentid: this.#commentid
                 }
             }).then(response => {

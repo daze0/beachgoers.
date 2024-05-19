@@ -32,7 +32,7 @@ class FeedViewLayout {
     }
 
     loadMorePosts() {
-        const postSectionLoadingElem = document.querySelector("#postSection > div > div.loading-dots");
+        const postSectionLoadingElem = document.querySelector("#postSection > div.loading-dots");
 
         // Loading animation
         this.#components["loadingElement"].toggleComponent();
@@ -84,16 +84,14 @@ class FeedViewLayout {
 
     #generate() {
         let content = `
-        <div class="row bg-light pt-5 mb-5">
-            <div id="spacingStartSection" class="col-3"></div>
+        <div class="row gx-0 py-5 mb-5">
+            <div id="spacingStartSection" class="col-sm-1 col-md-4"></div>
             <div id="spacingCenterSection" class="d-none"></div>
-            <div id="postSection" class="col-6 overflow-auto">
-                <div class="bg-light">
-                    ${this.#generatePosts(this.#feedData["posts"])}
-                    ${this.#components["loadingElement"].generateComponent()}
-                </div>
+            <div id="postSection" class="col-sm-10 col-md-4 py-5">
+                ${this.#generatePosts(this.#feedData["posts"])}
+                ${this.#components["loadingElement"].generateComponent()}
             </div>
-            <div id="spacingEndSection" class="col-3 pe-0"></div>
+            <div id="spacingEndSection" class="col-sm-1 col-md-4 pe-0"></div>
         </div>`;
 
         return content;

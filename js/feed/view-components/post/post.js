@@ -17,7 +17,7 @@ class Post {
 
     generateComponent(data, authorUsername, authorImg, layout) {
         this.#components.postLikeButton = new PostLikeButton(data.postid, data.author, data.hasMyLike, layout);
-        if(layout instanceof ProfileViewLayout){
+        if (layout instanceof ProfileViewLayout) {
             this.#components.postCancelButton = new PostCancelButton(data);
         }
         this.#components.commentsListPopup = new CommentsListPopup(data);
@@ -43,7 +43,7 @@ class Post {
                 ${this.#generateThumbnail(authorImg)}
                 ${authorUsername}
                 ${this.#generateCancelButton()}
-                <span class="text-muted float-end pt-2">${Utils.generateTimeElapsedString(postData.createdAt)}</span>
+                <span class="float-end pt-2">${Utils.generateTimeElapsedString(postData.createdAt)}</span>
             </div>
             <img class="card-img rounded-0" src="upload/${postData.img}" alt="post image"/>
             <div class="card-body">
@@ -57,8 +57,8 @@ class Post {
         `;
     }
 
-    #generateCancelButton(){
-        if(this.#components["postCancelButton"]){
+    #generateCancelButton() {
+        if (this.#components["postCancelButton"]) {
             return `<span class="float-end btn-sm mt-1 ms-2">${this.#components["postCancelButton"].generateComponent().outerHTML}</span>`;
         }
         return "";

@@ -4,7 +4,7 @@ require_once("utils/webpage.php");
 
 $webpage = new WebPage(
     "beachgoers. | Profile",
-    array("global-style.css", "profile.css", "navbar.css", "loading.css"),
+    array("global-style.css", "profile.css", "feed.css", "navbar.css", "loading.css"),
     array("https://unpkg.com/axios/dist/axios.min.js"),
     array("js/profile/profile.js", "js/navbar/navbar.js", "js/footer/footer.js")
 );

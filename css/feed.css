@@ -1,0 +1,32 @@
+main > div.row:first-child {
+    margin-top: 12rem !important;
+}
+
+main > div.row {
+    background-color: rgba(105, 20, 14, 0.75);
+}
+
+main > div.row > div#postSection > div.card {
+    background-color: #F2F3AE;
+    border-color: #A44200;
+    color: #3C1518;
+}
+
+main > div.row > div#postSection > div.card > div.card-header {
+    border-bottom-color: #A44200;
+}
+
+main > div.row > div#postSection > div.card > div.card-header > span {
+    color: #D58936;
+}
+
+main > div.row > div#postSection > div.card > div.card-header > span > button > i,
+main > div.row > div#postSection > div.card > div.card-body > button > i,
+main > div.row > div#postSection > div.card > div.card-body > button > span {
+    color: #A44200;
+}
+
+main > div.row > div#postSection > div.card > div.card-header > span > button:hover,
+main > div.row > div#postSection > div.card > div.card-body > button:hover {
+    border-color: #A44200;
+}

@@ -33,7 +33,7 @@ class FollowingListPopup extends AbstractDataPopup {
 
     /*
     REFACTORING NOTES:
-    - The following code repeats itself also in followersListPopup class.
+    - The following code repeats itself also in followingListPopup class.
     - It would be better to extract this code to the base class AbstractDataPopup.
     */
 
@@ -55,17 +55,25 @@ class FollowingListPopup extends AbstractDataPopup {
                 </div>
             `;
             content += `
-                <div class="modal-body">
-                    <table class="table table-hover align-middle">
+                <div class="modal-body p-4">
             `;
 
+            let isFirst = true;
             for (const following of followingList) {
                 const followingItem = this.#generateFollowingItem(following);
-                content += `<tr>${followingItem}</tr>`;
+                if (!isFirst) {
+                    content += `
+                        <hr />
+                        <div class="row">${followingItem}</div>
+                    `;
+                } else {
+                    content += `<div class="row">${followingItem}</div>`;
+                    isFirst = false;
+                }
+
             }
 
             content += `
-                    </table>
                 </div>
             `;
         }
@@ -77,8 +85,16 @@ class FollowingListPopup extends AbstractDataPopup {
 
     #generateFollowingItem(following) {
         return `
-            <td><a class="text-decoration-none text-dark" href="profile.php?uid=${following.userid}"><img src="upload/${following.userimg}" alt="Profile Picture"></a></td>
-            <td><a class="text-decoration-none text-dark" href="profile.php?uid=${following.userid}">${following.username}</a></td>
+            <div class="col-4">
+                <a class="text-decoration-none text-dark" href="profile.php?uid=${following.userid}">
+                    <img class="img-thumbnail h-80 w-80" src="upload/${following.userimg}" alt="Profile Picture">
+                </a>
+            </div>
+            <div class="col-8 d-flex align-items-center justify-content-center">
+                <a class="text-decoration-none text-dark" href="profile.php?uid=${following.userid}">
+                    <p class="fs-3">@${following.username}</p>
+                </a>
+            </div>
         `;
     }
 
