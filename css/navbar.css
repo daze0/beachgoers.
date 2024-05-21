@@ -72,3 +72,48 @@ AUTOCOMPLETE
     color: #ffffff;
 }
   
+
+/********************************
+NOTIFICATIONS
+*/
+
+#notification-list {    
+    overflow: hidden;
+    width: 20rem;
+    position: absolute;
+    border: 1px solid #A44200;
+    border-bottom: none;
+    border-top: 1px solid #A44200;
+    z-index: 99;
+    top: 3.5rem;
+    /* left: -15rem; */
+    right: 0;
+}
+
+.notification-item {
+    padding: 10px;
+    background-color: #F2F3AE;
+    border-bottom: 1px solid #A44200;
+}
+
+.notification-item-unread{
+    font-weight: bold;
+}
+
+.notification-elapsed-time, .notification-item .notification-elapsed-time,.notification-item:hover .notification-elapsed-time{
+    color: #D58936;
+}
+
+/*when hovering an item:*/
+
+.notification-item:hover  {
+    background-color: #A44200;
+    color: #F2F3AE;
+}
+
+/*when navigating through the items using the arrow keys:*/
+
+#notification-list {
+    background-color: DodgerBlue !important;
+}
+  

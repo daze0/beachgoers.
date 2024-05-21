@@ -13,18 +13,15 @@ class BotHelper{
     }
 
     public function sendNewLikeNotification($post, $postAuthor, $user): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($postAuthor, "New Like to your post ...");
+        return $this->sendMessage($postAuthor, "New Like to your post by ".$user["username"]);
     }
 
     public function sendNewCommentLikeNotification($comment, $commentAuthor, $user): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($commentAuthor, "New Like to your comment ...");
+        return $this->sendMessage($commentAuthor, "New Like to your comment by ".$user["username"]);
     }
 
     public function sendNewCommentNotification($post, $postAuthor, $commentText, $commentAuthor): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($postAuthor, "New comment to your post...");
+        return $this->sendMessage($postAuthor, $commentAuthor["username"]." commented your post");
     }
 
     public function sendNewFollowerNotification($followed, $follower): bool{
@@ -67,11 +64,15 @@ class BotHelper{
 
     protected function sendMessage($user, $text): bool{
         $chatId = $user["telegramChatId"];
-        if(empty($chatId) || empty($text)){
+        if(empty($text)){
             return false;
         }
 
         $this->dbh->addNotification($user["userid"], $text);
+
+        if(empty($chatId)){
+            return false;
+        }
 
         $query = http_build_query([
             'chat_id' => $chatId,

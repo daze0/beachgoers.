@@ -18,6 +18,7 @@ class NavbarViewLayout {
         Object.entries(this.#components).forEach(([label, component]) => {
             component.attachListeners();
         });
+        this.#components.notificationButton.updateBadgeCount();
     }
 
     #generate() {
@@ -33,6 +34,7 @@ class NavbarViewLayout {
             <a href="profile.php" class="navbar-brand mb-0 h1">
                 <i class="bi bi-person-fill navbar-color"></i>
             </a>
+            ${this.#components["notificationButton"].generateComponent().outerHTML}
             <a href="#" class="navbar-brand ms-2 mb-0 h1">
                 ${this.#components["logoutIcon"].generateComponent().outerHTML}
             </a>
