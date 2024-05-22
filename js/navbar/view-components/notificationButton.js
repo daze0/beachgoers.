@@ -47,6 +47,20 @@ class NotificationButton {
         });
     }
 
+    #generateTelegramButtonItem(){
+        const item = document.createElement("div");
+        item.classList.add("notification-item","p-2", "border-bottom");
+
+        
+        const itemLink = document.createElement("a");
+        itemLink.classList.add('btn', 'w-100', 'h-100');
+        itemLink.href = "https://t.me/BeachgoersBot";
+        itemLink.target = "_blank";
+        itemLink.innerHTML = '<i class="bi bi-telegram"></i>'+" Click to open telegram bot";
+        item.appendChild(itemLink);
+        return item;
+    }    
+
     getListener(label) {
         return this._listeners[label];
     }
@@ -97,10 +111,13 @@ class NotificationButton {
                 notificationList.append(notificationItem);
             }
 
+            notificationList.append(this.#generateTelegramButtonItem());
+
             const navbar = document.getElementById("navbar");
             navbar.append(notificationList);
-            const notificationBadge = document.getElementById("notificationButtonBadge");
-            notificationBadge.classList.add("d-none");
+            //const notificationBadge = document.getElementById("notificationButtonBadge");
+            //notificationBadge.classList.add("d-none");
+            this.updateBadgeCount();
 
             document.addEventListener("click", e => {
                 notificationList.remove();
