@@ -14,7 +14,7 @@ class NotificationButton {
     generateComponent() {
         const button = document.createElement("a");
         button.id = "notificationButton";
-        button.classList.add("navbar-link", "mb-0", "position-relative");
+        button.classList.add("nav-link", "mb-0", "position-relative");
         button.href = "#";
 
         const icon = document.createElement("i");
@@ -113,7 +113,7 @@ class NotificationButton {
 
             notificationList.append(this.#generateTelegramButtonItem());
 
-            const navbar = document.getElementById("navbar");
+            const navbar = document.querySelector(".navbar");
             navbar.append(notificationList);
             //const notificationBadge = document.getElementById("notificationButtonBadge");
             //notificationBadge.classList.add("d-none");
