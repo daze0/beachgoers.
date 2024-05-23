@@ -13,11 +13,13 @@
 div.input-group-append > button {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
+    background-color: #A44200;
+    color: #F2F3AE !important;
 }
 
 div.input-group-append > button:hover {
-    background-color: #A44200;
-    color: #F2F3AE !important;
+    color: #A44200 !important;
+    background-color: #F2F3AE ;
 }
 
 /********************************

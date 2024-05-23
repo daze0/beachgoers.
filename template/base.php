@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="p-0 navbar navbar-bg-color"></nav>
+    <nav class="p-0 navbar navbar-expand-md navbar-bg-color"></nav>
     <main class="pb-4"></main>
     <footer class="ms-0 mt-4 me-0 p-4 align-middle border-top border-light"></footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

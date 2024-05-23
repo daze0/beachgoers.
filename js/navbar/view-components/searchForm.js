@@ -18,7 +18,7 @@ class SearchForm {
         this._form.id = "searchForm";
         this._form.method = "get";
         this._form.autocomplete = "off";
-        this._form.classList.add("form-inline");
+        this._form.classList.add("form-inline", "me-2");
         this._form.innerHTML = this.#generateSearchForm();
 
         document.addEventListener("DOMContentLoaded", e => {

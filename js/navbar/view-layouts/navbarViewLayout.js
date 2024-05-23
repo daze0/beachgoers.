@@ -22,21 +22,33 @@ class NavbarViewLayout {
 
     #generate() {
         return `
+        <div class="container-fluid">
         <a href="#" class="navbar-brand navbar-color mb-0 h1 ms-2">
             beachgoers.
         </a>
-        ${this.#components["searchForm"].generateComponent().outerHTML}
-        <div class="d-flex mt-2 mb-2">
-            <a href="feed.php" class="navbar-brand mb-0 h1">
-                <i class="bi bi-house-fill navbar-color"></i>
-            </a>
-            <a href="profile.php" class="navbar-brand mb-0 h1">
-                <i class="bi bi-person-fill navbar-color"></i>
-            </a>
-            <a href="#" class="navbar-brand ms-2 mb-0 h1">
-                ${this.#components["logoutIcon"].generateComponent().outerHTML}
-            </a>
-        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglable" aria-controls="navbarTogglable" aria-expanded="false" aria-label="Toggle navigation options">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglable">
+            <ul class="navbar-nav ms-auto me-4 mt-2 mb-2">
+                <li class="nav-item me-2 mb-1">
+                    <a href="feed.php" class="navbar-link mb-0 h1">
+                        <i class="bi bi-house-fill fs-3 navbar-color"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-2 mb-1">
+                    <a href="profile.php" class="navbar-link mb-0 h1">
+                        <i class="bi bi-person-fill fs-3 navbar-color"></i>
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="#" class="navbar-link mb-0 h1">
+                        ${this.#components["logoutIcon"].generateComponent().outerHTML}
+                    </a>
+                </li>
+            </ul>
+            ${this.#components["searchForm"].generateComponent().outerHTML}
+        </div></div>
         `;
     }
 }
