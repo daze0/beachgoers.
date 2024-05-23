@@ -13,18 +13,22 @@ class BotHelper{
     }
 
     public function sendNewLikeNotification($post, $postAuthor, $user): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($postAuthor, "New Like to your post ...");
+        $userUrl = BASE_URL."profile.php?uid=".$user["userid"];
+        $userLink = '<b><a href="'.$userUrl.'">'.$user["username"]."</a></b>";
+        return $this->sendMessage($postAuthor, "New Like to your post by ".$userLink." ❤️");
     }
 
     public function sendNewCommentLikeNotification($comment, $commentAuthor, $user): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($commentAuthor, "New Like to your comment ...");
+        $userUrl = BASE_URL."profile.php?uid=".$user["userid"];
+        $userLink = '<b><a href="'.$userUrl.'">'.$user["username"]."</a></b>";
+        return $this->sendMessage($commentAuthor, "New Like to your comment by ".$userLink." ❤️");
     }
 
     public function sendNewCommentNotification($post, $postAuthor, $commentText, $commentAuthor): bool{
-        //TODO UPDATE TEXT
-        return $this->sendMessage($postAuthor, "New comment to your post...");
+        $commentAuthorUrl = BASE_URL."profile.php?uid=".$commentAuthor["userid"];
+        $commentAuthorLink = '<b><a href="'.$commentAuthorUrl.'">'.$commentAuthor["username"]."</a></b>";
+        $notificationMessage = $commentAuthorLink." commented your post 💬";
+        return $this->sendMessage($postAuthor, $notificationMessage);
     }
 
     public function sendNewFollowerNotification($followed, $follower): bool{
@@ -67,11 +71,15 @@ class BotHelper{
 
     protected function sendMessage($user, $text): bool{
         $chatId = $user["telegramChatId"];
-        if(empty($chatId) || empty($text)){
+        if(empty($text)){
             return false;
         }
 
         $this->dbh->addNotification($user["userid"], $text);
+
+        if(empty($chatId)){
+            return false;
+        }
 
         $query = http_build_query([
             'chat_id' => $chatId,

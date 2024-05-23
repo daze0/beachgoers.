@@ -36,12 +36,17 @@ class Post {
         return `<img src="upload/${authorImg}" alt="Profile image" class="img-thumbnail rounded-circle" style="width:50px; height:50px"/>`;
     }
 
+    #generateAuthorLink(authorId, authorUsername){
+        const authorUrl = "profile.php?uid="+authorId;
+        return `<a class="post-author-link" href="${authorUrl}">${authorUsername}</a>`;
+    }
+
     #generatePost(postData, authorUsername, authorImg) {
         return `
         <div class="card mb-4" >
             <div class="card-header">
                 ${this.#generateThumbnail(authorImg)}
-                ${authorUsername}
+                ${this.#generateAuthorLink(postData.author, authorUsername)}
                 ${this.#generateCancelButton()}
                 <span class="float-end pt-2">${Utils.generateTimeElapsedString(postData.createdAt)}</span>
             </div>

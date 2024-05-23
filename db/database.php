@@ -570,7 +570,7 @@ class DatabaseHelper
     }
 
     public function getLastUserNotifications($userid, $count = 10){
-        $query = "SELECT * FROM notification WHERE user=? ORDER BY createdAt DESC LIMIT ?";
+        $query = "SELECT * FROM `notification` WHERE `user`=? ORDER BY `read` ASC, `createdAt` DESC LIMIT ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $userid, $count);
         $stmt->execute();

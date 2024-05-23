@@ -1,0 +1,1 @@
+ALTER TABLE `user_follows_user` ADD PRIMARY KEY(`followed`, `follower`);

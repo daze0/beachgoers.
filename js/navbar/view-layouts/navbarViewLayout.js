@@ -18,6 +18,7 @@ class NavbarViewLayout {
         Object.entries(this.#components).forEach(([label, component]) => {
             component.attachListeners();
         });
+        this.#components.notificationButton.updateBadgeCount();
     }
 
     #generate() {
@@ -40,6 +41,9 @@ class NavbarViewLayout {
                     <a href="profile.php" class="navbar-link mb-0 h1">
                         <i class="bi bi-person-fill fs-3 navbar-color"></i>
                     </a>
+                </li>
+                <li class="nav-item me-2 mb-1">
+                    ${this.#components["notificationButton"].generateComponent().outerHTML}
                 </li>
                 <li class="nav-item mb-1">
                     <a href="#" class="navbar-link mb-0 h1">
