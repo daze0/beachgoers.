@@ -137,6 +137,7 @@ class LoginAuthForm extends AuthForm {
         axios.post("api/api-login.php", data).then(response => {
             if (response.data["login_success"]) {
                 document.querySelector("main").innerHTML = this.generateLoginSuccessLayout(response.data["username"]);
+
                 setTimeout(() => {
                     window.location.href = "feed.php";
                 }, 500);
@@ -148,21 +149,24 @@ class LoginAuthForm extends AuthForm {
 
     generateLoginSuccessLayout(username) {
         return `
-        <div class="col-2"></div>
-        <div class="container col-8 py-4">
+        <div class="col-md-3"></div>
+        <div class="container custom-primary-color col-sm-12 col-md-6 py-4">
             <header class="pb-3 mb-4 mt-4">
-                <h1 class="display-1 text-center"><a class="text-decoration-none text-dark" href="feed.php">< ConnectU ></a></h1>
+                <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
             </header>
-            <div class="container-fluid py-5">
-                <header class="row p-2">
-                    <h2 class="display-4 text-center">Welcome back</h2>
-                </header>
-                <div class="row p-2">
-                    <p class="text-center">${username}</p>
+            <div class="p-5 rounded-3">
+                <div class="container-fluid py-5 px-4">
+                    <header class="d-flex flex-row justify-content-center p-2">
+                        <h2 class="display-4 text-center">Welcome back</h2>
+                    </header>
+                    <div class="d-flex flex-row justify-content-center p-2">
+                        <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-2"></div>`;
+        <div class="col-md-3"></div>
+        `;
     }
 }
 
@@ -258,21 +262,23 @@ class SignupAuthForm extends AuthForm {
 
     generateSignupSuccessLayout(username) {
         return `
-        <div class="col-2"></div>
-        <div class="container col-8 py-4">
+        <div class="col-md-3"></div>
+        <div class="container custom-primary-color col-sm-12 col-md-6 py-4">
             <header class="pb-3 mb-4 mt-4">
-                <h1 class="display-1 text-center"><a class="text-decoration-none text-dark" href="feed.php">< ConnectU ></a></h1>
+                <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
             </header>
-            <div class="container-fluid py-5">
-                <header class="row p-2">
-                    <h2 class="display-4 text-center">Welcome</h2>
-                </header>
-                <div class="row p-2">
-                    <p class="text-center">${username}</p>
+            <div class="p-5 rounded-3">
+                <div class="container-fluid py-5 px-4">
+                    <header class="d-flex flex-row justify-content-center p-2">
+                        <h2 class="display-4 text-center">Welcome</h2>
+                    </header>
+                    <div class="d-flex flex-row justify-content-center p-2">
+                        <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-2"></div>`;
+        <div class="col-md-3"></div>`;
     }
 }
 

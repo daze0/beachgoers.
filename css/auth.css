@@ -43,6 +43,18 @@ main > div.container > div > div > section > div:last-child > p > a {
     color: #A44200;
 }
 
+.custom-primary-color {
+    color: #F2F3AE !important;
+}
+
+.custom-secondary-color {
+    color: #A44200 !important;
+}
+
+.custom-tertiary-color {
+    color: #D58936 !important;
+}
+
 .input-group-text {
     color: #F2F3AE !important;
     background-color: #A44200 !important;
