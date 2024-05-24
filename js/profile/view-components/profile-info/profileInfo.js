@@ -89,11 +89,11 @@ class ProfileInfo {
 
     #generateProfileInfo(userData) {
         return `
-        <div class="d-flex flex-column flex-md-row w-100 align-items-center justify-content-md-between"> 
+        <div class="d-flex flex-column flex-md-row profile-info w-100 align-items-center justify-content-md-between"> 
             <div class="d-flex flex-row flex-md-column p-4 w-50 position-relative">
                 ${this.#generateUserImg(userData)}
             </div>
-            <div class="d-flex flex-row flex-md-column profile-info ps-md-5 py-4 w-100 justify-content-center justify-content-md-start">
+            <div class="d-flex flex-row flex-md-column user-info ps-md-5 py-4 w-100 justify-content-center justify-content-md-start">
                 <div class="row">
                     <div class="col-1 col-md-1 col-xl-1"></div>
                     <div class="col-10 text-center col-md-5 col-xl-3 col-xs-10">
@@ -170,7 +170,7 @@ class ProfileInfo {
                         <i class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></i>
                     </div>
                     <div class="d-flex flex-column">
-                        <p>${this.#userInfo["likes"]}</p>
+                        <p class="mb-0">${this.#userInfo["likes"]}</p>
                     </div>
                 </div>
             `,
@@ -180,7 +180,7 @@ class ProfileInfo {
                         <i class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></i>
                     </div>
                     <div class="d-flex flex-column">
-                        <p>${this.#userInfo["posts"]}</p>
+                        <p class="mb-0">${this.#userInfo["posts"]}</p>
                     </div>
                 </div>
             `
@@ -198,12 +198,12 @@ class ProfileInfo {
             } else if (idx == 0) {
                 // First element
                 res += `
-                <div class="d-flex flex-column justify-content-start ms-0 me-3">
+                <div class="d-flex flex-column justify-content-start ms-0 me-4">
                 `;
             } else {
                 // Middle elements
                 res += `
-                <div class="d-flex flex-column justify-content-start me-3">
+                <div class="d-flex flex-column justify-content-start me-4">
                 `;
             }
             res += `

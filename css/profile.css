@@ -2,7 +2,7 @@ main > div.row:first-child {
     margin-top: 12rem !important;
 }
 
-main > div.row:first-child {
+.profile-info {
     background-color: #F2F3AE;
     color: #3C1518;
 }
@@ -72,8 +72,16 @@ div.modal-content > div.modal-body input[type="submit"]:hover {
     transform: translateX(-50%);
 }
 
-.profile-info {
+.user-info {
     margin-top: 75px; /* opposite of bottom property in profile-picture */
+}
+
+.user-info-icon-animate {
+    transition: transform 0.5s;
+}
+
+.user-info-icon-animate:hover {
+    transform: scale(1.5);
 }
 
 @media (min-width: 768px) {
@@ -81,7 +89,7 @@ div.modal-content > div.modal-body input[type="submit"]:hover {
         left: 65%;
     }
 
-    .profile-info {
+    .user-info {
         margin-top: 0;
     }
 }
