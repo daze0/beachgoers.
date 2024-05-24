@@ -117,7 +117,7 @@ class LoginAuthForm extends AuthForm {
         if (label === "Password") {
             res += `
             <input type="${label.toLowerCase()}" id="input${label}" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
-            <button class="btn btn-outline-secondary" type="button" id="toggle">
+            <button class="btn custom-btn-secondary" type="button" id="toggle">
                 <i class="bi bi-eye"></i>
             </button>`;
         } else {
@@ -176,7 +176,7 @@ class SignupAuthForm extends AuthForm {
                 "Password": "bi bi-key",
                 "Name": "",
                 "Surname": "",
-                "Profile Picture": "",
+                "Profile picture": "bi bi-person-bounding-box",
                 "Telegram username": ""
             }
         );
@@ -204,8 +204,8 @@ class SignupAuthForm extends AuthForm {
             if (label === formKeys[2]) {
                 res += `
                 <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
-                    <button class="btn btn-outline-secondary" type="button" id="toggle">
-                        &#128065;
+                    <button class="btn custom-btn-secondary" type="button" id="toggle">
+                        <i class="bi bi-eye"></i>
                     </button>`;
             } else {
                 res += `
@@ -213,17 +213,24 @@ class SignupAuthForm extends AuthForm {
                 `;
             }
         } else {
-            res = `
-            <div class="input-group mt-2 mb-2 flex-nowrap">
-            <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
-            `;
             if (label === formKeys[5]) {
+                res = `
+                <div class="input-group custom-btn-file mt-2 mb-2 flex-nowrap">
+                    <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
+                    <span class="input-group-text">
+                        <i class="${classIcon}"></i>
+                    </span>
+                `;
                 res += `
-                <input type="file" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                    <input type="file" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" />
                 `;
             } else {
+                res = `
+                <div class="input-group mt-2 mb-2 flex-nowrap">
+                    <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
+                `;
                 res += `
-                <input type="text" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                    <input type="text" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                 `;
             }
         }
