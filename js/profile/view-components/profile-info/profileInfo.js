@@ -89,52 +89,55 @@ class ProfileInfo {
 
     #generateProfileInfo(userData) {
         return `
-        <div class="col-3 p-4 text-center position-relative">
-            ${this.#generateUserImg(userData)}
-        </div>
-        <div class="col-6 py-4">
-            <div class="row">
-                <div class="col-6 col-lg-4 col-xs-10">
-                    <div class="row pe-0">
-                        ${this.#generateUsername(userData)}
-                        ${this.#generateUserInfo(userData)}
-                    </div>                    
-                </div>
-                <div class="col-6 col-lg-8 col-xs-2 pe-0"></div>
+        <div class="d-flex flex-column flex-md-row w-100 align-items-center justify-content-md-between"> 
+            <div class="d-flex flex-row flex-md-column p-4 w-50 position-relative">
+                ${this.#generateUserImg(userData)}
             </div>
-        </div>
-        <div class="col-3 py-4 pe-0">
-            ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"], this.#layout)}
-            ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
-            ${this.#generateEnableNotificationContent(userData["personal_profile"], userData)}
+            <div class="d-flex flex-row flex-md-column profile-info ps-md-5 py-4 w-100 justify-content-center justify-content-md-start">
+                <div class="row">
+                    <div class="col-1 col-md-1 col-xl-1"></div>
+                    <div class="col-10 text-center col-md-5 col-xl-3 col-xs-10">
+                        <div class="row pe-0">
+                            ${this.#generateUsername(userData)}
+                            ${this.#generateUserInfo(userData)}
+                        </div>                    
+                    </div>
+                    <div class="col-1 col-md-6 col-xl-8 col-xs-2 pe-0"></div>
+                </div>
+            </div>
+            <div class="d-flex flex-row flex-md-column justify-content-center justify-content-md-start py-4 pe-0 w-50">
+                ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"], this.#layout)}
+                ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
+                ${this.#generateEnableNotificationContent(userData["personal_profile"], userData)}
+            </div>
         </div>
         `;
     }
 
-    #generateEnableNotificationContent(isPersonalProfile, userData){
-        if(isPersonalProfile){
-            if(!userData["telegram_chat_id"]){
+    #generateEnableNotificationContent(isPersonalProfile, userData) {
+        if (isPersonalProfile) {
+            if (!userData["telegram_chat_id"]) {
                 this.#components["telegramConnectorPopup"] = new TelegramConnectorPopup(userData);
                 this.#components["telegramConnectorPopup"].render();
                 return this.#components["telegramConnectorPopup"].getPopupOpenElement().generateComponent();
-            }else{
+            } else {
                 return `
                     <p>Notifications enabled</p>
                 `;
             }
-        }else{
-            return "";  
+        } else {
+            return "";
         }
     }
 
     #generateUserImg(userData) {
-        return `<img src="upload/${userData["profile_picture"]}" alt="profile picture" class="img-thumbnail position-absolute top-50 start-50 translate-middle" />`;
+        return `<img src="upload/${userData["profile_picture"]}" alt="profile picture" class="img-thumbnail profile-picture" />`;
     }
 
     #generateUsername(userData) {
         return `
-            <div class="row">
-                <p class="text-start fs-5">@${userData["username"]}</p>
+            <div class="d-flex flex-row justify-content-center justify-content-md-start ps-0 px-md-0">
+                <p class="fs-5">@${userData["username"]}</p>
             </div>
         `;
     }
@@ -142,9 +145,8 @@ class ProfileInfo {
     #generateUserInfo(userData) {
         // Renders following and followers list elements(they trigger popups) along with likes and posts number elements
         return `
-        <div class="row">
-            ${this.#populateUserInfoRow(userData)
-            }
+        <div class="d-flex flex-row justify-content-center justify-content-md-start px-md-0">
+            ${this.#populateUserInfoRow(userData)}
         </div>
     `;
     }
@@ -163,21 +165,21 @@ class ProfileInfo {
                 ${this.#components["followingListPopup"].getPopupOpenElement().generateComponent(this.#userInfo["following"])}
             `,
             "likes": `
-                <div class="row">
-                    <div class="col-6">
+                <div class="d-flex flex-row gx-0">
+                    <div class="d-flex flex-column me-2 custom-secondary-color">
                         <i class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></i>
                     </div>
-                    <div class="col-6">
+                    <div class="d-flex flex-column">
                         <p>${this.#userInfo["likes"]}</p>
                     </div>
                 </div>
             `,
             "posts": `
-                <div class="row">
-                    <div class="col-6">
+                <div class="d-flex flex-row gx-0">
+                    <div class="d-flex flex-column me-2 custom-secondary-color">
                         <i class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></i>
                     </div>
-                    <div class="col-6">
+                    <div class="d-flex flex-column">
                         <p>${this.#userInfo["posts"]}</p>
                     </div>
                 </div>
@@ -185,13 +187,30 @@ class ProfileInfo {
         };
 
         let res = "";
+        let idx = 0;
 
         for (const key of Object.keys(userInfoElements)) {
+            if (idx == Object.keys(userInfoElements).length - 1) {
+                // Last element 
+                res += `
+                <div class="d-flex flex-column justify-content-start">
+                `;
+            } else if (idx == 0) {
+                // First element
+                res += `
+                <div class="d-flex flex-column justify-content-start ms-0 me-3">
+                `;
+            } else {
+                // Middle elements
+                res += `
+                <div class="d-flex flex-column justify-content-start me-3">
+                `;
+            }
             res += `
-                <div class="col-3">
                     ${userInfoElements[key]}
                 </div >
             `;
+            idx += 1;
         }
 
         return res;

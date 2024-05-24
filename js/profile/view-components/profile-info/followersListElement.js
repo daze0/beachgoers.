@@ -7,11 +7,11 @@ class FollowersListElement extends PopupOpenElement {
 
     generateComponent(data) {
         return `
-            <div class="row">
-                <div class="col-6">
+            <div class="d-flex flex-row gx-0">
+                <div class="d-flex flex-column me-2">
                     ${this._generateReactiveElement('followersListPopupOpen', 'bi-people').outerHTML}
                 </div>
-                <div class="col-6">
+                <div class="d-flex flex-column">
                     <p>${data}</p>
                 </div>
             </div>

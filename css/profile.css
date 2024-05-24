@@ -21,8 +21,11 @@ main > div.row:last-child button#newPostButton:hover {
 
 div.modal-content > div.modal-body button,
 div.modal-content > div.modal-body hr,
-main > div.row:first-child button#telegramConnectorButton,
-main > div.row:first-child > div.col-6 > div.row > div.col-6:first-child > div.row > div.row:last-child {
+main > div.row:first-child button#telegramConnectorButton {
+    color: #A44200;
+}
+
+.custom-secondary-color {
     color: #A44200;
 }
 
@@ -57,4 +60,28 @@ main > div.row:first-child button#unfollowButton:hover,
 div.modal-content > div.modal-body input[type="submit"]:hover {
     background-color: #F2F3AE;
     color: #A44200;
+}
+
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.profile-info {
+    margin-top: 75px; /* opposite of bottom property in profile-picture */
+}
+
+@media (min-width: 768px) {
+    .profile-picture {
+        left: 65%;
+    }
+
+    .profile-info {
+        margin-top: 0;
+    }
 }
