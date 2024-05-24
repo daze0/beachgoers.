@@ -64,8 +64,8 @@ div.modal-content > div.modal-body input[type="submit"]:hover {
 
 
 .profile-picture {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     position: absolute;
     bottom: -75px;
     left: 50%;
@@ -84,8 +84,14 @@ div.modal-content > div.modal-body input[type="submit"]:hover {
     transform: scale(1.5);
 }
 
+.user-info-value {
+    margin-bottom: 0;
+}
+
 @media (min-width: 768px) {
     .profile-picture {
+        width: 200px;
+        height: 200px;
         left: 65%;
     }
 

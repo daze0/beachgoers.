@@ -35,21 +35,17 @@ class ProfileInfo {
         // Sub-optimal solution, but it works for now
         if (label in this.#userInfo) {
             this.#userInfo[label] = value;
+            const userInfoContainers = document.querySelectorAll(".user-info-value");
+            console.log(userInfoContainers);
             // Re-render user info
             if (label == "followers") {
-                const followers = document.querySelector(
-                    "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(1) > div.row > div:last-child > p"
-                );
+                const followers = userInfoContainers[0];
                 followers.innerHTML = this.#userInfo[label];
             } else if (label == "following") {
-                const following = document.querySelector(
-                    "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(2) > div.row > div:last-child > p"
-                );
+                const following = userInfoContainers[1];
                 following.innerHTML = this.#userInfo[label];
             } else if (label == "likes") {
-                const likes = document.querySelector(
-                    "main > div.row:first-child > div:nth-child(2) > div.row > div:first-child > div.row > div.row:last-child > div:nth-child(3) > div.row > div:last-child > p"
-                );
+                const likes = userInfoContainers[2];
                 likes.innerHTML = this.#userInfo[label];
             } else if (label == "posts") {
                 // not needed atm
@@ -170,7 +166,7 @@ class ProfileInfo {
                         <i class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></i>
                     </div>
                     <div class="d-flex flex-column">
-                        <p class="mb-0">${this.#userInfo["likes"]}</p>
+                        <p class="user-info-value">${this.#userInfo["likes"]}</p>
                     </div>
                 </div>
             `,
@@ -180,7 +176,7 @@ class ProfileInfo {
                         <i class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></i>
                     </div>
                     <div class="d-flex flex-column">
-                        <p class="mb-0">${this.#userInfo["posts"]}</p>
+                        <p class="user-info-value">${this.#userInfo["posts"]}</p>
                     </div>
                 </div>
             `

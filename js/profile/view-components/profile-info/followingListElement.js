@@ -12,7 +12,7 @@ class FollowingListElement extends PopupOpenElement {
                     ${this._generateReactiveElement('followingListPopupOpen', 'bi-people-fill', 'user-info-icon-animate').outerHTML}
                 </div>
                 <div class="d-flex flex-column">
-                    <p class="mb-0">${data}</p>
+                    <p class="user-info-value">${data}</p>
                 </div>
             </div>
         `;

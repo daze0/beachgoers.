@@ -80,7 +80,7 @@ class FollowButton {
             this.#followButton = document.createElement("button");
             this.#followButton.id = "followButton";
             this.#followButton.type = "button";
-            this.#followButton.classList.add("btn");
+            this.#followButton.classList.add("btn", "w-50");
             this.#followButton.textContent = "Follow";
             if (followStatus) {
                 this.#followButton.classList.add("d-none");
@@ -93,7 +93,7 @@ class FollowButton {
             this.#unfollowButton = document.createElement("button");
             this.#unfollowButton.id = "unfollowButton";
             this.#unfollowButton.type = "button";
-            this.#unfollowButton.classList.add("btn");
+            this.#unfollowButton.classList.add("btn", "w-50");
             this.#unfollowButton.textContent = "Unfollow";
             if (!followStatus) {
                 this.#unfollowButton.classList.add("d-none");
