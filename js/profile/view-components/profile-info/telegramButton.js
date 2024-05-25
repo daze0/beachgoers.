@@ -27,14 +27,14 @@ class TelegramButton {
     }
 
     #generateTelegramButton(isPersonalProfile, telegramUsername) {
-        if(telegramUsername && !isPersonalProfile){
+        if (telegramUsername && !isPersonalProfile) {
             this.#button = document.createElement("a");
             this.#button.id = "telegramButton";
             this.#button.type = "button";
-            this.#button.classList.add("btn");
-            this.#button.innerHTML = "<i class='bi bi-telegram'></i>";
-            this.#button.href =  "https://t.me/"+telegramUsername;
-            this.#button.target =  "_blank";
+            this.#button.classList.add("btn", "mt-2", "mt-lg-0", "ms-lg-2", "d-flex", "flex-row", "justify-content-center", "align-items-center");
+            this.#button.innerHTML = "Contact <i class='bi bi-telegram ms-2'></i>";
+            this.#button.href = "https://t.me/" + telegramUsername;
+            this.#button.target = "_blank";
         }
     }
 }

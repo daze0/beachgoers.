@@ -101,7 +101,7 @@ class ProfileInfo {
                     <div class="col-1 col-md-6 col-xl-8 col-xs-2 pe-0"></div>
                 </div>
             </div>
-            <div class="d-flex flex-row flex-md-column justify-content-center justify-content-md-start py-4 pe-0 w-50">
+            <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-start py-4 px-5 ps-md-0 pe-md-5 w-75 w-md-auto">
                 ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"], this.#layout)}
                 ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
                 ${this.#generateEnableNotificationContent(userData["personal_profile"], userData)}

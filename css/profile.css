@@ -47,6 +47,7 @@ div.modal-content > div.modal-body > div > div:last-child > span {
     color: #D58936;
 }
 
+main > div.row:first-child a#telegramButton,
 main > div.row:first-child button#followButton,
 main > div.row:first-child button#unfollowButton,
 div.modal-content > div.modal-header,
@@ -55,13 +56,13 @@ div.modal-content > div.modal-body input[type="submit"] {
     background-color: #A44200;
 }
 
+main > div.row:first-child a#telegramButton:hover,
 main > div.row:first-child button#followButton:hover,
 main > div.row:first-child button#unfollowButton:hover,
 div.modal-content > div.modal-body input[type="submit"]:hover {
     background-color: #F2F3AE;
     color: #A44200;
 }
-
 
 .profile-picture {
     width: 150px;
@@ -97,5 +98,9 @@ div.modal-content > div.modal-body input[type="submit"]:hover {
 
     .user-info {
         margin-top: 0;
+    }
+
+    .w-md-auto {
+        width: auto !important;
     }
 }
