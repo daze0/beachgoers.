@@ -1,6 +1,4 @@
-main > div.row:first-child {
-    margin-top: 12rem !important;
-}
+
 
 main > div.row {
     background-color: rgba(105, 20, 14, 0.75);
