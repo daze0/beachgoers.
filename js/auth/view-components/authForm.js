@@ -138,9 +138,9 @@ class LoginAuthForm extends AuthForm {
             if (response.data["login_success"]) {
                 document.querySelector("main").innerHTML = this.generateLoginSuccessLayout(response.data["username"]);
 
-                setTimeout(() => {
-                    window.location.href = "feed.php";
-                }, 500);
+                // setTimeout(() => {
+                //     window.location.href = "feed.php";
+                // }, 500);
             } else {
                 document.querySelector("form > p").innerHTML = response.data["login_error"];
             }
@@ -149,23 +149,25 @@ class LoginAuthForm extends AuthForm {
 
     generateLoginSuccessLayout(username) {
         return `
-        <div class="col-md-3"></div>
-        <div class="container custom-primary-color col-sm-12 col-md-6 py-4">
-            <header class="pb-3 mb-4 mt-4">
-                <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
-            </header>
-            <div class="p-5 rounded-3">
-                <div class="container-fluid py-5 px-4">
-                    <header class="d-flex flex-row justify-content-center p-2">
-                        <h2 class="display-4 text-center">Welcome back</h2>
-                    </header>
-                    <div class="d-flex flex-row justify-content-center p-2">
-                        <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="auth-wrapper col-12 col-md-6 py-4">
+                <header class="pb-3 mb-4 mt-4">
+                    <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
+                </header>
+                <div class="p-5 custom-primary-color rounded-3">
+                    <div class="container-fluid py-5 px-4">
+                        <header class="d-flex flex-row justify-content-center p-2">
+                            <h2 class="display-4 text-center">Welcome back</h2>
+                        </header>
+                        <div class="d-flex flex-row justify-content-center p-2">
+                            <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3"></div>
         `;
     }
 }
@@ -262,23 +264,26 @@ class SignupAuthForm extends AuthForm {
 
     generateSignupSuccessLayout(username) {
         return `
-        <div class="col-md-3"></div>
-        <div class="container custom-primary-color col-sm-12 col-md-6 py-4">
-            <header class="pb-3 mb-4 mt-4">
-                <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
-            </header>
-            <div class="p-5 rounded-3">
-                <div class="container-fluid py-5 px-4">
-                    <header class="d-flex flex-row justify-content-center p-2">
-                        <h2 class="display-4 text-center">Welcome</h2>
-                    </header>
-                    <div class="d-flex flex-row justify-content-center p-2">
-                        <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="auth-wrapper col-12 col-md-6 py-4">
+                <header class="pb-3 mb-4 mt-4">
+                    <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
+                </header>
+                <div class="p-5 custom-primary-color rounded-3">
+                    <div class="container-fluid py-5 px-4">
+                        <header class="d-flex flex-row justify-content-center p-2">
+                            <h2 class="display-4 text-center">Welcome</h2>
+                        </header>
+                        <div class="d-flex flex-row justify-content-center p-2">
+                            <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3"></div>`;
+        `;
     }
 }
 
