@@ -1,18 +1,18 @@
-main > div.container > header > h1 {
+.auth-wrapper > header > h1 {
     text-shadow: 2px 2px 5px rgba(213, 137, 54, 0.75);
 }
 
-main > div.container > header > h1 > a {
+.auth-wrapper > header > h1 > a {
     color: #F2F3AE;
     background-color: #69140E;
 }
 
-main > div.container > div > div {
+.auth-wrapper > div > div {
     position: relative;
     z-index: 1;
 }
 
-main > div.container > div > div::before {
+.auth-wrapper > div > div::before {
     content: "";
     position: absolute;
     top: 0;
@@ -24,22 +24,22 @@ main > div.container > div > div::before {
     border-radius: 0.3em; 
 }
 
-main > div.container > div > div > section > header {
+.auth-wrapper > div > div > section > header {
     color: #F2F3AE;
 }
 
-main > div.container > div > div > section > div > form input[type="submit"]:hover,
-main > div.container > div > div > section > div {
+.auth-wrapper > div > div > section > div > form input[type="submit"]:hover,
+.auth-wrapper > div > div > section > div {
     background-color: #F2F3AE;
     color: #A44200;
 }
 
-main > div.container > div > div > section > div > form input[type="submit"] {
+.auth-wrapper > div > div > section > div > form input[type="submit"] {
     color: #F2F3AE;
     background-color: #A44200;
 }
 
-main > div.container > div > div > section > div:last-child > p > a {
+.auth-wrapper > div > div > section > div:last-child > p > a {
     color: #A44200;
 }
 

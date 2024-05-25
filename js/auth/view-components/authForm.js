@@ -16,21 +16,21 @@ class AuthForm {
         const formContainer = document.createElement('section');
         this._form.action = "#";
         this._form.method = "post";
-        this._form.classList.add("was-validate");
+        this._form.classList.add("was-validate", "w-100");
         this._form.enctype = "multipart/form-data";
         this._form.accept = "image/*";
         const pError = document.createElement("p");
-        pError.classList.add("text-danger");
+        pError.classList.add("custom-tertiary-color");
         this._form.appendChild(pError);
         this._form.innerHTML += `${this.#generateAuthForm()}`;
         formContainer.innerHTML = `
-        <header class="row p-2">
+        <header class="d-flex flex-row justify-content-center p-2">
             <h2 class="display-4 text-center">${this._title}</h2>
         </header>
-        <div class="row p-2 rounded-3 border">
+        <div class="d-flex flex-row justify-content-center py-2 px-4 rounded-3 border">
             ${this._form.outerHTML}
         </div>
-        <div class="row p-2 mt-4 rounded-3 border">
+        <div class="d-flex flex-row justify-content-center p-2 mt-4 rounded-3 border">
             ${this._generateAuthQuestion()}
         </div>`;
 
@@ -104,7 +104,7 @@ class LoginAuthForm extends AuthForm {
 
     _generateAuthQuestion() {
         return `
-        <p class="m-2 text-center align-middle">Don't have an account? <a href="signup.php"><strong>Sign-up</strong></a></p>
+        <p class="m-2 text-center">Don't have an account? <a href="signup.php"><strong>Sign-up</strong></a></p>
         `;
     }
 
@@ -142,7 +142,7 @@ class LoginAuthForm extends AuthForm {
                     window.location.href = "feed.php";
                 }, 500);
             } else {
-                document.querySelector("div.row.p-2 > form > p").innerHTML = response.data["login_error"];
+                document.querySelector("form > p").innerHTML = response.data["login_error"];
             }
         });
     }
@@ -188,7 +188,7 @@ class SignupAuthForm extends AuthForm {
 
     _generateAuthQuestion() {
         return `
-        <p class="m-2 text-center align-middle">Already have an account? <a href="login.php"><strong>Log-in</strong></a></p>
+        <p class="m-2 text-center">Already have an account? <a href="login.php"><strong>Log-in</strong></a></p>
         `;
     }
 
