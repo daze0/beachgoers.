@@ -1,18 +1,18 @@
-main > div.container > header > h1 {
+.auth-wrapper > header > h1 {
     text-shadow: 2px 2px 5px rgba(213, 137, 54, 0.75);
 }
 
-main > div.container > header > h1 > a {
+.auth-wrapper > header > h1 > a {
     color: #F2F3AE;
     background-color: #69140E;
 }
 
-main > div.container > div > div {
+.auth-wrapper > div > div {
     position: relative;
     z-index: 1;
 }
 
-main > div.container > div > div::before {
+.auth-wrapper > div > div::before {
     content: "";
     position: absolute;
     top: 0;
@@ -24,25 +24,72 @@ main > div.container > div > div::before {
     border-radius: 0.3em; 
 }
 
-main > div.container > div > div > section > header {
+.auth-wrapper > div > div > section > header {
     color: #F2F3AE;
 }
 
-main > div.container > div > div > section > div {
+.auth-wrapper > div > div > section > div > form input[type="submit"]:hover,
+.auth-wrapper > div > div > section > div {
     background-color: #F2F3AE;
     color: #A44200;
 }
 
-main > div.container > div > div > section > div > form input[type="submit"] {
+.auth-wrapper > div > div > section > div > form input[type="submit"] {
     color: #F2F3AE;
     background-color: #A44200;
 }
 
-main > div.container > div > div > section > div > form input[type="submit"]:hover {
-    background-color: #F2F3AE;
+.auth-wrapper > div > div > section > div:last-child > p > a {
     color: #A44200;
 }
 
-main > div.container > div > div > section > div:last-child > p > a {
+.custom-primary-color {
+    color: #F2F3AE !important;
+}
+
+.custom-secondary-color {
+    color: #A44200 !important;
+}
+
+.custom-tertiary-color {
+    color: #D58936 !important;
+}
+
+.input-group-text {
+    color: #F2F3AE !important;
+    background-color: #A44200 !important;
+}
+
+.custom-btn-secondary {
     color: #A44200;
+    background-color: #F2F3AE;
+    border-color: #A44200;
+}
+
+.custom-btn-secondary:focus,
+.custom-btn-secondary:active,
+.custom-btn-secondary:hover {
+    color: #F2F3AE !important;
+    background-color: #A44200 !important;
+    border-color: #A44200 !important;
+}
+
+.custom-btn-secondary:hover {
+    box-shadow: 1px 1px 5px 2px rgba(164, 66, 0, 0.75) !important;
+}
+
+.custom-btn-secondary:focus {
+    box-shadow: 1px 1px 5px 2px rgba(213, 137, 54, 0.75) !important;
+}
+
+.custom-btn-file input[type="file"] {
+    margin-left: -2px !important;
+}
+
+.custom-btn-file input[type=file]::-webkit-file-upload-button {
+    display: none;
+}
+
+.custom-btn-file input[type=file]::file-selector-button {
+    display: none;
 }
