@@ -138,9 +138,9 @@ class LoginAuthForm extends AuthForm {
             if (response.data["login_success"]) {
                 document.querySelector("main").innerHTML = this.generateLoginSuccessLayout(response.data["username"]);
 
-                // setTimeout(() => {
-                //     window.location.href = "feed.php";
-                // }, 500);
+                setTimeout(() => {
+                    window.location.href = "feed.php";
+                }, 500);
             } else {
                 document.querySelector("form > p").innerHTML = response.data["login_error"];
             }
