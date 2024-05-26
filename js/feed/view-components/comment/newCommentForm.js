@@ -84,9 +84,9 @@ class NewCommentForm {
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="contentInput-${this.#postid}" class="form-label visually-hidden">Comment</label>
             
-                <input id="commentInput-${this.#postid}" type="text" name="comment" class="form-control" placeholder="Write a new comment"/>
+                <input id="commentInput-${this.#postid}" type="text" name="comment" class="form-control rounded-start" placeholder="Write a new comment"/>
                 <div class="input-group-append">
-                    <input type="submit" class="btn" value="Done">
+                    <input type="submit" class="btn rounded-0 rounded-end" value="Done">
                 </div>
             </div>
         `;
