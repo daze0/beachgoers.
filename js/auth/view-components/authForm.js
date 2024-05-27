@@ -158,10 +158,10 @@ class LoginAuthForm extends AuthForm {
                 <div class="p-5 custom-primary-color rounded-3">
                     <div class="container-fluid py-5 px-4">
                         <header class="d-flex flex-row justify-content-center p-2">
-                            <h2 class="display-4 text-center">Welcome back!</h2>
+                            <h2 class="display-4 text-center">Welcome back</h2>
                         </header>
                         <div class="d-flex flex-row justify-content-center p-2">
-                            <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+                            <p class="fs-1 mb-0 text-center"><strong>${username}</strong>!</p>
                         </div>
                     </div>
                 </div>
@@ -273,10 +273,10 @@ class SignupAuthForm extends AuthForm {
                 <div class="p-5 custom-primary-color rounded-3">
                     <div class="container-fluid py-5 px-4">
                         <header class="d-flex flex-row justify-content-center p-2">
-                            <h2 class="display-4 text-center">Welcome!</h2>
+                            <h2 class="display-4 text-center">Welcome</h2>
                         </header>
                         <div class="d-flex flex-row justify-content-center p-2">
-                            <p class="fs-1 mb-0 text-center"><strong>${username}</strong></p>
+                            <p class="fs-1 mb-0 text-center"><strong>${username}</strong>!</p>
                         </div>
                     </div>
                 </div>
