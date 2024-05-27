@@ -7,20 +7,16 @@ main > div.row:first-child {
     color: #3C1518;
 }
 
-div.modal-content > div.modal-footer input[type="submit"]:hover,
 main > div.row:last-child button#newPostButton {
     color: #A44200;
     background-color: #F2F3AE;
 }
 
-div.modal-content > div.modal-footer input[type="submit"],
 main > div.row:last-child button#newPostButton:hover {
     background-color: #A44200;
     color: #F2F3AE;
 }
 
-div.modal-content > div.modal-body button,
-div.modal-content > div.modal-body hr,
 main > div.row:first-child button#telegramConnectorButton {
     color: #A44200;
 }
@@ -49,17 +45,14 @@ div.modal-content > div.modal-body > div > div:last-child > span {
 
 main > div.row:first-child a#telegramButton,
 main > div.row:first-child button#followButton,
-main > div.row:first-child button#unfollowButton,
-div.modal-content > div.modal-header,
-div.modal-content > div.modal-body input[type="submit"] {
+main > div.row:first-child button#unfollowButton {
     color: #F2F3AE;
     background-color: #A44200;
 }
 
 main > div.row:first-child a#telegramButton:hover,
 main > div.row:first-child button#followButton:hover,
-main > div.row:first-child button#unfollowButton:hover,
-div.modal-content > div.modal-body input[type="submit"]:hover {
+main > div.row:first-child button#unfollowButton:hover {
     background-color: #F2F3AE;
     color: #A44200;
 }

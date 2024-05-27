@@ -18,7 +18,7 @@ if (
         $userimgFilename = uploadImg("profilepicture");
         if (is_array($userimgFilename)) {
             //uploadimg failed
-            $signup_data["signup_error"] = "Failed to upload image.";
+            $signup_data["signup_error"] = $userimgFilename[0];
         } else {
             $newlyRegisteredUser = $dbh->registerUser($_POST["email"], $_POST["username"], $_POST["password"], $_POST["name"], $_POST["surname"], $userimgFilename, $_POST["telegramusername"]);
             registerLoggedUser($newlyRegisteredUser[0]);

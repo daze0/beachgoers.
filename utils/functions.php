@@ -26,10 +26,16 @@ function unregisterLoggedUser()
  */
 function uploadImg($filename)
 {
+    $errorMsgs = array();
+
+    if ($_FILES[$filename]["tmp_name"] == '') {
+        array_push($errorMsgs, "No profile picture provided");
+        return $errorMsgs;
+    }
+
     $targetFileName = time() . '_' . $_FILES[$filename]["name"];
     $targetFile = "../" . UPLOAD_DIR . $targetFileName;
     $uploadOk = true;
-    $errorMsgs = array();
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
     // Check if it's a real image or a fake one and if the resolution is supported
