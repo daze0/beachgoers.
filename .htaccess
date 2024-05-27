@@ -1,4 +1,3 @@
-<Files "config.php">
-	Order Allow, Deny
-	Deny from all
+<Files "local.php">
+	Require all denied
 </Files>
