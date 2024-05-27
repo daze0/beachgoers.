@@ -232,7 +232,7 @@ class SignupAuthForm extends AuthForm {
                 `;
             } else {
                 res = `
-                <div class="input-group mt-2 mb-2 flex-nowrap">
+                <div class="mt-2 mb-2 flex-nowrap">
                     <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
                 `;
                 res += `

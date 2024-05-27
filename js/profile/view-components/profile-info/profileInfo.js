@@ -133,7 +133,7 @@ class ProfileInfo {
     #generateUsername(userData) {
         return `
             <div class="d-flex flex-row justify-content-center justify-content-md-start ps-0 px-md-0">
-                <p class="fs-5">@${userData["username"]}</p>
+                <p class="fs-5">${userData["username"]}</p>
             </div>
         `;
     }
