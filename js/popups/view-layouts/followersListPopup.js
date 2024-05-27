@@ -86,7 +86,7 @@ class FollowersListPopup extends AbstractDataPopup {
             </div>
             <div class="col-8 d-flex align-items-center justify-content-center">
                 <a class="text-decoration-none text-dark" href="profile.php?uid=${follower.userid}">
-                    <p class="fs-3">@${follower.username}</p>
+                    <p class="fs-3">${follower.username}</p>
                 </a>
             </div>
         `;
