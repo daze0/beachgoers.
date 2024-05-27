@@ -46,6 +46,9 @@ class FollowingListPopup extends AbstractDataPopup {
                     <h2 class="modal-title" id="followingListPopupLabel">No following</h2>
                     ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
                 </div>
+                <div class="modal-body p-4">
+                    Following nobody at the moment
+                </div>
             `;
         } else {
             content += `
