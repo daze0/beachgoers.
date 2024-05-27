@@ -105,7 +105,7 @@ class Utils {
                         */
                         autocompletedItem.addEventListener("click", innerEvent => {
                             //inputElement.value = item["username"];
-                            window.location.href = "profile.php?uid="+item.userid;
+                            window.location.href = "profile.php?uid=" + item.userid;
                             closeAllLists();
                         });
                         autocompleteItemsWrapper.appendChild(autocompletedItem);
@@ -116,19 +116,17 @@ class Utils {
             });
         });
         /*
-            Execute when someone presses a key on the keyboard:
-        */
+           Execute when someone presses a key on the keyboard:
+       */
         inputElement.addEventListener("keydown", e => {
             const autocompleteItemsWrapper = document.querySelector("#autocompleteList" + e.target.id);
             if (autocompleteItemsWrapper) {
                 const autocompleteItems = autocompleteItemsWrapper.getElementsByTagName("div");
                 if (e.keyCode == 40) {
-                    console.log("down");
                     // key DOWN
                     currentFocus++;
                     addActive(autocompleteItems);
                 } else if (e.keyCode == 38) {
-                    console.log("up");
                     /*If the arrow UP key is pressed,
                     decrease the currentFocus variable:*/
                     currentFocus--;
