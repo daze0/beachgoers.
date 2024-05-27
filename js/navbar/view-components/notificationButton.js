@@ -47,6 +47,48 @@ class NotificationButton {
         });
     }
 
+    #generateNotificationList(notifications) {
+        const notificationList = document.createElement("div");
+        notificationList.id = "notification-list";
+        notificationList.classList.add('navbar-dark-color');
+
+        if(notifications.length){
+            for (const notification of notifications) {
+                const notificationItem = document.createElement("div");
+                notificationItem.classList.add("notification-item", "p-2", "border-bottom");
+    
+                if (!notification.read) {
+                    notificationItem.classList.add("notification-item-unread");
+                    const notificationItemUnreadBadge = document.createElement("span");
+                    notificationItemUnreadBadge.classList.add("my-2", "me-1", "float-start",
+                        "p-1", "bg-danger", "border", "border-light", "rounded-circle");
+                    notificationItem.append(notificationItemUnreadBadge);
+    
+                }
+    
+                const notificationItemDateTime = document.createElement("span");
+                notificationItemDateTime.classList.add("float-end", "notification-elapsed-time");
+                notificationItemDateTime.textContent = Utils.generateTimeElapsedString(notification.createdAt);
+                notificationItem.appendChild(notificationItemDateTime);
+    
+                const notificationItemContent = document.createElement("div");
+                notificationItemContent.innerHTML = notification.content;
+                notificationItem.appendChild(notificationItemContent);
+    
+    
+                notificationList.append(notificationItem);
+            }
+        }else{
+            const noElementItem = document.createElement("div");
+            noElementItem.classList.add("notification-item", "p-3", "border-bottom", "text-center", "m-0");
+            noElementItem.textContent = "No notifications yet";
+            notificationList.append(noElementItem);
+        }
+
+        notificationList.append(this.#generateTelegramButtonItem());
+        return notificationList;
+    }
+
     #generateTelegramButtonItem() {
         const item = document.createElement("div");
         item.classList.add("notification-item", "p-2", "border-bottom");
@@ -80,43 +122,10 @@ class NotificationButton {
             return;
         }
         axios.get("api/api-notifications.php").then(response => {
-            const notificationList = document.createElement("div");
-            notificationList.id = "notification-list";
-            notificationList.classList.add('navbar-dark-color');
-
             const notifications = response.data.notifications;
-            for (const notification of notifications) {
-                const notificationItem = document.createElement("div");
-                notificationItem.classList.add("notification-item", "p-2", "border-bottom");
-
-                if (!notification.read) {
-                    notificationItem.classList.add("notification-item-unread");
-                    const notificationItemUnreadBadge = document.createElement("span");
-                    notificationItemUnreadBadge.classList.add("my-2", "me-1", "float-start",
-                        "p-1", "bg-danger", "border", "border-light", "rounded-circle");
-                    notificationItem.append(notificationItemUnreadBadge);
-
-                }
-
-                const notificationItemDateTime = document.createElement("span");
-                notificationItemDateTime.classList.add("float-end", "notification-elapsed-time");
-                notificationItemDateTime.textContent = Utils.generateTimeElapsedString(notification.createdAt);
-                notificationItem.appendChild(notificationItemDateTime);
-
-                const notificationItemContent = document.createElement("div");
-                notificationItemContent.innerHTML = notification.content;
-                notificationItem.appendChild(notificationItemContent);
-
-
-                notificationList.append(notificationItem);
-            }
-
-            notificationList.append(this.#generateTelegramButtonItem());
-
+            const notificationList = this.#generateNotificationList(notifications);
             const navbar = document.querySelector(".navbar");
             navbar.append(notificationList);
-            //const notificationBadge = document.getElementById("notificationButtonBadge");
-            //notificationBadge.classList.add("d-none");
             this.updateBadgeCount();
 
             document.addEventListener("click", e => {

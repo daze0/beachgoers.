@@ -12,7 +12,7 @@ class NewPostForm {
 
     generateComponent() {
         const formContainer = document.createElement('div');
-        formContainer.classList.add("col-md-7");
+        //formContainer.classList.add("col-md-7");
         this._form.action = "#";
         this._form.id = "newPostForm";
         this._form.method = "post";
@@ -72,7 +72,7 @@ class NewPostForm {
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="contentInput" class="form-label visually-hidden">Content</label>
             
-                <textarea id="contentInput" name="content" class="form-control" placeholder="Write a post"></textarea>
+                <textarea id="contentInput" name="content" class="form-control rounded" placeholder="Write a post"></textarea>
             </div>
         `;
     }
@@ -82,7 +82,7 @@ class NewPostForm {
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="imageUploadInput" class="form-label visually-hidden">Image</label>
             
-                <input type="file" id="imageUploadInput" name="postimg" class="form-control" placeholder="Image">
+                <input type="file" id="imageUploadInput" name="postimg" class="form-control rounded" placeholder="Image">
             </div>
         `;
     }
