@@ -104,7 +104,8 @@ class Utils {
                             Execute when someone clicks on the item value
                         */
                         autocompletedItem.addEventListener("click", innerEvent => {
-                            inputElement.value = item["username"];
+                            //inputElement.value = item["username"];
+                            window.location.href = "profile.php?uid="+item.userid;
                             closeAllLists();
                         });
                         autocompleteItemsWrapper.appendChild(autocompletedItem);
