@@ -75,8 +75,8 @@ AUTOCOMPLETE
 /*when navigating through the items using the arrow keys:*/
 
 .autocomplete-active {
-    background-color: DodgerBlue !important;
-    color: #ffffff;
+    background-color: #A44200 !important;
+    color: #F2F3AE !important;
 }
   
 
@@ -116,11 +116,5 @@ NOTIFICATIONS
 .notification-item:hover  {
     background-color: #A44200;
     color: #F2F3AE;
-}
-
-/*when navigating through the items using the arrow keys:*/
-
-#notification-list {
-    background-color: DodgerBlue !important;
 }
   
