@@ -10,7 +10,7 @@ class IndexViewLayout {
             <header class="pb-3 mb-4 mt-4">
                 <h1 class="display-1 text-center"><a class="text-decoration-none pb-2 rounded-3" href="index.php">beachgoers.</a></h1>
             </header>
-            <div class="p-5 rounded-3">
+            <div class=" mb-4 p-5 rounded-3">
                 <div class="container-fluid py-5">
                     <div class="row">
                         <p class="col-12 fs-4">

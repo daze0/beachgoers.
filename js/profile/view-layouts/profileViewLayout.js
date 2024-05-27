@@ -75,10 +75,10 @@ class ProfileViewLayout {
                 this.#components["profileInfo"].generateComponent(this.#userData, this, updatedUserInfo)
             }
             </div>
-            <div class="row gx-0 pt-5 mb-5">
+            <div class="row gx-0 py-5">
                 <div id="spacingStartSection" class="col-sm-1 col-md-4"></div>
                 <div id="spacingCenterSection" class="d-none"></div>
-                <div id="postSection" class="col-sm-10 col-md-4">
+                <div id="postSection" class="col-sm-10 col-md-4 py-md-5">
                     ${this.#components["profileFeed"].generateComponent(this.#userData, this.#userFeedData, this)}
                     ${this.#components["profileFeed"].getComponent("loadingElement").generateComponent()}
                 </div>
