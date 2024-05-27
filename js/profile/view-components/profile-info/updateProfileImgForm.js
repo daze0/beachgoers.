@@ -1,12 +1,12 @@
 import { Listener } from "../../../utils/listener.js";
 
-class NewPostForm {
+class UpdateProfileImgForm {
     constructor() {
         this._form = document.createElement('form');
         this.formSubmitCallback = this.formSubmitCallback.bind(this);
 
         this._listeners = {
-            "formSubmit": new Listener("#newPostForm", "submit", this.formSubmitCallback)
+            "formSubmit": new Listener("#updateProfileImgForm", "submit", this.formSubmitCallback)
         };
     }
 
@@ -14,15 +14,15 @@ class NewPostForm {
         const formContainer = document.createElement('div');
         //formContainer.classList.add("col-md-7");
         this._form.action = "#";
-        this._form.id = "newPostForm";
+        this._form.id = "updateProfileImgForm";
         this._form.method = "post";
         this._form.classList.add("was-validate");
         this._form.enctype = "multipart/form-data";
         this._form.accept = "image/*";
         const pError = document.createElement("p");
-        pError.id = "newPostFormError";
+        pError.id = "updateProfileImgFormError";
         pError.classList.add("text-danger");
-        this._form.innerHTML = `${this.#generateNewPostForm()}`;
+        this._form.innerHTML = `${this.#generateForm()}`;
         this._form.appendChild(pError);
         formContainer.innerHTML = this._form.outerHTML;
 
@@ -44,21 +44,19 @@ class NewPostForm {
     }
 
     formSubmitCallback() {
-        this._form = document.querySelector("#newPostForm");
+        this._form = document.querySelector("#updateProfileImgForm");
         const data = new FormData(this._form);
-        axios.post("api/api-profile-feed.php", data).then(response => {
-            if (response.data["post_success"]) {
+        axios.post("api/api-profile.php", data).then(response => {
+            if (response.data["profile_img_update_success"]) {
                 document.location.reload();
             } else {
-                document.querySelector("#newPostFormError").textContent = response.data["post_error"];
+                document.querySelector("#updateProfileImgFormError").textContent = response.data["profile_img_update_error"];
             }
         });
     }
 
-    #generateNewPostForm() {
+    #generateForm() {
         let content = ``;
-
-        content += this.#generateContentInput();
 
         content += this.#generateImageUploadInput();
 
@@ -67,22 +65,12 @@ class NewPostForm {
         return content;
     }
 
-    #generateContentInput() {
-        return `
-            <div class="input-group mt-2 mb-2 flex-nowrap">
-                <label for="contentInput" class="form-label visually-hidden">Content</label>
-            
-                <textarea id="contentInput" name="content" class="form-control rounded" placeholder="Write a post"></textarea>
-            </div>
-        `;
-    }
-
     #generateImageUploadInput() {
         return `
             <div class="input-group mt-2 mb-2 flex-nowrap">
-                <label for="imageUploadInput" class="form-label visually-hidden">Image</label>
+                <label for="profileImgUploadInput" class="form-label visually-hidden">Image</label>
             
-                <input type="file" id="imageUploadInput" name="postimg" class="form-control rounded" placeholder="Image">
+                <input type="file" id="profileImgUploadInput" name="profileimg" class="form-control rounded" placeholder="Image">
             </div>
         `;
     }
@@ -95,4 +83,4 @@ class NewPostForm {
         `;
     }
 }
-export { NewPostForm };
+export { UpdateProfileImgForm };
