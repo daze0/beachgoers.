@@ -257,7 +257,7 @@ class SignupAuthForm extends AuthForm {
                     window.location.href = "profile.php";
                 }, 500);
             } else {
-                document.querySelector("div.row.p-2 > form > p").innerHTML = response.data["signup_error"];
+                document.querySelector("form > p").innerHTML = response.data["signup_error"];
             }
         });
     }
