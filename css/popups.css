@@ -1,0 +1,35 @@
+div.modal-content > div.modal-footer input[type="submit"]:hover,
+main > div.row:last-child button {
+    color: #A44200;
+    background-color: #F2F3AE;
+}
+
+div.modal-content > div.modal-footer input[type="submit"],
+div.modal-content > div.modal-header,
+div.modal-content > div.modal-body input[type="submit"] {
+    background-color: #A44200;
+    color: #F2F3AE;
+}
+
+div.modal-content > div.modal-body button,
+div.modal-content > div.modal-body hr {
+    color: #A44200;
+}
+
+div.modal-content {
+    background-color: #F2F3AE;
+    color: #3C1518;
+}
+
+div.modal-content > div.modal-footer {
+    border-top: 1px solid #A44200;
+}
+
+div.modal-content > div.modal-body > div > div:last-child > span {
+    color: #D58936;
+}
+
+div.modal-content > div.modal-body input[type="submit"]:hover {
+    background-color: #F2F3AE;
+    color: #A44200;
+}
