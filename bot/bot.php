@@ -15,19 +15,25 @@ class BotHelper{
     public function sendNewLikeNotification($post, $postAuthor, $user): bool{
         $userUrl = BASE_URL."profile.php?uid=".$user["userid"];
         $userLink = '<b><a href="'.$userUrl.'">'.$user["username"]."</a></b>";
-        return $this->sendMessage($postAuthor, "New Like to your post by ".$userLink." ❤️");
+        $postUrl = BASE_URL."feed.php?post=".$post["postid"];
+        $postLink = '<b><a href="'.$postUrl.'">post</a></b>';
+        return $this->sendMessage($postAuthor, "New Like to your ".$postLink." by ".$userLink." ❤️");
     }
 
     public function sendNewCommentLikeNotification($comment, $commentAuthor, $user): bool{
         $userUrl = BASE_URL."profile.php?uid=".$user["userid"];
         $userLink = '<b><a href="'.$userUrl.'">'.$user["username"]."</a></b>";
-        return $this->sendMessage($commentAuthor, "New Like to your comment by ".$userLink." ❤️");
+        $postUrl = BASE_URL."feed.php?post=".$comment["post"];
+        $commentLink = '<b><a href="'.$postUrl.'">comment</a></b>';
+        return $this->sendMessage($commentAuthor, "New Like to your ".$commentLink." by ".$userLink." ❤️");
     }
 
     public function sendNewCommentNotification($post, $postAuthor, $commentText, $commentAuthor): bool{
         $commentAuthorUrl = BASE_URL."profile.php?uid=".$commentAuthor["userid"];
         $commentAuthorLink = '<b><a href="'.$commentAuthorUrl.'">'.$commentAuthor["username"]."</a></b>";
-        $notificationMessage = $commentAuthorLink." commented your post 💬";
+        $postUrl = BASE_URL."feed.php?post=".$post["postid"];
+        $postLink = '<b><a href="'.$postUrl.'">post</a></b>';
+        $notificationMessage = $commentAuthorLink." commented your ".$postLink." 💬";
         return $this->sendMessage($postAuthor, $notificationMessage);
     }
 

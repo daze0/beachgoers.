@@ -10,7 +10,7 @@ class FeedViewLayout {
     #hasMoreData;
     #isAlreadyLoading;
 
-    constructor(components, feedData) {
+    constructor(components, feedData, hasMoreData = true) {
         this.#components = components;
         this.scrollPostsCallback = this.scrollPostsCallback.bind(this);
         this.#listeners = {
@@ -18,7 +18,7 @@ class FeedViewLayout {
         };
         this.#feedData = feedData;
         this.#nextPage = 2;
-        this.#hasMoreData = true;
+        this.#hasMoreData = hasMoreData;
         this.#isAlreadyLoading = false; // Lock-like variable to prevent problems with multiple scroll events
     }
 
