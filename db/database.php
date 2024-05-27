@@ -33,6 +33,14 @@ class DatabaseHelper
         return $this->getUserByUsername($username);
     }
 
+    public function updateUserProfileImg($userid, $userImg){
+        $query = "UPDATE `user` SET `userImg`=? WHERE `userid`=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $userImg, $userid);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     /**
      * Returns false if email has already been used, true otherwise.
      */

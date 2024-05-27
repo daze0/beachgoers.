@@ -52,6 +52,16 @@ if (isUserLoggedIn()) {
         }
         $profile_data["follow_status"] = $dbh->isUserFollowedByUser($_SESSION["profile_uid"], $_SESSION["userid"]);
     } else {
+        if (isset($_FILES["profileimg"])) {
+            $newProfileImgFilename = uploadImg("profileimg");
+            if (is_array($newProfileImgFilename)) {
+                $profile_data["profile_img_update_success"] = false;
+                $profile_data["profile_img_update_error"] = implode(", ", $newProfileImgFilename);
+            } else {
+                $dbh->updateUserProfileImg($_SESSION["userid"], $newProfileImgFilename);
+                $profile_data["profile_img_update_success"] = true;
+            }
+        }
         $profile_data["profile_picture"] = $dbh->getUserImgById($_SESSION["userid"])[0]["userimg"];
         $profile_data["username"] = $_SESSION["username"];
         $profile_data["followers"] = $dbh->getUserFollowersNumById($_SESSION["userid"])[0][0];

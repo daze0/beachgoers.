@@ -3,6 +3,7 @@ import { TelegramButton } from './telegramButton.js';
 import { FollowersListPopup } from '../../../popups/view-layouts/followersListPopup.js';
 import { FollowingListPopup } from '../../../popups/view-layouts/followingListPopup.js';
 import { TelegramConnectorPopup } from '../../../popups/view-layouts/telegramConnectorPopup.js';
+import { UpdateProfileImgPopup } from '../../../popups/view-layouts/updateProfileImgPopup.js';
 
 class ProfileInfo {
     #layout;
@@ -14,6 +15,7 @@ class ProfileInfo {
         this.#components = {
             "followButton": new FollowButton(),
             "telegramButton": new TelegramButton(),
+            "updateProfileImgPopup": new UpdateProfileImgPopup(),
             "followersListPopup": undefined,
             "followingListPopup": undefined,
             //'telegramConnectorPopup':undefined
@@ -68,6 +70,7 @@ class ProfileInfo {
             this.#userInfo["posts"] = data["posts"];
         }
 
+        this.#components.updateProfileImgPopup.render();
         const profileInfo = this.#generateProfileInfo(data);
         return profileInfo;
     }
@@ -94,8 +97,11 @@ class ProfileInfo {
                     <div class="col-1 col-md-1 col-xl-1"></div>
                     <div class="col-10 text-center col-md-5 col-xl-3 col-xs-10">
                         <div class="row pe-0">
+                            <div class="col-12">
+                            ${this.#generateUpdateProfileImgButton(userData)}
                             ${this.#generateUsername(userData)}
                             ${this.#generateUserInfo(userData)}
+                            </div>
                         </div>                    
                     </div>
                     <div class="col-1 col-md-6 col-xl-8 col-xs-2 pe-0"></div>
@@ -210,6 +216,11 @@ class ProfileInfo {
         }
 
         return res;
+    }
+
+    
+    #generateUpdateProfileImgButton(userData) {
+        return this.#components.updateProfileImgPopup.getPopupOpenElement().generateComponent(userData["personal_profile"]);
     }
 }
 
