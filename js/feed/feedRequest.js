@@ -4,29 +4,39 @@ import { LoadingElement } from './view-components/misc/loading.js';
 class FeedRequest {
     #components;
     #layout;
+    #postId;
 
-    constructor() {
+    constructor(postId = undefined) {
         this.#components = {
             "loadingElement": new LoadingElement()
         };
         this.#layout = undefined;
+        this.#postId = postId;
     }
 
     loadRequest() {
-        axios.get("api/api-feed.php?page=1").then(response => {
-            console.log("FEED - PAGE REQ #1 - main");
-            this.#layout = new FeedViewLayout(this.#components, response.data);
-            this.#layout.render(document.querySelector("main"));
-
-            // Check if the document is already loaded
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", () => {
+        if(this.#postId){
+            axios.get("api/api-feed.php?post="+this.#postId).then(response => {
+                console.log("FEED - PAGE REQ #1 - main");
+                this.#layout = new FeedViewLayout(this.#components, response.data, false);
+                this.#layout.render(document.querySelector("main"));
+            });
+        }else{
+            axios.get("api/api-feed.php?page=1").then(response => {
+                console.log("FEED - PAGE REQ #1 - main");
+                this.#layout = new FeedViewLayout(this.#components, response.data);
+                this.#layout.render(document.querySelector("main"));
+    
+                // Check if the document is already loaded
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", () => {
+                        this.#handleLoadedDOM(this.#layout);
+                    });
+                } else {
                     this.#handleLoadedDOM(this.#layout);
-                });
-            } else {
-                this.#handleLoadedDOM(this.#layout);
-            }
-        })
+                }
+            });
+        }
     }
 
     #handleLoadedDOM(layout) {

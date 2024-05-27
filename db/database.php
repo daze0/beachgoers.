@@ -535,7 +535,7 @@ class DatabaseHelper
      */
     public function getSearchSuggestions($userid, $inputQuery, $maxSuggestions)
     {
-        $query = "SELECT DISTINCT u.username, u.userimg 
+        /*$query = "SELECT DISTINCT u.username, u.userimg 
         FROM (
             SELECT followed AS userid FROM user_follows_user WHERE follower = ? UNION
             SELECT follower AS userid FROM user_follows_user WHERE followed = ?
@@ -548,9 +548,22 @@ class DatabaseHelper
             ELSE 4
         END, u.username
         LIMIT ?;
-        ";
+        ";*/
+         $query = "SELECT u.userid, u.username, u.userimg 
+         FROM user u
+         WHERE u.username LIKE CONCAT('%', ?, '%') 
+         ORDER BY CASE 
+             WHEN u.username LIKE ? THEN 1
+             WHEN u.username LIKE CONCAT(?, '%') THEN 2
+             WHEN u.username LIKE CONCAT('%', ?, '%') THEN 3
+             WHEN u.username LIKE CONCAT('%', ?) THEN 4
+             ELSE 5
+         END, u.username
+         LIMIT ?;
+         ";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iisssi", $userid, $userid, $inputQuery, $inputQuery, $inputQuery, $maxSuggestions);
+        //$stmt->bind_param("iisssi", $userid, $userid, $inputQuery, $inputQuery, $inputQuery, $maxSuggestions);
+        $stmt->bind_param("sssssi", $inputQuery, $inputQuery, $inputQuery, $inputQuery, $inputQuery, $maxSuggestions);
         $stmt->execute();
         $result = $stmt->get_result();
 
