@@ -229,12 +229,13 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function updateUserTelegramChatId($telegramUsername, $telegramChatId){
+    public function updateUserTelegramChatId($telegramUsername, $telegramChatId)
+    {
         $result = $this->getUserTelegramChatIdByTelegramUsername($telegramUsername);
-        if(!isset($result[0])){
+        if (!isset($result[0])) {
             return false;
         }
-        if($result[0]["telegramChatId"] == $telegramChatId){
+        if ($result[0]["telegramChatId"] == $telegramChatId) {
             return false;
         }
 
@@ -263,20 +264,30 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getFeedPostsByUserId($userid, $page_num)
+    public function getFeedPostsByUserId($userid, $page_num, $include_personal)
     {
         $batch_size = self::PAGINATION_BATCH_SIZE;
         $offset = self::PAGINATION_BATCH_SIZE * ($page_num - 1);
 
-        $query = "SELECT author, postid, img, content, createdAt FROM post 
-        WHERE author IN (SELECT followed FROM user_follows_user WHERE follower=?) 
-        ORDER BY createdAt DESC 
-        LIMIT ? OFFSET ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iii", $userid, $batch_size, $offset);
-        $stmt->execute();
+        $stmt = null;
+        if (!$include_personal) {
+            $query = "SELECT author, postid, img, content, createdAt FROM post 
+            WHERE author IN (SELECT followed FROM user_follows_user WHERE follower=?) 
+            ORDER BY createdAt DESC 
+            LIMIT ? OFFSET ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("iii", $userid, $batch_size, $offset);
+            $stmt->execute();
+        } else {
+            $query = "SELECT author, postid, img, content, createdAt FROM post 
+            WHERE author IN (SELECT followed FROM user_follows_user WHERE follower=?) OR author=?
+            ORDER BY createdAt DESC 
+            LIMIT ? OFFSET ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("iiii", $userid, $userid, $batch_size, $offset);
+            $stmt->execute();
+        }
         $result = $stmt->get_result();
-
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -569,7 +580,8 @@ class DatabaseHelper
         $stmt->close();
     }
 
-    public function getLastUserNotifications($userid, $count = 10){
+    public function getLastUserNotifications($userid, $count = 10)
+    {
         $query = "SELECT * FROM `notification` WHERE `user`=? ORDER BY `read` ASC, `createdAt` DESC LIMIT ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $userid, $count);
@@ -578,19 +590,20 @@ class DatabaseHelper
         $notifications = $result->fetch_all(MYSQLI_ASSOC);
 
         $idsToRead = [];
-        foreach($notifications as $notification){
-            if(!$notification["read"]){
+        foreach ($notifications as $notification) {
+            if (!$notification["read"]) {
                 $idsToRead[] = $notification["id"];
             }
         }
-        if(!empty($idsToRead)){
+        if (!empty($idsToRead)) {
             $this->setNotificationsReadState($idsToRead);
         }
 
         return $notifications;
     }
 
-    public function getUnreadUserNotificationsCount($userid){
+    public function getUnreadUserNotificationsCount($userid)
+    {
         $query = "SELECT COUNT(*) FROM `notification` WHERE `user`=? AND `read`=0";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $userid);
@@ -600,8 +613,9 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_NUM)[0][0];
     }
 
-    protected function setNotificationsReadState($idsNotifications){
-        $query = "UPDATE `notification` SET `read`=1 WHERE `id` IN (".implode(", ", $idsNotifications).")";
+    protected function setNotificationsReadState($idsNotifications)
+    {
+        $query = "UPDATE `notification` SET `read`=1 WHERE `id` IN (" . implode(", ", $idsNotifications) . ")";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $stmt->close();

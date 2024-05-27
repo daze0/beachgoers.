@@ -12,7 +12,7 @@ if (isUserLoggedIn()) {
     $feed_data["username"] = $dbh->getUsernameById($_SESSION["userid"])[0]["username"];
     $feed_data["posts"] = array();
     if (isset($_GET["page"])) {
-        $posts = $dbh->getFeedPostsByUserId($_SESSION["userid"], $_GET["page"]); // Retrieve only first page initially
+        $posts = $dbh->getFeedPostsByUserId($_SESSION["userid"], $_GET["page"], true); // Retrieve only first page initially
         if (!empty($posts)) {
             $rich_post = array();
             foreach ($posts as $post) {
