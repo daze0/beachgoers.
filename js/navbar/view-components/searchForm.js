@@ -32,7 +32,8 @@ class SearchForm {
     #generateSearchForm() {
         return `
             <div class="input-group">
-                <input class="form-control navbar-dark-color" name="query" type="search" placeholder="Search by username" aria-label="Search">
+                <label for="searchQueryInput" class="d-none">Search</label>
+                <input id="searchQueryInput" class="form-control navbar-dark-color" name="query" type="search" placeholder="Search by username">
                 <div class="input-group-append">
                     <button class="btn navbar-color" type="submit">
                         <i class="bi bi-search"></i>

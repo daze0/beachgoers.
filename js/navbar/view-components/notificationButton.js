@@ -16,6 +16,7 @@ class NotificationButton {
         button.id = "notificationButton";
         button.classList.add("nav-link", "mb-0", "position-relative");
         button.href = "#";
+        button.title = "Notifications";
 
         const icon = document.createElement("i");
         icon.classList.add("d-inline-block", "align-top", "bi", "bi-bell-fill", "navbar-color", "fs-3");
