@@ -209,13 +209,17 @@ class SignupAuthForm extends AuthForm {
 
             if (label === formKeys[2]) {
                 res += `
-                <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                <input type="password" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                     <button class="btn custom-btn-secondary" type="button" id="toggle">
                         <span class="bi bi-eye"></span>
                     </button>`;
-            } else {
+            } else if(label === "username"){
                 res += `
-                <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                <input type="text" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                `;
+            }else { //email
+                res += `
+                <input type="email" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                 `;
             }
         } else {
