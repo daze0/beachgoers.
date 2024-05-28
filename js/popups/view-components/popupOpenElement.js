@@ -42,13 +42,13 @@ class PopupOpenElement {
      * @returns created reactive element.
      */
     _generateReactiveElement(id, className, additionalClass = undefined) {
-        this.#element = document.createElement('i');
+        this.#element = document.createElement('span');
         this.#element.classList.add('bi', className, "custom-secondary-color", (additionalClass) ? additionalClass : "");
         this.#element.id = id;
 
         // Accessibility attrs
         this.#element.setAttribute('aria-hidden', 'true');
-        this.#element.setAttribute('aria-label', id);
+        this.#element.setAttribute('aria-labelledby', id);
         this.#element.title = id;
 
         this.#listener = new Listener(`#${this.#element.id}`, "click", this.popupOpenCallback);
