@@ -27,12 +27,10 @@ class IndexViewLayout {
                     </div>
                     <div class="row">
                         <div class="d-grid gap-2">
-                            <a href="login.php">
-                                <button class="btn btn-lg w-100" type="button">
-                                    <i class="bi bi-box-arrow-in-right"></i> Log-in
-                                </button>
+                            <a href="login.php" class="btn btn-lg w-100 btn-yellow">
+                                <span class="bi bi-box-arrow-in-right"></span> Log-in
                             </a>
-                            <p class="text-start p-2"><i>Don't have an account? Register <a class="" href="signup.php"><strong>here</strong></a></i></p>
+                            <p class="text-start p-2"><span class="fst-italic">Don't have an account? Register <a class="" href="signup.php"><strong>here</strong></a></span></p>
                         </div>
                     </div>
                 </div>

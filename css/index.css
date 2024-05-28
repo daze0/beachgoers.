@@ -30,12 +30,12 @@ main > div.container > div div.row:last-child > div > p  a {
     color: #F2F3AE;
 }
 
-main > div.container > div button {
+.btn-yellow {
     background-color: #F2F3AE;
     color: #A44200;
 }
 
-main > div.container > div button:hover {
+.btn-yellow:hover {
     color: #F2F3AE;
     background-color: #A44200;
 }
