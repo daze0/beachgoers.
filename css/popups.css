@@ -25,7 +25,7 @@ div.modal-content > div.modal-footer {
     border-top: 1px solid #A44200;
 }
 
-div.modal-content > div.modal-body > div > div > span {
+div.modal-content > div.modal-body > div > div:nth-child(2n+2) > span {
     color: #D58936;
 }
 
