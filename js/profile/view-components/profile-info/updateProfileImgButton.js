@@ -9,7 +9,7 @@ class UpdateProfileImgButton extends PopupOpenElement {
     generateComponent(isPersonalProfile) {
         let btn = undefined;
         if (isPersonalProfile) {
-            btn = this._generateReactiveButton("updateProfileImgButton", "bi-pen");
+            btn = this._generateReactiveButton("updateProfileImgButton", "position-absolute", "bi-pen", "edit-profile-picture-btn");
         }
         return (btn instanceof HTMLElement) ? btn.outerHTML : "";
     }

@@ -91,6 +91,7 @@ class ProfileInfo {
         <div class="d-flex flex-column flex-md-row profile-info w-100 align-items-center justify-content-md-between"> 
             <div class="d-flex flex-row flex-md-column p-4 w-50 position-relative">
                 ${this.#generateUserImg(userData)}
+                ${this.#generateUpdateProfileImgButton(userData)}
             </div>
             <div class="d-flex flex-row flex-md-column user-info ps-md-5 py-4 w-100 justify-content-center justify-content-md-start">
                 <div class="row">
@@ -98,9 +99,8 @@ class ProfileInfo {
                     <div class="col-10 text-center col-md-5 col-xl-3 col-xs-10">
                         <div class="row pe-0">
                             <div class="col-12">
-                            ${this.#generateUpdateProfileImgButton(userData)}
-                            ${this.#generateUsername(userData)}
-                            ${this.#generateUserInfo(userData)}
+                                ${this.#generateUsername(userData)}
+                                ${this.#generateUserInfo(userData)}
                             </div>
                         </div>                    
                     </div>
@@ -133,7 +133,8 @@ class ProfileInfo {
     }
 
     #generateUserImg(userData) {
-        return `<img src="upload/${userData["profile_picture"]}" alt="profile picture" class="img-thumbnail profile-picture" />`;
+        return `
+            <img src="upload/${userData["profile_picture"]}" alt="profile picture" class="img-thumbnail profile-picture" />`;
     }
 
     #generateUsername(userData) {
@@ -218,7 +219,7 @@ class ProfileInfo {
         return res;
     }
 
-    
+
     #generateUpdateProfileImgButton(userData) {
         return this.#components.updateProfileImgPopup.getPopupOpenElement().generateComponent(userData["personal_profile"]);
     }

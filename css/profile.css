@@ -64,6 +64,23 @@ main > div.row:first-child button#unfollowButton:hover {
     bottom: -75px;
     left: 50%;
     transform: translateX(-50%);
+    object-fit: cover;
+}
+
+.edit-profile-picture-btn {
+    top: -30%;
+    right: 50%;
+    transform: translateX(-50%);
+    background-color: #F2F3AE;
+    color: #A44200;
+    cursor: pointer;
+}
+
+.edit-profile-picture-btn:focus,
+.edit-profile-picture-btn:active,
+.edit-profile-picture-btn:hover {
+    color: #F2F3AE;
+    background-color: #A44200;
 }
 
 .user-info {
@@ -89,11 +106,35 @@ main > div.row:first-child button#unfollowButton:hover {
         left: 65%;
     }
 
+    .edit-profile-picture-btn {
+        top: -130%;
+        right: 45%;
+        transform: translateX(-45%);
+    }
+
     .user-info {
         margin-top: 0;
     }
 
     .w-md-auto {
         width: auto !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .edit-profile-picture-btn {
+        right: 42%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .edit-profile-picture-btn {
+        right: 41%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .edit-profile-picture-btn {
+        right: 40%;
     }
 }

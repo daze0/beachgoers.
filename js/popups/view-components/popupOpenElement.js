@@ -43,7 +43,11 @@ class PopupOpenElement {
      */
     _generateReactiveElement(id, className, additionalClass = undefined) {
         this.#element = document.createElement('i');
-        this.#element.classList.add('bi', className, "custom-secondary-color", (additionalClass) ? additionalClass : "");
+        if (additionalClass) {
+            this.#element.classList.add('bi', className, "custom-secondary-color", additionalClass);
+        } else {
+            this.#element.classList.add('bi', className, "custom-secondary-color");
+        }
         this.#element.id = id;
 
         // Accessibility attrs
