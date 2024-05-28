@@ -213,7 +213,7 @@ class SignupAuthForm extends AuthForm {
                     <button class="btn custom-btn-secondary" type="button" id="toggle">
                         <span class="bi bi-eye"></span>
                     </button>`;
-            } else if(label === "username"){
+            } else if(label === formKeys[1]){
                 res += `
                 <input type="text" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                 `;
