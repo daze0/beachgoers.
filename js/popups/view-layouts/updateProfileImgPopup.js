@@ -38,7 +38,7 @@ class UpdateProfileImgPopup extends AbstractPopup {
 
         content += `
             <div class="modal-header px-4">
-                <h3 class="modal-title" id="newPostPopupLabel">Update profile image</h3>
+                <h3 class="modal-title" id="updateProfileImgLabel">Update profile image</h3>
                 ${this._getComponent("popupCancelButton").generateComponent().outerHTML}
             </div>
         `;

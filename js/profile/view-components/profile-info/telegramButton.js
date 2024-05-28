@@ -32,7 +32,7 @@ class TelegramButton {
             this.#button.id = "telegramButton";
             this.#button.type = "button";
             this.#button.classList.add("btn", "mt-2", "mt-lg-0", "ms-lg-2", "d-flex", "flex-row", "justify-content-center", "align-items-center");
-            this.#button.innerHTML = "Contact <i class='bi bi-telegram ms-2'></i>";
+            this.#button.innerHTML = "Contact <span class='bi bi-telegram ms-2'></span>";
             this.#button.href = "https://t.me/" + telegramUsername;
             this.#button.target = "_blank";
         }

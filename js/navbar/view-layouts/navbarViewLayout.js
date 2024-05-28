@@ -31,14 +31,14 @@ class NavbarViewLayout {
                     </a>
                 </div>
                 <div class="d-flex flex-row flex-md-col mb-2 mb-md-0 ms-2 ms-md-0 me-3 w-100 justify-content-center justify-content-md-end">
-                    <a href="feed.php" class="nav-link mb-0 me-4 me-md-3">
-                        <i class="bi bi-house-fill fs-3 navbar-color"></i>
+                    <a href="feed.php" class="nav-link mb-0 me-4 me-md-3" title="Home">
+                        <span class="bi bi-house-fill fs-3 navbar-color"></span>
                     </a>
-                    <a href="profile.php" class="nav-link mb-0 me-4 me-md-3">
-                        <i class="bi bi-person-fill fs-3 navbar-color"></i>
+                    <a href="profile.php" class="nav-link mb-0 me-4 me-md-3" title="Profile">
+                        <span class="bi bi-person-fill fs-3 navbar-color"></span>
                     </a>
                     ${this.#components["notificationButton"].generateComponent().outerHTML}
-                    <a href="#" class="nav-link mb-0 ms-4 mx-md-3">
+                    <a href="#" class="nav-link mb-0 ms-4 mx-md-3" title="Logout">
                         ${this.#components["logoutIcon"].generateComponent().outerHTML}
                     </a>
                 </div>

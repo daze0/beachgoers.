@@ -70,7 +70,7 @@ class UpdateProfileImgForm {
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="profileImgUploadInput" class="form-label visually-hidden">Image</label>
             
-                <input type="file" id="profileImgUploadInput" name="profileimg" class="form-control rounded" placeholder="Image">
+                <input type="file" id="profileImgUploadInput" name="profileimg" class="form-control rounded">
             </div>
         `;
     }

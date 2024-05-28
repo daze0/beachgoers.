@@ -76,7 +76,7 @@ class TelegramConnectorPopup extends AbstractDataPopup {
         button.id = "openTelegramBotChatButton";
         button.type = "button";
         //button.classList.add("btn");
-        button.innerHTML = "<i class='bi bi-telegram'></i>";
+        button.innerHTML = "<span class='bi bi-telegram'></span>";
         button.href =  "https://t.me/"+telegramBotUsername;
         button.target =  "_blank";
         return button.outerHTML;

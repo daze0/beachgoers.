@@ -82,7 +82,7 @@ class NewPostForm {
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="imageUploadInput" class="form-label visually-hidden">Image</label>
             
-                <input type="file" id="imageUploadInput" name="postimg" class="form-control rounded" placeholder="Image">
+                <input type="file" id="imageUploadInput" name="postimg" class="form-control rounded">
             </div>
         `;
     }

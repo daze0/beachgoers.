@@ -19,7 +19,7 @@ class CommentCancelButton {
         this.#commentCancelButton = document.createElement('button');
         this.#commentCancelButton.id = "commentCancelButton-" + this.#commentid;
         this.#commentCancelButton.type = 'button';
-        this.#commentCancelButton.innerHTML = "<i class='bi bi-trash'></i>";
+        this.#commentCancelButton.innerHTML = "<span class='bi bi-trash'></span>";
         this.#commentCancelButton.classList.add('btn');
         return this.#commentCancelButton;
     }

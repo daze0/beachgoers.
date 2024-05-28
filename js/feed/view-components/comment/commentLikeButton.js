@@ -101,7 +101,7 @@ class CommentLikeButton {
         this.#commentLikeButton.id = "commentLikeButton-" + this.#commentid;
         this.#commentLikeButton.type = "button";
         this.#commentLikeButton.classList.add("btn");
-        this.#commentLikeButton.innerHTML = "<i class='bi bi-heart'></i>";
+        this.#commentLikeButton.innerHTML = "<span class='bi bi-heart'></span>";
         if (this.#hasLiked) {
             this.#commentLikeButton.classList.add("d-none");
         }
@@ -112,7 +112,7 @@ class CommentLikeButton {
         this.#commentRemoveLikeButton.id = "commentRemoveLikeButton-" + this.#commentid;
         this.#commentRemoveLikeButton.type = "button";
         this.#commentRemoveLikeButton.classList.add("btn");
-        this.#commentRemoveLikeButton.innerHTML = "<i class='bi bi-heart-fill'></i>";
+        this.#commentRemoveLikeButton.innerHTML = "<span class='bi bi-heart-fill'></span>";
         if (!this.#hasLiked) {
             this.#commentRemoveLikeButton.classList.add("d-none");
         }
