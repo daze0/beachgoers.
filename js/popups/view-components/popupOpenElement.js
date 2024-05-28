@@ -77,7 +77,7 @@ class PopupOpenElement {
         this.#element.setAttribute('aria-hidden', 'true');
         this.#element.setAttribute('aria-label', id);
 
-        this.#element.innerHTML = `<i class="bi ${iconClassName}"></i>`;
+        this.#element.innerHTML = `<span class="bi ${iconClassName}"></span>`;
 
         this.#listener = new Listener(`#${this.#element.id}`, "click", this.popupOpenCallback);
 

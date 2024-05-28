@@ -36,7 +36,7 @@ class SearchForm {
                 <input id="searchQueryInput" class="form-control navbar-dark-color" name="query" type="search" placeholder="Search by username">
                 <div class="input-group-append">
                     <button class="btn navbar-color" type="submit">
-                        <i class="bi bi-search"></i>
+                        <span class="bi bi-search"></span>
                     </button>
                 </div>
             </div>

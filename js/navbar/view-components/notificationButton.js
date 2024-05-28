@@ -18,7 +18,7 @@ class NotificationButton {
         button.href = "#";
         button.title = "Notifications";
 
-        const icon = document.createElement("i");
+        const icon = document.createElement("span");
         icon.classList.add("d-inline-block", "align-top", "bi", "bi-bell-fill", "navbar-color", "fs-3");
         button.append(icon);
 
@@ -99,7 +99,7 @@ class NotificationButton {
         itemLink.classList.add('btn', 'w-100', 'h-100');
         itemLink.href = "https://t.me/BeachgoersBot";
         itemLink.target = "_blank";
-        itemLink.innerHTML = '<i class="bi bi-telegram"></i>' + " Click to open telegram bot";
+        itemLink.innerHTML = '<span class="bi bi-telegram"></span>' + " Click to open telegram bot";
         item.appendChild(itemLink);
         return item;
     }

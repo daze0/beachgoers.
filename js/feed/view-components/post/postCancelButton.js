@@ -17,7 +17,7 @@ class PostCancelButton{
         this.#postCancelButton = document.createElement('button');
         this.#postCancelButton.id = "postCancelButton-"+this.#postid;
         this.#postCancelButton.type = 'button';
-        this.#postCancelButton.innerHTML = "<i class='bi bi-trash'></i>";
+        this.#postCancelButton.innerHTML = "<span class='bi bi-trash'></span>";
         this.#postCancelButton.classList.add('btn','text-danger');
         return this.#postCancelButton;
     }

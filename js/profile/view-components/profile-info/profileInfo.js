@@ -169,7 +169,7 @@ class ProfileInfo {
             "likes": `
                 <div class="d-flex flex-row gx-0">
                     <div class="d-flex flex-column me-2 custom-secondary-color">
-                        <i class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></i>
+                        <span class='bi bi-heart' aria-hidden="true" aria-label="likes" title="likes"></span>
                     </div>
                     <div class="d-flex flex-column">
                         <p class="user-info-value">${this.#userInfo["likes"]}</p>
@@ -179,7 +179,7 @@ class ProfileInfo {
             "posts": `
                 <div class="d-flex flex-row gx-0">
                     <div class="d-flex flex-column me-2 custom-secondary-color">
-                        <i class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></i>
+                        <span class='bi bi-file-text' aria-hidden="true" aria-label="posts" title="posts"></span>
                     </div>
                     <div class="d-flex flex-column">
                         <p class="user-info-value">${this.#userInfo["posts"]}</p>

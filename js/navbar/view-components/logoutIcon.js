@@ -5,7 +5,7 @@ class LogoutIcon {
     _listeners;
 
     constructor() {
-        this._icon = document.createElement('i');
+        this._icon = document.createElement('span');
         this.logoutCallback = this.logoutCallback.bind(this);
         this._listeners = {
             "logoutIconClick": new Listener("#logoutIcon", "click", this.logoutCallback),
