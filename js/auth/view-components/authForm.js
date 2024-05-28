@@ -83,10 +83,10 @@ class AuthForm {
         const toggle = document.getElementById('toggle');
         if (passwordInput.type === 'password') {
             passwordInput.setAttribute('type', 'text');
-            toggle.innerHTML = '<i class="bi bi-eye-slash"></i>';
+            toggle.innerHTML = '<span class="bi bi-eye-slash"></span>';
         } else {
             passwordInput.setAttribute('type', 'password');
-            toggle.innerHTML = '<i class="bi bi-eye"></i>';
+            toggle.innerHTML = '<span class="bi bi-eye"></span>';
         }
     }
 }
@@ -112,17 +112,17 @@ class LoginAuthForm extends AuthForm {
         let res = `
         <div class="input-group mt-2 mb-2 flex-nowrap">
             <label for="input${label}Login" class="form-label visually-hidden">${label}</label>
-            <span class="input-group-text"><i class="${classIcon}"></i></span>
+            <span class="input-group-text"><span class="${classIcon}"></span></span>
             `;
         if (label === "Password") {
             res += `
-            <input type="${label.toLowerCase()}" id="input${label}" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
+            <input type="password" id="input${label}Login" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
             <button class="btn custom-btn-secondary" type="button" id="toggle">
-                <i class="bi bi-eye"></i>
+                <span class="bi bi-eye"></span>
             </button>`;
         } else {
             res += `
-            <input type="${label.toLowerCase()}" id="input${label}Login" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
+            <input type="text" id="input${label}Login" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
             `;
         }
         res += `</div>`;
@@ -204,14 +204,14 @@ class SignupAuthForm extends AuthForm {
             res = `
             <div class="input-group mt-2 mb-2 flex-nowrap">
                 <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
-                <span class="input-group-text"><i class="${classIcon}"></i></span>
+                <span class="input-group-text"><span class="${classIcon}"></span></span>
                 `;
 
             if (label === formKeys[2]) {
                 res += `
                 <input type="${trimmedLabel.toLowerCase()}" id="input${trimmedLabel}" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                     <button class="btn custom-btn-secondary" type="button" id="toggle">
-                        <i class="bi bi-eye"></i>
+                        <span class="bi bi-eye"></span>
                     </button>`;
             } else {
                 res += `
@@ -224,7 +224,7 @@ class SignupAuthForm extends AuthForm {
                 <div class="input-group custom-btn-file mt-2 mb-2 flex-nowrap">
                     <label for="input${trimmedLabel}Signup" class="form-label visually-hidden">${label}</label>
                     <span class="input-group-text">
-                        <i class="${classIcon}"></i>
+                        <span class="${classIcon}"></span>
                     </span>
                 `;
                 res += `
