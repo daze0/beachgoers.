@@ -33,7 +33,7 @@ function uploadImg($filename)
         return $errorMsgs;
     }
 
-    $targetFileName = time() . '_' . $_FILES[$filename]["name"];
+    $targetFileName = time() . '_' . str_replace(" ","_",$_FILES[$filename]["name"]);
     $targetFile = "../" . UPLOAD_DIR . $targetFileName;
     $uploadOk = true;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
