@@ -22,6 +22,17 @@ div.input-group-append > button:hover {
     background-color: #F2F3AE ;
 }
 
+@media (min-width: 768px) {
+    .nav-link:hover {
+        color: #F2F3AE !important;
+        background-color: #A44200;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        border-radius: 0.375em;
+    }
+}
+
+
 /********************************
 Error handling animation
 */

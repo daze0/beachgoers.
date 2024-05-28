@@ -14,12 +14,12 @@ class NotificationButton {
     generateComponent() {
         const button = document.createElement("a");
         button.id = "notificationButton";
-        button.classList.add("nav-link", "mb-0", "position-relative");
+        button.classList.add("nav-link", "mb-0", "position-relative", "py-1", "px-3", "navbar-color");
         button.href = "#";
         button.title = "Notifications";
 
         const icon = document.createElement("span");
-        icon.classList.add("d-inline-block", "align-top", "bi", "bi-bell-fill", "navbar-color", "fs-3");
+        icon.classList.add("d-inline-block", "align-top", "bi", "bi-bell-fill", "fs-3");
         button.append(icon);
 
         const badge = document.createElement("span");
@@ -53,33 +53,33 @@ class NotificationButton {
         notificationList.id = "notification-list";
         notificationList.classList.add('navbar-dark-color');
 
-        if(notifications.length){
+        if (notifications.length) {
             for (const notification of notifications) {
                 const notificationItem = document.createElement("div");
                 notificationItem.classList.add("notification-item", "p-2", "border-bottom");
-    
+
                 if (!notification.read) {
                     notificationItem.classList.add("notification-item-unread");
                     const notificationItemUnreadBadge = document.createElement("span");
                     notificationItemUnreadBadge.classList.add("my-2", "me-1", "float-start",
                         "p-1", "bg-danger", "border", "border-light", "rounded-circle");
                     notificationItem.append(notificationItemUnreadBadge);
-    
+
                 }
-    
+
                 const notificationItemDateTime = document.createElement("span");
                 notificationItemDateTime.classList.add("float-end", "notification-elapsed-time");
                 notificationItemDateTime.textContent = Utils.generateTimeElapsedString(notification.createdAt);
                 notificationItem.appendChild(notificationItemDateTime);
-    
+
                 const notificationItemContent = document.createElement("div");
                 notificationItemContent.innerHTML = notification.content;
                 notificationItem.appendChild(notificationItemContent);
-    
-    
+
+
                 notificationList.append(notificationItem);
             }
-        }else{
+        } else {
             const noElementItem = document.createElement("div");
             noElementItem.classList.add("notification-item", "p-3", "border-bottom", "text-center", "m-0");
             noElementItem.textContent = "No notifications yet";
