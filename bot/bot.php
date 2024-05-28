@@ -14,32 +14,32 @@ class BotHelper{
 
     public function sendNewLikeNotification($post, $postAuthor, $user): bool{
         $userUrl = BASE_URL."profile.php?uid=".$user["userid"];
-        $userLink = '<b><a href="'.$userUrl.'">'.$user["username"]."</a></b>";
+        $userLink = '<strong><a href="'.$userUrl.'">'.$user["username"]."</a></strong>";
         $postUrl = BASE_URL."feed.php?post=".$post["postid"];
-        $postLink = '<b><a href="'.$postUrl.'">post</a></b>';
+        $postLink = '<strong><a href="'.$postUrl.'">post</a></strong>';
         return $this->sendMessage($postAuthor, "New Like to your ".$postLink." by ".$userLink." ❤️");
     }
 
     public function sendNewCommentLikeNotification($comment, $commentAuthor, $user): bool{
         $userUrl = BASE_URL."profile.php?uid=".$user["userid"];
-        $userLink = '<b><a href="'.$userUrl.'">'.$user["username"]."</a></b>";
+        $userLink = '<strong><a href="'.$userUrl.'">'.$user["username"]."</a></strong>";
         $postUrl = BASE_URL."feed.php?post=".$comment["post"];
-        $commentLink = '<b><a href="'.$postUrl.'">comment</a></b>';
+        $commentLink = '<strong><a href="'.$postUrl.'">comment</a></strong>';
         return $this->sendMessage($commentAuthor, "New Like to your ".$commentLink." by ".$userLink." ❤️");
     }
 
     public function sendNewCommentNotification($post, $postAuthor, $commentText, $commentAuthor): bool{
         $commentAuthorUrl = BASE_URL."profile.php?uid=".$commentAuthor["userid"];
-        $commentAuthorLink = '<b><a href="'.$commentAuthorUrl.'">'.$commentAuthor["username"]."</a></b>";
+        $commentAuthorLink = '<strong><a href="'.$commentAuthorUrl.'">'.$commentAuthor["username"]."</a></strong>";
         $postUrl = BASE_URL."feed.php?post=".$post["postid"];
-        $postLink = '<b><a href="'.$postUrl.'">post</a></b>';
+        $postLink = '<strong><a href="'.$postUrl.'">post</a></strong>';
         $notificationMessage = $commentAuthorLink." commented your ".$postLink." 💬";
         return $this->sendMessage($postAuthor, $notificationMessage);
     }
 
     public function sendNewFollowerNotification($followed, $follower): bool{
         $followerUrl = BASE_URL."profile.php?uid=".$follower["userid"];
-        $text = '<b><a href="'.$followerUrl.'">'.$follower["username"]."</a></b> started following you! 🚀";
+        $text = '<strong><a href="'.$followerUrl.'">'.$follower["username"]."</a></strong> started following you! 🚀";
         return $this->sendMessage(
             $followed, 
             $text
