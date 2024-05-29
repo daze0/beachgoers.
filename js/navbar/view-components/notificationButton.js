@@ -14,7 +14,7 @@ class NotificationButton {
     generateComponent() {
         const button = document.createElement("a");
         button.id = "notificationButton";
-        button.classList.add("nav-link", "mb-0", "position-relative", "py-1", "px-3", "navbar-color");
+        button.classList.add("nav-link", "mb-0", "position-relative", "py-1", "px-3", "navbar-color", "mx-3");
         button.href = "#";
         button.title = "Notifications";
 

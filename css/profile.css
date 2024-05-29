@@ -1,5 +1,5 @@
 main > div.row:first-child {
-    margin-top: 12rem !important;
+    margin-top: 6rem !important;
 }
 
 .profile-info {
@@ -73,6 +73,7 @@ main > div.row:first-child button#unfollowButton:hover {
     transform: translateX(-50%);
     background-color: #F2F3AE;
     color: #A44200;
+    /*opacity: 0.5;*/
     cursor: pointer;
 }
 

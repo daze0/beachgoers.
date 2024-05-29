@@ -107,7 +107,7 @@ class ProfileInfo {
                     <div class="col-1 col-md-6 col-xl-8 col-xs-2 pe-0"></div>
                 </div>
             </div>
-            <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-start py-4 px-5 ps-md-0 pe-md-5 w-75 w-md-auto">
+            <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-start py-4 pt-0 pt-md-4 px-5 ps-md-0 pe-md-5 w-75 w-md-auto">
                 ${this.#components["followButton"].generateComponent(userData["personal_profile"], userData["follow_status"], this.#layout)}
                 ${this.#components["telegramButton"].generateComponent(userData["personal_profile"], userData["telegram_username"])}
                 ${this.#generateEnableNotificationContent(userData["personal_profile"], userData)}
@@ -124,7 +124,7 @@ class ProfileInfo {
                 return this.#components["telegramConnectorPopup"].getPopupOpenElement().generateComponent();
             } else {
                 return `
-                    <p>Notifications enabled</p>
+                    <h6 class="text-center">Notifications enabled</h6>
                 `;
             }
         } else {
@@ -139,8 +139,8 @@ class ProfileInfo {
 
     #generateUsername(userData) {
         return `
-            <div class="d-flex flex-row justify-content-center justify-content-md-start ps-0 px-md-0">
-                <p class="fs-5">${userData["username"]}</p>
+            <div class="d-flex flex-row justify-content-center justify-content-md-start ps-0 px-md-0 mb-2">
+                <h2>${userData["username"]}</h2>
             </div>
         `;
     }

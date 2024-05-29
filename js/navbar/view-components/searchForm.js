@@ -18,7 +18,7 @@ class SearchForm {
         this._form.id = "searchForm";
         this._form.method = "get";
         this._form.autocomplete = "off";
-        this._form.classList.add("form-inline", "me-2");
+        this._form.classList.add("form-inline", "mx-4", "me-md-0");
         this._form.innerHTML = this.#generateSearchForm();
 
         document.addEventListener("DOMContentLoaded", e => {
@@ -33,7 +33,7 @@ class SearchForm {
         return `
             <div class="input-group">
                 <label for="searchQueryInput" class="d-none">Search</label>
-                <input id="searchQueryInput" class="form-control navbar-dark-color" name="query" type="search" placeholder="Search by username">
+                <input id="searchQueryInput" class="form-control navbar-dark-color rounded-start" name="query" type="search" placeholder="Search by username">
                 <div class="input-group-append">
                     <button class="btn navbar-color" type="submit">
                         <span class="bi bi-search"></span>
