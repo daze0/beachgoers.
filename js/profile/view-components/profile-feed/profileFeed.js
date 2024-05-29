@@ -37,7 +37,7 @@ class ProfileFeed {
     }
 
     loadMorePosts() {
-        const postSectionLoadingElem = document.querySelector("#postSection > div > div.loading-dots");
+        const postSectionLoadingElem = document.querySelector("#postSection > div.loading-dots");
 
         // Loading animation
         this.#components["loadingElement"].toggleComponent();
