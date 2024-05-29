@@ -24,10 +24,13 @@ class NotificationButton {
 
         const badge = document.createElement("span");
         badge.id = "notificationButtonBadge";
-        badge.classList.add("badge", "bg-danger", "text-white", "position-absolute", "start-100",
+        badge.classList.add("badge", "bg-danger", "text-white", "position-absolute",
             "translate-middle", "rounded-circle", "d-none");
         badge.style.fontSize = "0.75rem";
         badge.style.padding = "0.2rem 0.4rem";
+        badge.style.top = "0.2rem";
+        badge.style.right = "-0.5rem";
+
         button.append(badge);
 
         return button;
