@@ -104,7 +104,7 @@ class LoginAuthForm extends AuthForm {
 
     _generateAuthQuestion() {
         return `
-        <p class="m-2 text-center">Don't have an account? <a href="signup.php"><strong>Sign-up</strong></a></p>
+        <p class="m-2 text-center">Don't have an account? <br/><a href="signup.php"><strong>Sign-up</strong></a></p>
         `;
     }
 
