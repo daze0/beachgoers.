@@ -84,7 +84,7 @@ class FeedViewLayout {
 
     #generate() {
         let content = `
-        <div class="row gx-0 py-5">
+        <div class="row gx-0">
             <div id="spacingStartSection" class="col-sm-1 col-md-4"></div>
             <div id="spacingCenterSection" class="d-none"></div>
             <div id="postSection" class="col-sm-10 col-md-4 py-5">

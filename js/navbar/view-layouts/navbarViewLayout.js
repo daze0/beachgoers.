@@ -26,7 +26,7 @@ class NavbarViewLayout {
         <div class="container-fluid py-4">
             <div class="d-flex flex-column flex-md-row w-100 align-items-center justify-content-md-between">
                 <div class="d-flex flex-row flex-md-col mb-2 mb-md-0 w-100 justify-content-center justify-content-md-start">
-                    <a href="#" class="navbar-brand navbar-color mb-0 mx-2 h1">
+                    <a href="feed.php" class="navbar-brand navbar-color mb-0 mx-2 h1 fs-1">
                         beachgoers.
                     </a>
                 </div>

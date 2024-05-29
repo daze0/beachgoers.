@@ -15,6 +15,10 @@ body {
     background-attachment: fixed;
 }
 
+html, body{
+    font-family: "Comfortaa", sans-serif;
+}
+
 body > main {
     flex: 1;
 }
