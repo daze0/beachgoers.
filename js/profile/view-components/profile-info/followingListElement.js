@@ -9,7 +9,7 @@ class FollowingListElement extends PopupOpenElement {
         return `
             <div class="d-flex flex-row gx-0">
                 <div class="d-flex flex-column me-2">
-                    ${this._generateReactiveElement('followingListPopupOpen', 'bi-people-fill', 'user-info-icon-animate', 'Follows').outerHTML}
+                    ${this._generateReactiveElement('followingListPopupOpen', 'bi-people-fill', 'user-info-icon-animate', 'Following').outerHTML}
                 </div>
                 <div class="d-flex flex-column">
                     <p class="user-info-value">${data}</p>
