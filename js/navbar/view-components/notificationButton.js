@@ -28,8 +28,8 @@ class NotificationButton {
             "translate-middle", "rounded-circle", "d-none");
         badge.style.fontSize = "0.75rem";
         badge.style.padding = "0.2rem 0.4rem";
-        badge.style.top = "0.2rem";
-        badge.style.right = "-0.5rem";
+        badge.style.top = "0.3rem";
+        badge.style.right = "-0.2rem";
 
         button.append(badge);
 
@@ -54,7 +54,7 @@ class NotificationButton {
     #generateNotificationList(notifications) {
         const notificationList = document.createElement("div");
         notificationList.id = "notification-list";
-        notificationList.classList.add('navbar-dark-color');
+        notificationList.classList.add('navbar-dark-color', 'rounded');
 
         if (notifications.length) {
             for (const notification of notifications) {
@@ -129,11 +129,14 @@ class NotificationButton {
             const notifications = response.data.notifications;
             const notificationList = this.#generateNotificationList(notifications);
             const navbar = document.querySelector(".navbar");
+            const notificationButton = document.getElementById("notificationButton");
+            notificationButton.classList.add("active");
             navbar.append(notificationList);
             this.updateBadgeCount();
 
             document.addEventListener("click", e => {
                 notificationList.remove();
+                notificationButton.classList.remove("active");
             }, { once: true });
         }).catch(error => {
             console.log("Error detected while getting notifications: " + error);

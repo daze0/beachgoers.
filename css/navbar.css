@@ -22,14 +22,15 @@ div.input-group-append > button:hover {
     background-color: #F2F3AE ;
 }
 
-@media (min-width: 768px) {
-    .nav-link:hover {
-        color: #F2F3AE !important;
-        background-color: #A44200;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
-        border-radius: 0.375em;
-    }
+.nav-link{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 0.375em;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #F2F3AE !important;
+    background-color: #A44200;
 }
 
 
@@ -111,12 +112,20 @@ NOTIFICATIONS
     width: 20rem;
     position: absolute;
     border: 1px solid #A44200;
-    border-bottom: none;
+    /* border-bottom: none; */
     border-top: 1px solid #A44200;
     z-index: 99;
-    top: 3.5rem;
+    top: 7.6rem;
     /* left: -15rem; */
     right: 0;
+}
+
+@media (min-width: 768px) {
+    #notification-list {      
+        top: 4.8rem;
+        left: calc(50% + 1rem);
+        width: 25rem;
+    }
 }
 
 .notification-item {
