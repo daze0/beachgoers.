@@ -6,7 +6,7 @@ class TelegramConnector extends PopupOpenElement {
     }
 
     generateComponent() {
-        const button = this._generateReactiveButton("telegramConnectorButton", "btn", "bi-telegram");
+        const button = this._generateReactiveButton("telegramConnectorButton", "btn", "bi-telegram", undefined, "Enable notifications");
         button.append(" Enable notifications");
 
         return button.outerHTML;

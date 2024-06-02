@@ -102,6 +102,7 @@ class CommentLikeButton {
         this.#commentLikeButton.type = "button";
         this.#commentLikeButton.classList.add("btn");
         this.#commentLikeButton.innerHTML = "<span class='bi bi-heart'></span>";
+        this.#commentLikeButton.title = "Like comment";
         if (this.#hasLiked) {
             this.#commentLikeButton.classList.add("d-none");
         }
@@ -113,6 +114,7 @@ class CommentLikeButton {
         this.#commentRemoveLikeButton.type = "button";
         this.#commentRemoveLikeButton.classList.add("btn");
         this.#commentRemoveLikeButton.innerHTML = "<span class='bi bi-heart-fill'></span>";
+        this.#commentRemoveLikeButton.title = "Remove like";
         if (!this.#hasLiked) {
             this.#commentRemoveLikeButton.classList.add("d-none");
         }

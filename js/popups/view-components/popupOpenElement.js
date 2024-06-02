@@ -41,7 +41,7 @@ class PopupOpenElement {
      * @param {*} className 
      * @returns created reactive element.
      */
-    _generateReactiveElement(id, className, additionalClass = undefined) {
+    _generateReactiveElement(id, className, additionalClass = undefined, title = undefined) {
         this.#element = document.createElement('span');
         if (additionalClass) {
             this.#element.classList.add('bi', className, "custom-secondary-color", additionalClass);
@@ -53,7 +53,7 @@ class PopupOpenElement {
         // Accessibility attrs
         this.#element.setAttribute('aria-hidden', 'true');
         this.#element.setAttribute('aria-labelledby', id);
-        this.#element.title = id;
+        this.#element.title = title;
 
         this.#listener = new Listener(`#${this.#element.id}`, "click", this.popupOpenCallback);
 
@@ -69,7 +69,7 @@ class PopupOpenElement {
      * @param {*} iconClassName 
      * @returns created reactive button.
      */
-    _generateReactiveButton(id, className, iconClassName, additionalClass = undefined) {
+    _generateReactiveButton(id, className, iconClassName, additionalClass = undefined, title = undefined) {
         this.#element = document.createElement('button');
         this.#element.id = id;
         this.#element.classList.add('btn', className);
@@ -77,7 +77,9 @@ class PopupOpenElement {
         this.#element.type = 'button';
 
         // Accessibility attrs
-        this.#element.title = id;
+        if(title){
+            this.#element.title = title;
+        }
         this.#element.setAttribute('aria-hidden', 'true');
         this.#element.setAttribute('aria-label', id);
 

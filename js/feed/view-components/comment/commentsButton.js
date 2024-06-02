@@ -9,7 +9,7 @@ class CommentsButton extends PopupOpenElement {
 
     generateComponent(postid, commentsCount) {
         this.#postid = postid;
-        const button = this._generateReactiveButton("commentsButton-" + postid, "btn", "bi-chat");
+        const button = this._generateReactiveButton("commentsButton-" + postid, "btn", "bi-chat", undefined, "Comments");
         const badge = document.createElement('span');
         badge.id = "commentsButtonCountBadge-" + postid;
         badge.classList.add('badge', 'pe-0');

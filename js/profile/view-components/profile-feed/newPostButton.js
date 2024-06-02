@@ -9,7 +9,7 @@ class NewPostButton extends PopupOpenElement {
     generateComponent(isPersonalProfile) {
         let btn = undefined;
         if (isPersonalProfile) {
-            btn = this._generateReactiveButton("newPostButton", "w-100", "bi-plus-circle", "py-3");
+            btn = this._generateReactiveButton("newPostButton", "w-100", "bi-plus-circle", "py-3", "New post");
         }
         return (btn instanceof HTMLElement) ? btn.outerHTML : "";
     }

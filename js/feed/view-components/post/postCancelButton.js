@@ -19,6 +19,8 @@ class PostCancelButton{
         this.#postCancelButton.type = 'button';
         this.#postCancelButton.innerHTML = "<span class='bi bi-trash'></span>";
         this.#postCancelButton.classList.add('btn','text-danger');
+        this.#postCancelButton.title = "Delete post";
+        
         return this.#postCancelButton;
     }
 

@@ -21,6 +21,7 @@ class CommentCancelButton {
         this.#commentCancelButton.type = 'button';
         this.#commentCancelButton.innerHTML = "<span class='bi bi-trash'></span>";
         this.#commentCancelButton.classList.add('btn');
+        this.#commentCancelButton.title = "Delete comment";
         return this.#commentCancelButton;
     }
 
