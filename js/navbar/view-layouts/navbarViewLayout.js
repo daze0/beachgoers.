@@ -30,7 +30,7 @@ class NavbarViewLayout {
                         beachgoers.
                     </a>
                 </div>
-                <div class="d-flex flex-row flex-md-col mb-2 mb-md-0 mx-2 w-100 justify-content-center justify-content-md-end">
+                <div class="d-flex flex-row flex-md-col mb-2 mb-md-0 mx-2 w-100 justify-content-center justify-content-md-center">
                     <a href="feed.php" class="nav-link navbar-color mb-0 mx-3 me-md-3 py-1 px-3" title="Home">
                         <span class="bi bi-house-fill fs-3"></span>
                     </a>
@@ -42,7 +42,7 @@ class NavbarViewLayout {
                         ${this.#components["logoutIcon"].generateComponent().outerHTML}
                     </a>
                 </div>
-                <div class="d-flex flex-column flex-md-row w-100 justify-content-end">
+                <div class="d-flex flex-row flex-md-row w-100 justify-content-center justify-content-md-end">
                     ${this.#components["searchForm"].generateComponent().outerHTML}
                 </div>
                 

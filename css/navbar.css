@@ -52,6 +52,17 @@ Error handling animation
 /********************************
 AUTOCOMPLETE
 */
+
+#searchForm .input-group{
+    width: 19rem;
+}
+
+@media (min-width: 768px) {
+    #searchForm .input-group{
+        width: initial;
+    }
+}
+
 .autocomplete {
     position: relative;
     display: inline-block;
