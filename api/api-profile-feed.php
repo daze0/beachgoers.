@@ -32,6 +32,7 @@ if (isUserLoggedIn()) {
                     $rich_post["img"] = $post["img"];
                     $rich_post["content"] = $post["content"];
                     $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
+                    $rich_post["canDelete"] = false;
                     $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0][0];
                     $comments = $dbh->getCommentsByPostId($post["postid"]);
                     foreach ($comments as $idx => $comment) {
@@ -68,6 +69,7 @@ if (isUserLoggedIn()) {
                     $rich_post["img"] = $post["img"];
                     $rich_post["content"] = $post["content"];
                     $rich_post["hasMyLike"] = $dbh->doesUserAlreadyLikePost($_SESSION["userid"], $post["postid"]);
+                    $rich_post["canDelete"] = true;
                     $rich_post["likes"] = $dbh->getPostLikesById($post["postid"])[0][0];
                     $comments = $dbh->getCommentsByPostId($post["postid"]);
                     foreach ($comments as $idx => $comment) {
