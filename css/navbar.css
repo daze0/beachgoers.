@@ -79,12 +79,12 @@ AUTOCOMPLETE
     top: 100%;
     left: 0;
     right: 0;
+    background-color: #F2F3AE;
 }
 
 .autocomplete-items div {
     padding: 10px;
     cursor: pointer;
-    background-color: #F2F3AE;
     border-bottom: 1px solid #A44200;
 }
 
