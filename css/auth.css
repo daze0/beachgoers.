@@ -93,3 +93,7 @@
 .custom-btn-file input[type=file]::file-selector-button {
     display: none;
 }
+
+.empty-required-input {
+    border: 2px solid #A44200;
+}

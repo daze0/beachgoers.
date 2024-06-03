@@ -213,11 +213,11 @@ class SignupAuthForm extends AuthForm {
                     <button class="btn custom-btn-secondary" type="button" id="toggle">
                         <span class="bi bi-eye"></span>
                     </button>`;
-            } else if(label === formKeys[1]){
+            } else if (label === formKeys[1]) {
                 res += `
                 <input type="text" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                 `;
-            }else { //email
+            } else { //email
                 res += `
                 <input type="email" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
                 `;
@@ -262,6 +262,28 @@ class SignupAuthForm extends AuthForm {
                 }, 500);
             } else {
                 document.querySelector("form > p").innerHTML = response.data["signup_error"];
+                if (response.data["signup_error"] == "No profile picture provided") {
+                    const profilePicInput = document.getElementById("inputProfilepictureSignup");
+                    profilePicInput.classList.add("empty-required-input");
+                    setTimeout(() => {
+                        profilePicInput.classList.remove("empty-required-input");
+                    }, 5000);
+                } else {
+                    const requiredInputs = [
+                        document.getElementById("inputEmailSignup"),
+                        document.getElementById("inputUsernameSignup"),
+                        document.getElementById("inputPasswordSignup"),
+                        document.getElementById("inputTelegramusernameSignup")
+                    ];
+                    for (const requiredInput of requiredInputs) {
+                        if (requiredInput.value == "") {
+                            requiredInput.classList.add("empty-required-input");
+                            setTimeout(() => {
+                                requiredInput.classList.remove("empty-required-input");
+                            }, 5000);
+                        }
+                    }
+                }
             }
         });
     }
