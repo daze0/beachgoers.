@@ -17,7 +17,7 @@ class Post {
 
     generateComponent(data, authorUsername, authorImg, layout) {
         this.#components.postLikeButton = new PostLikeButton(data.postid, data.author, data.hasMyLike, layout);
-        if (layout instanceof ProfileViewLayout) {
+        if (layout instanceof ProfileViewLayout && data.canDelete) {
             this.#components.postCancelButton = new PostCancelButton(data);
         }
         this.#components.commentsListPopup = new CommentsListPopup(data);
