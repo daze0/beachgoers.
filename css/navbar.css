@@ -82,6 +82,18 @@ AUTOCOMPLETE
     background-color: #F2F3AE;
 }
 
+/*Remove squared corners for first and last item*/
+.autocomplete-items div:first-child {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.autocomplete-items div:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/*base item*/
 .autocomplete-items div {
     padding: 10px;
     cursor: pointer;
