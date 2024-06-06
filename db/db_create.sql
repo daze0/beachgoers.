@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema ConnectU
+-- Schema beachgoers
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema ConnectU
+-- Schema beachgoers
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ConnectU` ;
-USE `ConnectU` ;
+CREATE SCHEMA IF NOT EXISTS `beachgoers` ;
+USE `beachgoers` ;
 
 -- -----------------------------------------------------
--- Table `ConnectU`.`user`
+-- Table `beachgoers`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ConnectU`.`user` (
+CREATE TABLE IF NOT EXISTS `beachgoers`.`user` (
   `userid` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(20) NOT NULL,
   `password` CHAR(128) NOT NULL,
@@ -33,30 +33,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ConnectU`.`user_follows_user`
+-- Table `beachgoers`.`user_follows_user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ConnectU`.`user_follows_user` (
+CREATE TABLE IF NOT EXISTS `beachgoers`.`user_follows_user` (
   `followed` INT NOT NULL,
   `follower` INT NOT NULL,
   INDEX `fk_user_follows_user_followed_idx` (`followed` ASC),
   INDEX `fk_user_follows_user_follower_idx` (`follower` ASC),
   CONSTRAINT `fk_user_follows_user_followed`
     FOREIGN KEY (`followed`)
-    REFERENCES `ConnectU`.`user` (`userid`)
+    REFERENCES `beachgoers`.`user` (`userid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_follows_user_follower`
     FOREIGN KEY (`follower`)
-    REFERENCES `ConnectU`.`user` (`userid`)
+    REFERENCES `beachgoers`.`user` (`userid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ConnectU`.`post`
+-- Table `beachgoers`.`post`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ConnectU`.`post` (
+CREATE TABLE IF NOT EXISTS `beachgoers`.`post` (
   `postid` INT NOT NULL AUTO_INCREMENT,
   `author` INT NOT NULL,
   `img` VARCHAR(45) NOT NULL,
@@ -67,30 +67,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ConnectU`.`user_likes_post`
+-- Table `beachgoers`.`user_likes_post`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ConnectU`.`user_likes_post` (
+CREATE TABLE IF NOT EXISTS `beachgoers`.`user_likes_post` (
   `user` INT NOT NULL,
   `post` INT NOT NULL,
   INDEX `fk_user_likes_post_user_idx` (`user` ASC),
   INDEX `fk_user_likes_post_post_idx` (`post` ASC),
   CONSTRAINT `fk_user_likes_post_user`
     FOREIGN KEY (`user`)
-    REFERENCES `ConnectU`.`user` (`userid`)
+    REFERENCES `beachgoers`.`user` (`userid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_likes_post_post`
     FOREIGN KEY (`post`)
-    REFERENCES `ConnectU`.`post` (`postid`)
+    REFERENCES `beachgoers`.`post` (`postid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ConnectU`.`comment`
+-- Table `beachgoers`.`comment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ConnectU`.`comment` (
+CREATE TABLE IF NOT EXISTS `beachgoers`.`comment` (
   `commentid` INT NOT NULL AUTO_INCREMENT,
   `user` INT NOT NULL,
   `post` INT NOT NULL,
@@ -101,12 +101,12 @@ CREATE TABLE IF NOT EXISTS `ConnectU`.`comment` (
   INDEX `fk_comment_post_idx` (`post` ASC),
   CONSTRAINT `fk_comment_user`
     FOREIGN KEY (`user`)
-    REFERENCES `ConnectU`.`user` (`userid`)
+    REFERENCES `beachgoers`.`user` (`userid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_post`
     FOREIGN KEY (`post`)
-    REFERENCES `ConnectU`.`post` (`postid`)
+    REFERENCES `beachgoers`.`post` (`postid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
