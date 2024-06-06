@@ -28,3 +28,8 @@ main > div.row > div#postSection > div.card > div.card-header > span > button:ho
 main > div.row > div#postSection > div.card > div.card-body > button:hover {
     border-color: #A44200;
 }
+
+main > div.row > div#postSection > p {
+    background-color: #FFE9BB;
+    color: #A44200;
+}

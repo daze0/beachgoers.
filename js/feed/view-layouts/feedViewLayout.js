@@ -106,6 +106,12 @@ class FeedViewLayout {
             content += postComponent.generateComponent(postData, postData.username, postData.userimg);
         }
 
+        if (content === "") {
+            content = `
+            <p class="text-center rounded-3 py-2"><strong>Nothing to see.</strong></p>
+            `;
+        }
+
         return content;
     }
 }
