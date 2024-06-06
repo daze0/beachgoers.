@@ -1,28 +1,120 @@
-INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `userimg`) VALUES
-('workabroad101', 'iamasc4mm3r', 'workabroad101@info.com', 'Eddie', 'Romero', 'profile-picture.png'),
-('willsmith', 'actuallyn0tW1llSm1th', 'willsmith@gmail.com', 'Ronnie', 'Blakey', 'profile-picture.png'),
-('forgetaboutme', 'rememberm3', 'johnwillings@hotmail.com', 'John', 'Willings', 'profile-picture.png');
+INSERT INTO `user` (`username`, `password`, `email`, `name`, `surname`, `telegramUsername`, `userimg`) VALUES
+('sandy_shores', 'BeachBum123', 'sandy.shores@example.com', 'Sandy', 'Shores', '@sandy_shores_tg', 'profile-picture.png'),
+('ocean_explorer', 'SeaLover456', 'ocean.explorer@example.com', 'Oliver', 'Eastman', '@ocean_explorer_tg', 'profile-picture.png'),
+('wave_rider', 'SurfingQueen789', 'wave.rider@example.com', 'Willa', 'Ryder', '@wave_rider_tg', 'profile-picture.png'),
+('sun_seeker', 'SunnyDays101', 'sun.seeker@example.com', 'Sam', 'Seeker', '@my_pand0 ', 'profile-picture.png'),
+('beach_bum', 'LazyDays999', 'beach.bum@example.com', 'Bree', 'Benson', '@beach_bum_tg', 'profile-picture.png'),
+('sea_breeze', 'BreezyLife123', 'sea.breeze@example.com', 'Serena', 'Breeze', '@sea_breeze_tg', 'profile-picture.png'),
+('surf_sage', 'WisdomWaves333', 'surf.sage@example.com', 'Sage', 'Surfer', '@ahxxl', 'profile-picture.png'),
+('coral_diver', 'UnderwaterWorld555', 'coral.diver@example.com', 'Coraline', 'Diver', '@coral_diver_tg', 'profile-picture.png');
 
 ALTER TABLE `user`
-    MODIFY `userid` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `userid` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 INSERT INTO `post` (`author`, `img`, `content`) VALUES
-(1, 'promo.png', 'Tired of the same routine? We got your back by providing you the opportunity to give a switch to your life. Register now before our promo ends!');
+(1, 'promo.png', 'Enjoying the sunset at Malibu Beach!'),
+(1, 'promo.png', 'The sand is so soft!'),
+(2, 'promo.png', 'Caribbean are so cool, leave me here please!'),
+(2, 'promo.png', 'Sunday at the beach, time well spent.'),
+(3, 'promo.png', 'Gone surfing.'),
+(3, 'promo.png', 'Chilling at my local beach, nothing less nothing more.'),
+(4, 'promo.png', 'Sun cream anyone? I think I sunburnt myself..'),
+(4, 'promo.png', 'Last day was special, me and my family altogether at the beach!'),
+(5, 'promo.png', 'It is a pity that there is so much plastic at this beach.'),
+(5, 'promo.png', 'I am Bree welcome to my Breeach! Ah Ah Ah'),
+(6, 'promo.png', 'No way the ocean is this flat today, I guess I am just going to chill. Not bad though.'),
+(6, 'promo.png', 'Feel the breeeeeeeze!'),
+(7, 'promo.png', 'Surfed at my local beachie, here is a sunset pic.'),
+(7, 'promo.png', 'Having so much fun with my friends in this beautiful piece of paradise!'),
+(8, 'promo.png', 'Imagine what is down below the surface..'),
+(8, 'promo.png', 'Not even a coral in sight, maybe I should change beach, or social?!');
 
 ALTER TABLE `post`
-    MODIFY `postid` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `postid` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 INSERT INTO `comment` (`user`, `post`, `comment`, `likes`) VALUES
-(2, 1, 'Different page, same bullshit.', 145),
-(3, 1, "I'm in, who's with me?", 2);
+(2, 1, 'That looks amazing! Malibu sunsets are the best', 0),
+(3, 1, "Too many people, I don't like that!", 0),
+(4, 2, 'I can tell by your photo, amazing!', 0),
+(6, 2, "Well, that's sand..", 0),
+(1, 3, 'Just like Ohio', 0),
+(4, 3, "Where is that precisely?", 0),
+(5, 4, 'You are damn right!', 0),
+(7, 5, "Me too", 0),
+(3, 6, 'Peace of senses', 0),
+(2, 6, "I envy you!", 0),
+(4, 7, 'LMAO it keeps happening to me too!', 0),
+(8, 8, "So sweet!", 0),
+(1, 9, 'Welcome to society!', 0),
+(7, 9, "This world is such a mess.", 0),
+(4, 10, 'Funny not funny.', 0),
+(3, 11, "Sometimes it's just like that, unluckily..", 0),
+(1, 12, 'Are you okay?', 0),
+(6, 12, "I can smell it, and it's not a good smell, is that normal guys?", 0),
+(5, 13, 'That is EPIC!!', 0),
+(2, 14, "It looks like you guys are having fun!", 0),
+(1, 15, 'You mean fish?', 0),
+(8, 15, "Is it sharky? Hopefully not.", 0),
+(7, 16, 'Maybe yes..', 0),
+(6, 16, "Change travel agency!", 0);
 
 ALTER TABLE `comment`
-    MODIFY `commentid` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `commentid` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 INSERT INTO `user_likes_post` (`user`, `post`) VALUES
-(3, 1);
+(1, 2),
+(1, 10),
+(2, 1),
+(3, 1),
+(4, 8),
+(5, 11),
+(5, 15),
+(6, 1),
+(7, 6),
+(7, 8),
+(7, 2),
+(8, 9),
+(8, 1),
+(7, 1),
+(6, 13),
+(3, 14),
+(8, 12),
+(2, 12),
+(1, 11),
+(4, 15),
+(6, 12),
+(3, 6),
+(8, 11),
+(2, 14),
+(7, 9),
+(5, 3),
+(4, 3),
+(1, 8),
+(4, 14),
+(7, 14);
 
 INSERT INTO `user_follows_user` (`followed`, `follower`) VALUES
-(1, 3),
+(3, 8),
 (3, 1),
-(3, 2);
+(3, 2),
+(1, 2),
+(1, 3),
+(1, 8),
+(2, 4),
+(2, 6),
+(2, 1),
+(4, 3),
+(4, 7),
+(4, 5),
+(5, 4),
+(5, 1),
+(5, 2),
+(6, 8),
+(6, 6),
+(6, 7),
+(8, 4),
+(8, 2),
+(8, 3),
+(7, 4),
+(7, 8),
+(7, 1);
