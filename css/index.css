@@ -3,7 +3,7 @@ main > div.container > header > h1 {
 }
 
 main > div.container > header > h1 > a {
-    color: #F2F3AE;
+    color: #FFE9BB;
     background-color: #69140E;
 }
 
@@ -27,15 +27,15 @@ main > div.container > div::before {
 main > div.container > div .row > p,
 main > div.container > div div.row:last-child > div > p,
 main > div.container > div div.row:last-child > div > p  a {
-    color: #F2F3AE;
+    color: #FFE9BB;
 }
 
 .btn-yellow {
-    background-color: #F2F3AE;
-    color: #A44200;
+    background-color: #FFE9BB;
+    color: #69140E;
 }
 
 .btn-yellow:hover {
-    color: #F2F3AE;
-    background-color: #A44200;
+    color: #FFE9BB;
+    background-color: #69140E;
 }

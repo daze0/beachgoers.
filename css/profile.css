@@ -3,18 +3,19 @@ main > div.row:first-child {
 }
 
 .profile-info {
-    background-color: #F2F3AE;
-    color: #3C1518;
+    background-color: #FFE9BB;
+    color: #000000;
 }
 
 main > div.row:last-child button#newPostButton {
     color: #A44200;
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
 }
 
 main > div.row:last-child button#newPostButton:hover {
     background-color: #A44200;
-    color: #F2F3AE;
+    color: #FFE9BB;
+    border-color: #FFE9BB;
 }
 
 main > div.row:first-child button#telegramConnectorButton {
@@ -31,8 +32,8 @@ main > div.row:first-child button#telegramConnectorButton:hover {
 }
 
 div.modal-content {
-    background-color: #F2F3AE;
-    color: #3C1518;
+    background-color: #FFE9BB;
+    color: #000000;
 }
 
 div.modal-content > div.modal-footer {
@@ -40,20 +41,20 @@ div.modal-content > div.modal-footer {
 }
 
 div.modal-content > div.modal-body > div > div:last-child > span {
-    color: #D58936;
+    color: #A44200;
 }
 
 main > div.row:first-child a#telegramButton,
 main > div.row:first-child button#followButton,
 main > div.row:first-child button#unfollowButton {
-    color: #F2F3AE;
+    color: #FFE9BB;
     background-color: #A44200;
 }
 
 main > div.row:first-child a#telegramButton:hover,
 main > div.row:first-child button#followButton:hover,
 main > div.row:first-child button#unfollowButton:hover {
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     color: #A44200;
 }
 
@@ -71,7 +72,7 @@ main > div.row:first-child button#unfollowButton:hover {
     top: -30%;
     right: 50%;
     transform: translateX(-50%);
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     color: #A44200;
     /*opacity: 0.5;*/
     cursor: pointer;
@@ -80,7 +81,7 @@ main > div.row:first-child button#unfollowButton:hover {
 .edit-profile-picture-btn:focus,
 .edit-profile-picture-btn:active,
 .edit-profile-picture-btn:hover {
-    color: #F2F3AE;
+    color: #FFE9BB;
     background-color: #A44200;
 }
 

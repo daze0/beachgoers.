@@ -1,13 +1,13 @@
 
 
 main > div.row {
-    background-color: rgba(105, 20, 14, 0.75);
+    background-color: rgba(35, 70, 118, 0.3);
 }
 
 main > div.row > div#postSection > div.card {
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     border-color: #A44200;
-    color: #3C1518;
+    color: #000000;
 }
 
 main > div.row > div#postSection > div.card > div.card-header {
@@ -15,7 +15,7 @@ main > div.row > div#postSection > div.card > div.card-header {
 }
 
 main > div.row > div#postSection > div.card > div.card-header > span {
-    color: #D58936;
+    color: #A44200;
 }
 
 main > div.row > div#postSection > div.card > div.card-header > span > button > i,

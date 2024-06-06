@@ -1,5 +1,5 @@
 .navbar-bg-color {
-    background-color: #F2F3AE !important;
+    background-color: #FFE9BB !important;
 }
 
 .navbar-color {
@@ -7,19 +7,19 @@
 }
 
 .navbar-dark-color {
-    color: #3C1518;
+    color: #000000;
 }
 
 div.input-group-append > button {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
     background-color: #A44200;
-    color: #F2F3AE !important;
+    color: #FFE9BB !important;
 }
 
 div.input-group-append > button:hover {
     color: #A44200 !important;
-    background-color: #F2F3AE ;
+    background-color: #FFE9BB ;
 }
 
 .nav-link{
@@ -29,7 +29,7 @@ div.input-group-append > button:hover {
 }
 
 .nav-link:hover, .nav-link.active {
-    color: #F2F3AE !important;
+    color: #FFE9BB !important;
     background-color: #A44200;
 }
 
@@ -79,7 +79,7 @@ AUTOCOMPLETE
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
 }
 
 /*Remove squared corners for first and last item*/
@@ -104,14 +104,14 @@ AUTOCOMPLETE
 
 .autocomplete-items div:hover {
     background-color: #A44200;
-    color: #F2F3AE;
+    color: #FFE9BB;
 }
 
 /*when navigating through the items using the arrow keys:*/
 
 .autocomplete-active {
     background-color: #A44200 !important;
-    color: #F2F3AE !important;
+    color: #FFE9BB !important;
 }
   
 
@@ -142,7 +142,7 @@ NOTIFICATIONS
 
 .notification-item {
     padding: 10px;
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     border-bottom: 1px solid #A44200;
 }
 
@@ -151,13 +151,13 @@ NOTIFICATIONS
 }
 
 .notification-elapsed-time, .notification-item .notification-elapsed-time,.notification-item:hover .notification-elapsed-time{
-    color: #D58936;
+    color: #A44200;
 }
 
 /*when hovering an item:*/
 
 .notification-item:hover  {
     background-color: #A44200;
-    color: #F2F3AE;
+    color: #FFE9BB;
 }
   

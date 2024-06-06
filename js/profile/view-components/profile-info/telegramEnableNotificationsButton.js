@@ -20,12 +20,12 @@ class telegramEnableNotificationsButton {
     connectButtonCallback() {
         axios.get("api/api-profile.php?checkTelegramBotActivation=true").then(response => {
             const responseDiv = document.getElementById("telegram-enable-notifications-result");
-            if(response.data.telegram_bot_active){
-                responseDiv.textContent = "Notifications enabled.";
+            if (response.data.telegram_bot_active) {
+                responseDiv.innerHTML = "<strong>Notifications enabled.</strong>";
                 setTimeout(() => {
                     location.reload();
                 }, 3000);
-            }else{
+            } else {
                 responseDiv.textContent = "Connection failed, retry steps.";
             }
         }).catch(error => {
@@ -47,7 +47,7 @@ class telegramEnableNotificationsButton {
         this.#connectButton.id = "telegramEnableNotificationsButton";
         this.#connectButton.type = "button";
         this.#connectButton.classList.add("btn");
-        this.#connectButton.textContent = "Enable notifications";
+        this.#connectButton.innerHTML = "<strong>Enable notifications</strong>";
     }
 }
 

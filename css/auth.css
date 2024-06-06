@@ -3,7 +3,7 @@
 }
 
 .auth-wrapper > header > h1 > a {
-    color: #F2F3AE;
+    color: #FFE9BB;
     background-color: #69140E;
 }
 
@@ -25,17 +25,17 @@
 }
 
 .auth-wrapper > div > div > section > header {
-    color: #F2F3AE;
+    color: #FFE9BB;
 }
 
 .auth-wrapper > div > div > section > div > form input[type="submit"]:hover,
 .auth-wrapper > div > div > section > div {
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     color: #A44200;
 }
 
 .auth-wrapper > div > div > section > div > form input[type="submit"] {
-    color: #F2F3AE;
+    color: #FFE9BB;
     background-color: #A44200;
 }
 
@@ -44,32 +44,28 @@
 }
 
 .custom-primary-color {
-    color: #F2F3AE !important;
+    color: #FFE9BB !important;
 }
 
 .custom-secondary-color {
     color: #A44200 !important;
 }
 
-.custom-tertiary-color {
-    color: #D58936 !important;
-}
-
 .input-group-text {
-    color: #F2F3AE !important;
+    color: #FFE9BB !important;
     background-color: #A44200 !important;
 }
 
 .custom-btn-secondary {
     color: #A44200;
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     border-color: #A44200;
 }
 
 .custom-btn-secondary:focus,
 .custom-btn-secondary:active,
 .custom-btn-secondary:hover {
-    color: #F2F3AE !important;
+    color: #FFE9BB !important;
     background-color: #A44200 !important;
     border-color: #A44200 !important;
 }

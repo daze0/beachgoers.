@@ -1,14 +1,14 @@
 div.modal-content > div.modal-footer input[type="submit"]:hover,
 main > div.row:last-child button {
     color: #A44200;
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
 }
 
 div.modal-content > div.modal-footer input[type="submit"],
 div.modal-content > div.modal-header,
 div.modal-content > div.modal-body input[type="submit"] {
     background-color: #A44200;
-    color: #F2F3AE;
+    color: #FFE9BB;
 }
 
 div.modal-content > div.modal-body button,
@@ -17,8 +17,8 @@ div.modal-content > div.modal-body hr {
 }
 
 div.modal-content {
-    background-color: #F2F3AE;
-    color: #3C1518;
+    background-color: #FFE9BB;
+    color: #000000;
 }
 
 div.modal-content > div.modal-footer {
@@ -26,10 +26,10 @@ div.modal-content > div.modal-footer {
 }
 
 div.modal-content > div.modal-body > div > div:nth-child(2n+2) > span {
-    color: #D58936;
+    color: #A44200;
 }
 
 div.modal-content > div.modal-body input[type="submit"]:hover {
-    background-color: #F2F3AE;
+    background-color: #FFE9BB;
     color: #A44200;
 }

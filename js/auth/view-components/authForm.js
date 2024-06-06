@@ -20,7 +20,9 @@ class AuthForm {
         this._form.enctype = "multipart/form-data";
         this._form.accept = "image/*";
         const pError = document.createElement("p");
-        pError.classList.add("custom-tertiary-color");
+        pError.classList.add("custom-secondary-color");
+        const strongPError = document.createElement("strong");
+        pError.appendChild(strongPError);
         this._form.appendChild(pError);
         this._form.innerHTML += `${this.#generateAuthForm()}`;
         formContainer.innerHTML = `
@@ -142,7 +144,7 @@ class LoginAuthForm extends AuthForm {
                     window.location.href = "feed.php";
                 }, 500);
             } else {
-                document.querySelector("form > p").innerHTML = response.data["login_error"];
+                document.querySelector("form > p > strong").innerHTML = response.data["login_error"];
             }
         });
     }
@@ -261,7 +263,7 @@ class SignupAuthForm extends AuthForm {
                     window.location.href = "profile.php";
                 }, 500);
             } else {
-                document.querySelector("form > p").innerHTML = response.data["signup_error"];
+                document.querySelector("form > p > strong").innerHTML = response.data["signup_error"];
                 if (response.data["signup_error"] == "No profile picture provided") {
                     const profilePicInput = document.getElementById("inputProfilepictureSignup");
                     profilePicInput.classList.add("empty-required-input");
