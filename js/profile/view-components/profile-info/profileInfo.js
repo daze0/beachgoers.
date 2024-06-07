@@ -124,7 +124,7 @@ class ProfileInfo {
                 return this.#components["telegramConnectorPopup"].getPopupOpenElement().generateComponent();
             } else {
                 return `
-                    <h6 class="text-center">Notifications enabled</h6>
+                    <span class="text-center">Notifications enabled</span>
                 `;
             }
         } else {

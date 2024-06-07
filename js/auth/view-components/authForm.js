@@ -81,7 +81,7 @@ class AuthForm {
     }
 
     #showHideCallback() {
-        const passwordInput = document.getElementById('inputPassword');
+        const passwordInput = document.querySelector('.input-password');
         const toggle = document.getElementById('toggle');
         if (passwordInput.type === 'password') {
             passwordInput.setAttribute('type', 'text');
@@ -118,7 +118,7 @@ class LoginAuthForm extends AuthForm {
             `;
         if (label === "Password") {
             res += `
-            <input type="password" id="input${label}Login" class="form-control" placeholder="${label}" name="${label.toLowerCase()}"/>
+            <input type="password" id="input${label}Login" class="form-control input-password" placeholder="${label}" name="${label.toLowerCase()}"/>
             <button class="btn custom-btn-secondary" type="button" id="toggle">
                 <span class="bi bi-eye"></span>
             </button>`;
@@ -211,7 +211,7 @@ class SignupAuthForm extends AuthForm {
 
             if (label === formKeys[2]) {
                 res += `
-                <input type="password" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control" placeholder="${label}" />
+                <input type="password" id="input${trimmedLabel}Signup" name="${trimmedLabel.toLowerCase()}" class="form-control input-password" placeholder="${label}" />
                     <button class="btn custom-btn-secondary" type="button" id="toggle">
                         <span class="bi bi-eye"></span>
                     </button>`;
