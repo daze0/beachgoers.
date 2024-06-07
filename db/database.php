@@ -33,7 +33,8 @@ class DatabaseHelper
         return $this->getUserByUsername($username);
     }
 
-    public function updateUserProfileImg($userid, $userImg){
+    public function updateUserProfileImg($userid, $userImg)
+    {
         $query = "UPDATE `user` SET `userImg`=? WHERE `userid`=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("si", $userImg, $userid);
@@ -557,7 +558,7 @@ class DatabaseHelper
         END, u.username
         LIMIT ?;
         ";*/
-         $query = "SELECT u.userid, u.username, u.userimg 
+        $query = "SELECT u.userid, u.username, u.userimg 
          FROM user u
          WHERE u.username LIKE CONCAT('%', ?, '%') 
          ORDER BY CASE 
