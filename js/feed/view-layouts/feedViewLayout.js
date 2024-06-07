@@ -43,21 +43,24 @@ class FeedViewLayout {
             this.#components["loadingElement"].toggleComponent();
             if (response.data["posts"].length > 0) {
                 const newPostsIds = response.data["posts"].map(post => `post-${post.postid}`);
-                this.#feedData["posts"].push(response.data["posts"]);
-                postSectionLoadingElem.insertAdjacentHTML("beforebegin", this.#generatePosts(response.data["posts"]));
-                // Attach new posts' listeners, or comments and likes won't work
-                /*
-                    REFACTORing NOTE: could be better to call #attachListeners and change 
-                        each listener attaching method to support a isAttached method
-                        in order to permit attaching listeners for components generated 
-                        after first render.
-                */
-                Object.entries(this.#components)
-                    .filter(([label, component]) => newPostsIds.includes(label))
-                    .forEach(([label, component]) => {
-                        console.log(label);
-                        component.attachListeners();
-                    });
+                if (newPostsIds.every(key => !(key in this.#feedData["posts"])) &&
+                    newPostsIds.every(key => !(key in this.#components))) {
+                    this.#feedData["posts"].push(response.data["posts"]);
+                    postSectionLoadingElem.insertAdjacentHTML("beforebegin", this.#generatePosts(response.data["posts"]));
+                    // Attach new posts' listeners, or comments and likes won't work
+                    /*
+                        REFACTORing NOTE: could be better to call #attachListeners and change 
+                            each listener attaching method to support a isAttached method
+                            in order to permit attaching listeners for components generated 
+                            after first render.
+                    */
+                    Object.entries(this.#components)
+                        .filter(([label, component]) => newPostsIds.includes(label))
+                        .forEach(([label, component]) => {
+                            console.log(label);
+                            component.attachListeners();
+                        });
+                }
             } else {
                 this.#hasMoreData = false;
             }
